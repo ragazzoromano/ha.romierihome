@@ -1,0 +1,6 @@
+sensor.humidity:
+  friendly_name: DHT22Humidity
+sensor.temperature:
+  friendly_name: DHT22Temperature
+switch.zona_1:
+  friendly_name: Zona 1

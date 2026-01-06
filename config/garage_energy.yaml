@@ -1,0 +1,39 @@
+# ========================================
+# Garage Energy Configuration
+# ========================================
+# This file contains the energy tracking configuration for the garage
+# Including integration sensor and utility meters for different time periods
+
+# Integration sensor to convert power (W) to energy (kWh)
+# Source: sensor.garage_power is defined via Tasmota MQTT integration
+# This sensor provides real-time power consumption of the garage outlet
+sensor:
+  - platform: integration
+    source: sensor.garage_power
+    name: "Garage Energy"
+    unique_id: garage_energy_integration
+    unit_prefix: k
+    unit_time: h
+    round: 2
+
+# Utility meters for different time periods
+utility_meter:
+  garage_energy_daily:
+    source: sensor.garage_energy
+    name: "Garage Energy Daily"
+    cycle: daily
+
+  garage_energy_weekly:
+    source: sensor.garage_energy
+    name: "Garage Energy Weekly"
+    cycle: weekly
+
+  garage_energy_monthly:
+    source: sensor.garage_energy
+    name: "Garage Energy Monthly"
+    cycle: monthly
+
+  garage_energy_yearly:
+    source: sensor.garage_energy
+    name: "Garage Energy Yearly"
+    cycle: yearly

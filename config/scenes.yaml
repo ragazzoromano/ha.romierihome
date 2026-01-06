@@ -1,0 +1,143 @@
+- id: '1745953802594'
+  name: SHT Closed
+  entities:
+    cover.tapparella_bagno_notte:
+      current_position: 0
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella bagno notte
+      supported_features: 15
+      state: open
+    cover.tapparella_camera:
+      current_position: 0
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella camera
+      supported_features: 15
+      state: open
+    cover.tapparella_camera_da_letto:
+      current_position: 0
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella camera da letto
+      supported_features: 15
+      state: open
+    cover.tapparella_cameretta:
+      current_position: 0
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella cameretta
+      supported_features: 15
+      state: open
+    cover.tapparella_studio:
+      current_position: 0
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella studio
+      supported_features: 15
+      state: open
+  icon: mdi:window-shutter
+  metadata:
+    cover.tapparella_bagno_notte:
+      entity_only: true
+    cover.tapparella_camera:
+      entity_only: true
+    cover.tapparella_camera_da_letto:
+      entity_only: true
+    cover.tapparella_cameretta:
+      entity_only: true
+    cover.tapparella_studio:
+      entity_only: true
+- id: '1745954285304'
+  name: SHT Opened
+  entities:
+    cover.tapparella_bagno_notte:
+      current_position: 100
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella bagno notte
+      supported_features: 15
+      state: open
+    cover.tapparella_camera:
+      current_position: 100
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella camera
+      supported_features: 15
+      state: open
+    cover.tapparella_camera_da_letto:
+      current_position: 100
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella camera da letto
+      supported_features: 15
+      state: open
+    cover.tapparella_cameretta:
+      current_position: 100
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella cameretta
+      supported_features: 15
+      state: open
+    cover.tapparella_studio:
+      current_position: 100
+      attribution: Data provided by Netatmo
+      device_class: shutter
+      friendly_name: Tapparella studio
+      supported_features: 15
+      state: open
+  icon: mdi:window-shutter-open
+  metadata:
+    cover.tapparella_bagno_notte:
+      entity_only: true
+    cover.tapparella_camera:
+      entity_only: true
+    cover.tapparella_camera_da_letto:
+      entity_only: true
+    cover.tapparella_cameretta:
+      entity_only: true
+    cover.tapparella_studio:
+      entity_only: true
+- id: '1746039291164'
+  name: Tende aperte
+  entities:
+    cover.sunilus_io_dx:
+      current_position: 100
+      friendly_name: TSquare DX
+      supported_features: 7
+      state: open
+    cover.sunilus_io_sx:
+      current_position: 100
+      friendly_name: TSquare SX
+      supported_features: 7
+      state: open
+  icon: mdi:awning-outline
+  metadata:
+    cover.sunilus_io_dx:
+      entity_only: true
+    cover.sunilus_io_sx:
+      entity_only: true
+- id: '1746039418165'
+  name: Tende chiuse
+  entities:
+    cover.sunilus_io_dx:
+      current_position: 0
+      friendly_name: TSquare DX
+      supported_features: 7
+      state: closed
+    cover.sunilus_io_sx:
+      current_position: 0
+      friendly_name: TSquare SX
+      supported_features: 7
+      state: closed
+  icon: mdi:awning
+  metadata:
+    cover.sunilus_io_dx:
+      entity_only: true
+    cover.sunilus_io_sx:
+      entity_only: true
+- id: '1746531878671'
+  name: Light OFF
+  entities: {}
+  icon: mdi:lightbulb-group-outline
+  metadata: {}

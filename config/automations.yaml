@@ -1,0 +1,1750 @@
+- id: '1609686557369'
+  alias: Alarm Enable (Location) IFTTT
+  description: Enable home alarm
+  triggers:
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: device_tracker
+    entity_id: d5b416cacea2198d40521b452c45cb8d
+    type: leaves
+    trigger: device
+    zone: zone.home
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: device_tracker
+    entity_id: 823c9e16abd979865b9ef74b377b6fc1
+    type: leaves
+    zone: zone.home
+    trigger: device
+  conditions:
+  - condition: and
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_not_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_not_home
+  actions:
+  - data:
+      event: RomieriAlarm
+      value1: T 1
+    action: ifttt.trigger
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  mode: single
+- id: '1609686952547'
+  alias: Alarm Disable (Location) IFTTT
+  description: Disable home alarm
+  triggers:
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: device_tracker
+    entity_id: d5b416cacea2198d40521b452c45cb8d
+    type: enters
+    trigger: device
+    zone: zone.home
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: device_tracker
+    entity_id: 823c9e16abd979865b9ef74b377b6fc1
+    type: enters
+    zone: zone.home
+    trigger: device
+  conditions:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_not_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_not_home
+  actions:
+  - data:
+      event: RomieriAlarm
+      value1: D 1
+    action: ifttt.trigger
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    title: Allarme disabilitato
+    message: ' Inviato SMS per disabilitare allarme'
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: mobile_app
+    type: notify
+    message: ' Inviato SMS per disabilitare allarme'
+    title: Allarme disabilitato
+  mode: single
+- id: '1614083771225'
+  alias: 'Alarm Disable IFTTT '
+  description: Disable home alarm
+  triggers: []
+  conditions: []
+  actions:
+  - data:
+      event: RomieriAlarm
+      value1: D 1
+    action: ifttt.trigger
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per disabilitare allarme
+    title: Allarme disabilitato
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per disabilitare allarme
+    title: Allarme disabilitato
+  mode: single
+- id: '1614111057350'
+  alias: Alarm Enable IFTTT
+  description: Enable home alarm
+  triggers: []
+  conditions: []
+  actions:
+  - data:
+      value1: T 1
+      event: RomieriAlarm
+    action: ifttt.trigger
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  mode: single
+- id: '1632223938466'
+  alias: GRDN_Irrigazione_Settimanale
+  triggers:
+  - value_template: '{{ states(''sensor.time'') == (states.input_datetime.time_start_irrigazione.attributes.timestamp
+      | int | timestamp_custom(''%H:%M'', False)) }}'
+    trigger: template
+  conditions:
+  # CONDIZIONI METEO - Blocca se piove o fattore troppo basso (solo se Smart Irrigation attivo)
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.smart_irrigation_enabled
+      state: 'off'
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.israining
+        state: 'off'
+      - condition: numeric_state
+        entity_id: sensor.irrigation_combined_factor
+        above: 5
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.irrigation_mode_advanced
+        state: 'off'
+      - condition: or
+        conditions:
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.monday
+            state: 'on'
+          - condition: time
+            weekday: mon
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.tuesday
+            state: 'on'
+          - condition: time
+            weekday: tue
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.wednesday
+            state: 'on'
+          - condition: time
+            weekday: wed
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.thursday
+            state: 'on'
+          - condition: time
+            weekday: thu
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.friday
+            state: 'on'
+          - condition: time
+            weekday: fri
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.saturday
+            state: 'on'
+          - condition: time
+            weekday: sat
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.sunday
+            state: 'on'
+          - condition: time
+            weekday: sun
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.irrigation_mode_advanced
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: mon
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.monday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: tue
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: wed
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: thu
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.thursday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: fri
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.friday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: sat
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.saturday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: sun
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.sunday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_8
+              state: 'on'
+  actions:
+  - data: {}
+    target:
+      entity_id: script.grdn_inizia_ciclo_irrigazione
+    action: script.turn_on
+  - action: notify.mobile_app_sm_s901u1
+    data:
+      message: Inizio Irrigazione
+  mode: single
+- id: '1632224023054'
+  alias: GRDN_Irrigazione_Settimanale_Alba
+  description: ''
+  triggers:
+  - event: sunrise
+    trigger: sun
+  conditions:
+  # CONDIZIONI METEO - Blocca se piove o fattore troppo basso (solo se Smart Irrigation attivo)
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.smart_irrigation_enabled
+      state: 'off'
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.israining
+        state: 'off'
+      - condition: numeric_state
+        entity_id: sensor.irrigation_combined_factor
+        above: 5
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.irrigation_mode_advanced
+        state: 'off'
+      - condition: or
+        conditions:
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.monday
+            state: 'on'
+          - condition: time
+            weekday: mon
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.tuesday
+            state: 'on'
+          - condition: time
+            weekday: tue
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.wednesday
+            state: 'on'
+          - condition: time
+            weekday: wed
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.thursday
+            state: 'on'
+          - condition: time
+            weekday: thu
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.friday
+            state: 'on'
+          - condition: time
+            weekday: fri
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.saturday
+            state: 'on'
+          - condition: time
+            weekday: sat
+        - condition: and
+          conditions:
+          - condition: state
+            entity_id: input_boolean.sunday
+            state: 'on'
+          - condition: time
+            weekday: sun
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.irrigation_mode_advanced
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: mon
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.monday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.monday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: tue
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.tuesday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: wed
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.wednesday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: thu
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.thursday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.thursday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: fri
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.friday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.friday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: sat
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.saturday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.saturday_zone_8
+              state: 'on'
+        - condition: and
+          conditions:
+          - condition: time
+            weekday: sun
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: input_boolean.sunday_zone_1
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_2
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_4
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_5
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_6
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.sunday_zone_8
+              state: 'on'
+  actions:
+  - data: {}
+    target:
+      entity_id: script.grdn_inizia_ciclo_irrigazione
+    action: script.turn_on
+  - action: notify.mobile_app_sm_s901u1
+    data:
+      message: Inizio Irrigazione
+  mode: single
+- id: '1633346222844'
+  alias: GRDN Chiudi Tapparelle Zona 6
+  description: ''
+  triggers:
+  - entity_id: switch.tasmotairr_06
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 3
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: input_boolean.shutteropened
+    state: 'on'
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.sht_closed
+  mode: single
+- id: '1633375247675'
+  alias: LGT Sala TV > ON
+  description: ''
+  triggers:
+  - device_id: 96172cae7d0505d20ac4b369c6891c17
+    domain: media_player
+    entity_id: media_player.samsung_tv
+    type: turned_on
+    trigger: device
+  conditions:
+  - condition: device
+    type: is_off
+    device_id: 7e6f25e2b556b46875a29f0118eb010f
+    entity_id: 4ac3fb803e5ee0c10d397702751a7fa3
+    domain: switch
+  - condition: sun
+    before: sunrise
+    after: sunset
+  actions:
+  - type: turn_on
+    device_id: 7e6f25e2b556b46875a29f0118eb010f
+    entity_id: 4ac3fb803e5ee0c10d397702751a7fa3
+    domain: switch
+  mode: single
+- id: '1633375354850'
+  alias: LGT Sala TV > OFF
+  description: ''
+  triggers:
+  - device_id: 96172cae7d0505d20ac4b369c6891c17
+    domain: media_player
+    entity_id: media_player.samsung_tv
+    type: turned_off
+    trigger: device
+  conditions:
+  - condition: device
+    type: is_on
+    device_id: 7e6f25e2b556b46875a29f0118eb010f
+    entity_id: 4ac3fb803e5ee0c10d397702751a7fa3
+    domain: switch
+  actions:
+  - type: turn_off
+    device_id: 7e6f25e2b556b46875a29f0118eb010f
+    entity_id: 4ac3fb803e5ee0c10d397702751a7fa3
+    domain: switch
+  mode: single
+- id: '1638692618674'
+  alias: ENG Potenza attiva 5kW
+  description: ''
+  triggers:
+  - entity_id: sensor.home_power
+    above: '5000'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s901u1
+    data:
+      message: Potenza attiva superiore a 5kW
+      title: 'Soglia potenza '
+  - action: notify.mobile_app_sm_a546b
+    data:
+      message: 'Potenza attiva superiore a 5kW '
+      title: 'Soglia potenza '
+  mode: single
+- id: '1648500187701'
+  alias: GRDN Chiudi Tapparelle Zona 8
+  description: ''
+  triggers:
+  - entity_id: switch.tasmotairr_08
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 3
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: input_boolean.shutteropened
+    state: 'on'
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.sht_closed
+  mode: single
+- id: '1649156718690'
+  alias: 'SHT Open (Location) '
+  description: Open shutters by location
+  triggers:
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: device_tracker
+    entity_id: d5b416cacea2198d40521b452c45cb8d
+    type: enters
+    trigger: device
+    zone: zone.home
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: device_tracker
+    entity_id: 823c9e16abd979865b9ef74b377b6fc1
+    type: enters
+    zone: zone.home
+    trigger: device
+  conditions:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_not_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_not_home
+  - condition: and
+    conditions:
+    - condition: sun
+      before: sunset
+      after: sunrise
+      after_offset: '2'
+    - condition: state
+      entity_id: input_boolean.israining
+      state: 'off'
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.sht_opened
+  mode: single
+- id: '1649224379592'
+  alias: SHT Close (Location)
+  description: ''
+  triggers:
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: device_tracker
+    entity_id: d5b416cacea2198d40521b452c45cb8d
+    type: leaves
+    trigger: device
+    zone: zone.home
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: device_tracker
+    entity_id: 823c9e16abd979865b9ef74b377b6fc1
+    type: leaves
+    zone: zone.home
+    trigger: device
+  conditions:
+  - condition: and
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_not_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_not_home
+  - condition: sun
+    after: sunrise
+    before_offset: '22:30'
+  - condition: state
+    entity_id: input_boolean.shutteropened
+    state: 'on'
+  - condition: state
+    state: 'off'
+    entity_id: input_boolean.israining
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.sht_closed
+  mode: single
+- id: '1650475662481'
+  alias: ENG Potenza attiva 6kW
+  description: ''
+  triggers:
+  - entity_id:
+    - sensor.home_power
+    above: '6000'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - data:
+      message: Potenza attiva superiore a 6kW
+      title: Soglia potenza
+    action: notify.mobile_app_sm_a546b
+  - action: notify.mobile_app_sm_s901u1
+    data:
+      message: Potenza attiva superiore a 6kW
+      title: 'Soglia potenza '
+  mode: single
+- id: '1658404474268'
+  alias: SHT UV Index Tapparella camera (AccuW)
+  description: ''
+  triggers:
+  - at: '13:00:00'
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.romieriweather_uv_index
+      above: '6'
+    - condition: numeric_state
+      entity_id: sensor.romieriweather_realfeel_temperature
+      above: '25'
+  actions:
+  - action: cover.close_cover
+    metadata: {}
+    data: {}
+    target:
+      entity_id: cover.tapparella_camera
+  mode: single
+- id: '1658506463789'
+  alias: BiPedo Send to Park
+  description: ''
+  triggers:
+  - entity_id:
+    - input_boolean.israining
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    enabled: true
+    trigger: state
+  - entity_id:
+    - switch.zona_1
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  - entity_id:
+    - switch.zona_2
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  - entity_id:
+    - switch.zona_4
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  - entity_id:
+    - switch.zona_5
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  - entity_id:
+    - switch.zona_6
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  - entity_id:
+    - switch.zona_8
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    trigger: state
+  conditions:
+  - condition: device
+    device_id: ad41450039d7e7554bde03f58aabc964
+    domain: device_tracker
+    entity_id: b956351b6ab45179d7d47d57aa089e22
+    type: is_not_home
+  actions:
+  - type: turn_off
+    device_id: ad41450039d7e7554bde03f58aabc964
+    entity_id: ad291cbe319054e6f9db0b5ac1ad010a
+    domain: switch
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    message: Inviato comando per rientro in docking station
+    title: BiPedo in Casa
+  mode: single
+- id: '1660820695570'
+  alias: RN Rain active - close shutters
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_boolean.israining
+    to: 'on'
+    from: 'off'
+  conditions:
+  - condition: state
+    entity_id: input_boolean.shutterclosed
+    state: 'off'
+  actions:
+  - data:
+      message: Tapparelle chiuse
+      title: Pioggia
+    action: notify.mobile_app_sm_g980f
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.sht_closed
+  mode: single
+- id: '1673872553259'
+  alias: LGT NGT Lights
+  description: ''
+  triggers:
+  - type: plugged_in
+    device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    entity_id: cdb24b27a78a1ff9b15e703ad0f6ab41
+    domain: binary_sensor
+    trigger: device
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - type: plugged_in
+    device_id: 006a81adf2a442df2f102b481841cc65
+    entity_id: 97bb2a737564d6c90820677a2edeee09
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - condition: and
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_home
+    - condition: time
+      after: '22:00:00'
+      before: 06:00:00
+  - condition: and
+    conditions:
+    - type: is_plugged_in
+      condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      entity_id: cdb24b27a78a1ff9b15e703ad0f6ab41
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+    - type: is_plugged_in
+      condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      entity_id: 97bb2a737564d6c90820677a2edeee09
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - switch.luce_2_portico
+      - switch.luce_angolo_sala
+      - switch.luce_bagno_giorno
+      - switch.luce_bagno_notte
+      - switch.luce_camera
+      - switch.luce_camera_da_letto
+      - switch.luce_cameretta
+      - switch.luce_corridoio
+      - switch.luce_corridoio_camere
+      - switch.luce_cucina
+      - switch.luce_dispensa
+      - switch.luce_entrata_sala
+      - switch.luce_isola_cucina
+      - switch.luce_lavanderia
+      - switch.luce_mobile_sala
+      - switch.luce_mobile_tv_sala
+      - switch.luce_nord_sala
+      - switch.luce_pensile_cucina
+      - switch.luce_portico
+      - switch.luce_sgabuzzino
+      - switch.luce_specchio_bagno_giorno
+      - switch.luce_specchio_bagno_notte
+      - switch.luce_sud_sala
+      - switch.luce_studio
+      - switch.luce_tv_sala
+  mode: single
+- id: '1674131878590'
+  alias: Alarm Enable Partial IFTTT
+  description: Enable partial home alarm
+  triggers: []
+  conditions: []
+  actions:
+  - data:
+      event: RomieriAlarm
+      value1: P 1
+    action: ifttt.trigger
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: mobile_app
+    type: notify
+    message: Inviato SMS per attivazione allarme
+    title: Allarme attivato
+  mode: single
+- id: '1699477288155'
+  alias: LGT Portico
+  description: ''
+  triggers:
+  - entity_id: person.luca
+    zone: zone.home
+    event: enter
+    trigger: zone
+  - entity_id: person.mariachiara
+    zone: zone.home
+    event: enter
+    trigger: zone
+  conditions:
+  - condition: sun
+    before: sunrise
+    after: sunset
+  actions:
+  - type: turn_on
+    device_id: 1ac1500b0f9e4a7aa61ea3cacfa1cf4b
+    entity_id: adf485711e564f2a0bad7b3d16529b71
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  - type: turn_off
+    device_id: 1ac1500b0f9e4a7aa61ea3cacfa1cf4b
+    entity_id: adf485711e564f2a0bad7b3d16529b71
+    domain: switch
+  mode: single
+- id: '1714384746787'
+  alias: Alarm location OFF - weekdays
+  description: Turn off alarm if working day
+  triggers:
+  - at: 01:00:00
+    trigger: time
+  conditions:
+  - type: is_on
+    condition: device
+    device_id: ccb86e8a52abea30774804283338f331
+    entity_id: 2ab5f048c190e9f32c5cfe252b9a6eb7
+    domain: binary_sensor
+  actions:
+  - metadata: {}
+    data:
+      stop_actions: false
+    target:
+      entity_id: automation.enable_alarm_location_ifttt
+    action: automation.turn_off
+  mode: single
+- id: '1714384821537'
+  alias: Alarm location ON - weekdays
+  description: Turn on alarm if not working day
+  triggers:
+  - at: 01:00:00
+    trigger: time
+  conditions:
+  - type: is_off
+    condition: device
+    device_id: ccb86e8a52abea30774804283338f331
+    entity_id: 2ab5f048c190e9f32c5cfe252b9a6eb7
+    domain: binary_sensor
+  actions:
+  - target:
+      entity_id:
+      - automation.enable_alarm_location_ifttt
+    data: {}
+    action: automation.turn_on
+  mode: single
+- id: '1736546342913'
+  alias: Alarm location ON - weekdays after 19
+  description: Turn on alarm if working day after 19.00
+  triggers:
+  - at: '19:00:00'
+    trigger: time
+  conditions:
+  - type: is_on
+    condition: device
+    device_id: ccb86e8a52abea30774804283338f331
+    entity_id: 2ab5f048c190e9f32c5cfe252b9a6eb7
+    domain: binary_sensor
+  actions:
+  - target:
+      entity_id:
+      - automation.enable_alarm_location_ifttt
+    data: {}
+    action: automation.turn_on
+  mode: single
+- id: '1743078601197'
+  alias: SpeedTest Update entity
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: '10'
+  conditions: []
+  actions:
+  - action: homeassistant.update_entity
+    metadata: {}
+    data:
+      entity_id:
+      - sensor.speedtest_download
+      - sensor.speedtest_ping
+      - sensor.speedtest_upload
+  mode: single
+- id: '1743878305637'
+  alias: Shutters Location Auto Off
+  description: ''
+  triggers:
+  - trigger: time
+    at: '13:30:00'
+  - trigger: time
+    at: '21:30:00'
+  conditions:
+  - condition: state
+    entity_id: input_boolean.autotoggleshuttersmovmentbylocatio
+    state: 'on'
+  actions:
+  - action: automation.turn_off
+    metadata: {}
+    data:
+      stop_actions: true
+    target:
+      entity_id:
+      - automation.sht_open_location
+      - automation.sht_close_location_ifttt
+  mode: single
+- id: '1745051815983'
+  alias: LGT Bagno giorno Timer OFF
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 3c32b9df56d7678898cbf15e10d229c4
+    entity_id: db7af36e68c2f316000a74da08f80102
+    domain: switch
+    trigger: device
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  - type: turned_on
+    device_id: 7406c02f9528130b0d4d8a3184021f13
+    entity_id: 2bfe870fba13343792612e3447031387
+    domain: switch
+    trigger: device
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - 7406c02f9528130b0d4d8a3184021f13
+      - 3c32b9df56d7678898cbf15e10d229c4
+  mode: single
+- id: '1745051994994'
+  alias: LGT Bagno notte Timer OFF
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 3688c034d5e643b5e446f1fdc73da197
+    entity_id: c3fb99806115ca76a4d418b957450042
+    domain: switch
+    trigger: device
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  - type: turned_on
+    device_id: 2de87b4bda3ef9bc263664be2ebd79ad
+    entity_id: 0390332938f8911f876916482ea53892
+    domain: switch
+    trigger: device
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - 3688c034d5e643b5e446f1fdc73da197
+      - 2de87b4bda3ef9bc263664be2ebd79ad
+  mode: single
+- id: '1745053359108'
+  alias: LGT Switch OFF (Location)
+  description: Switch off ligths if empty home
+  triggers:
+  - device_id: 112e0adb7fac1d9a23a0db703a21eacb
+    domain: device_tracker
+    entity_id: d5b416cacea2198d40521b452c45cb8d
+    type: leaves
+    trigger: device
+    zone: zone.home
+  - device_id: 006a81adf2a442df2f102b481841cc65
+    domain: device_tracker
+    entity_id: 823c9e16abd979865b9ef74b377b6fc1
+    type: leaves
+    zone: zone.home
+    trigger: device
+  conditions:
+  - condition: and
+    conditions:
+    - condition: device
+      device_id: 112e0adb7fac1d9a23a0db703a21eacb
+      domain: device_tracker
+      entity_id: d5b416cacea2198d40521b452c45cb8d
+      type: is_not_home
+    - condition: device
+      device_id: 006a81adf2a442df2f102b481841cc65
+      domain: device_tracker
+      entity_id: 823c9e16abd979865b9ef74b377b6fc1
+      type: is_not_home
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      area_id:
+      - sala
+      - dispensa
+      - sgabuzziono
+      - corridoio
+      - bagno_giorno
+      - lavanderia
+      - studio
+      - corridoio_camere
+      - cameretta
+      - camera_da_letto
+      - bagno_notte
+      - camera
+      device_id: f9b5d1d2008c219637b06ec86068fe91
+  mode: single
+- id: '1745090254705'
+  alias: 'SHD Cover Height Dynamic '
+  description: ''
+  use_blueprint:
+    path: langestefan/auto_sun_blind.yaml
+    input:
+      azimuth: 272
+      distance: 0.5
+      max_height: 2.7
+      default_height: 100
+      time_out: 1
+      condition: []
+      cover_entity:
+        entity_id:
+        - cover.sunilus_io_dx
+        - cover.sunilus_io_sx
+      minimum_position: 0
+      max_elevation: 90
+      degrees: 90
+      azimuth_left: 0
+      azimuth_right: 0
+      change_threshold: 1
+      action: []
+      min_height: 0.1
+- id: '1745384737968'
+  alias: SHD Tende apertura
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_boolean.israining
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.tende_aperte
+  mode: single
+- id: '1746040554030'
+  alias: SHD Tramonto apertura tende
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: '-300'
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.tende_aperte
+  mode: single
+- id: '1746040877671'
+  alias: STS Shutters closed
+  description: ''
+  triggers:
+  - device_id: 6a54755bacfb60f1af43d24bfd430310
+    domain: cover
+    entity_id: 5f9e77032b33e5f80e262159ec011b36
+    type: closed
+    trigger: device
+  - device_id: 19b0d413651a6bad60d2bcc27b582a82
+    domain: cover
+    entity_id: 006ffbf5b20ec4ad1f765c5344cabfe2
+    type: closed
+    trigger: device
+  - device_id: ef21dd889bf80997f6bcfb4d2ce6e8db
+    domain: cover
+    entity_id: e8c8859462270e2c2c325cc317738e1f
+    type: closed
+    trigger: device
+  - device_id: 194632a267ddaff9540eedf5a690e706
+    domain: cover
+    entity_id: 1e0572b1bab7386ec2eea582fd8ca947
+    type: closed
+    trigger: device
+  - device_id: 9af1c0a79579c000a30d1ecfd1c7d273
+    domain: cover
+    entity_id: 439bcd81198f578a73e58aeb8774e7db
+    type: closed
+    trigger: device
+  - trigger: time_pattern
+    minutes: /10
+  conditions:
+  - condition: device
+    device_id: 6a54755bacfb60f1af43d24bfd430310
+    domain: cover
+    entity_id: 5f9e77032b33e5f80e262159ec011b36
+    type: is_closed
+  - condition: device
+    device_id: 19b0d413651a6bad60d2bcc27b582a82
+    domain: cover
+    entity_id: 006ffbf5b20ec4ad1f765c5344cabfe2
+    type: is_closed
+  - condition: device
+    device_id: ef21dd889bf80997f6bcfb4d2ce6e8db
+    domain: cover
+    entity_id: e8c8859462270e2c2c325cc317738e1f
+    type: is_closed
+  - condition: device
+    device_id: 194632a267ddaff9540eedf5a690e706
+    domain: cover
+    entity_id: 1e0572b1bab7386ec2eea582fd8ca947
+    type: is_closed
+  - condition: device
+    device_id: 9af1c0a79579c000a30d1ecfd1c7d273
+    domain: cover
+    entity_id: 439bcd81198f578a73e58aeb8774e7db
+    type: is_closed
+  actions:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.shutterclosed
+  - action: input_boolean.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.shutteropened
+  mode: single
+- id: '1746044191006'
+  alias: STS Shutters open
+  description: ''
+  triggers:
+  - device_id: 6a54755bacfb60f1af43d24bfd430310
+    domain: cover
+    entity_id: 5f9e77032b33e5f80e262159ec011b36
+    type: opened
+    trigger: device
+  - device_id: 19b0d413651a6bad60d2bcc27b582a82
+    domain: cover
+    entity_id: 006ffbf5b20ec4ad1f765c5344cabfe2
+    type: opened
+    trigger: device
+  - device_id: ef21dd889bf80997f6bcfb4d2ce6e8db
+    domain: cover
+    entity_id: e8c8859462270e2c2c325cc317738e1f
+    type: opened
+    trigger: device
+  - device_id: 194632a267ddaff9540eedf5a690e706
+    domain: cover
+    entity_id: 1e0572b1bab7386ec2eea582fd8ca947
+    type: opened
+    trigger: device
+  - device_id: 9af1c0a79579c000a30d1ecfd1c7d273
+    domain: cover
+    entity_id: 439bcd81198f578a73e58aeb8774e7db
+    type: opened
+    trigger: device
+  - trigger: time_pattern
+    minutes: /10
+  conditions:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 6a54755bacfb60f1af43d24bfd430310
+      domain: cover
+      entity_id: 5f9e77032b33e5f80e262159ec011b36
+      type: is_open
+    - condition: device
+      device_id: 19b0d413651a6bad60d2bcc27b582a82
+      domain: cover
+      entity_id: 006ffbf5b20ec4ad1f765c5344cabfe2
+      type: is_open
+    - condition: device
+      device_id: ef21dd889bf80997f6bcfb4d2ce6e8db
+      domain: cover
+      entity_id: e8c8859462270e2c2c325cc317738e1f
+      type: is_open
+    - condition: device
+      device_id: 194632a267ddaff9540eedf5a690e706
+      domain: cover
+      entity_id: 1e0572b1bab7386ec2eea582fd8ca947
+      type: is_open
+    - condition: device
+      device_id: 9af1c0a79579c000a30d1ecfd1c7d273
+      domain: cover
+      entity_id: 439bcd81198f578a73e58aeb8774e7db
+      type: is_open
+  actions:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.shutteropened
+  - action: input_boolean.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.shutterclosed
+  mode: single
+- id: '1746045970810'
+  alias: STS IsRaining ON (Accuw)
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: rainy
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: lightning-rainy
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: exceptional
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: hail
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: snowy-rainy
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: snowy
+  - trigger: state
+    entity_id:
+    - weather.romieriweather
+    to: pouring
+  conditions:
+  - condition: state
+    entity_id: input_boolean.israining
+    state: 'off'
+  actions:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.israining
+  mode: single
+- id: '1746046054153'
+  alias: STS IsRaining OFF (Accuw)
+  description: ''
+  triggers:
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: clear-night
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: cloudy
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: fog
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: partlycloudy
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: sunny
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: windy-variant
+  - entity_id:
+    - weather.romieriweather
+    trigger: state
+    to: windy
+  conditions:
+  - condition: state
+    entity_id: input_boolean.israining
+    state: 'on'
+  actions:
+  - data: {}
+    target:
+      entity_id: input_boolean.israining
+    action: input_boolean.turn_off
+  mode: single
+- id: '1746378165959'
+  alias: Shutters Location Auto On
+  description: ''
+  triggers:
+  - trigger: time
+    at: 09:15:00
+  - trigger: time
+    at: '17:15:00'
+  conditions:
+  - condition: state
+    entity_id: input_boolean.autotoggleshuttersmovmentbylocatio
+    state: 'on'
+  actions:
+  - action: automation.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - automation.sht_close_location_ifttt
+      - automation.sht_open_location
+  mode: single
+- id: '1754741810908'
+  alias: Tende UV Index (AccuW)
+  description: ''
+  triggers:
+  - at: '13:00:00'
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.romieriweather_uv_index
+      above: 5
+    - condition: numeric_state
+      entity_id: sensor.romieriweather_realfeel_temperature
+      above: '25'
+    - condition: state
+      entity_id: automation.cover_height_dynamic
+      state: 'off'
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.tende_chiuse
+  mode: single
+- id: '1767541092476'
+  alias: GRDN_GocciaGoccia_Settimanale
+  description: Automazione separata per sistema goccia-goccia
+  trigger:
+  - platform: template
+    value_template: '{{ states(''sensor.time'') == (states.input_datetime.time_start_gocciagoccia.attributes.timestamp
+      | int | timestamp_custom(''%H:%M'', False)) }}'
+  condition:
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_monday
+        state: 'on'
+      - condition: time
+        weekday: mon
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_tuesday
+        state: 'on'
+      - condition: time
+        weekday: tue
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_wednesday
+        state: 'on'
+      - condition: time
+        weekday: wed
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_thursday
+        state: 'on'
+      - condition: time
+        weekday: thu
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_friday
+        state: 'on'
+      - condition: time
+        weekday: fri
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_saturday
+        state: 'on'
+      - condition: time
+        weekday: sat
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.gocciagoccia_sunday
+        state: 'on'
+      - condition: time
+        weekday: sun
+  action:
+  - service: script.turn_on
+    data: {}
+    target:
+      entity_id: script.grdn_inizia_ciclo_gocciagoccia
+  - service: notify.mobile_app_sm_g980f
+    data:
+      message: Inizio ciclo goccia-goccia
+  mode: single

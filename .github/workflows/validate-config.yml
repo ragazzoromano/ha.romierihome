@@ -1,0 +1,25 @@
+name: Validate Home Assistant Configuration
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Configuration
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Home Assistant Config Check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: "."
+          secrets: secrets.yaml.template
+
+      - name: Notify validation success
+        if: success()
+        run: echo "✅ Configurazione Home Assistant valida!"

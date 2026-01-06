@@ -1,0 +1,47 @@
+# Secrets e credenziali
+secrets.yaml
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# Directory di sistema HA
+.storage/
+.cloud/
+.google.drive.token
+.ios.conf
+.spotify-token-cache
+.uuid
+
+# Backup e temporanei
+*.backup
+*.bak
+home-assistant.log*
+home-assistant_v2.db*
+
+# Database e cache
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+__pycache__/
+*.py[cod]
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Add-on specifici
+google_calendars.yaml
+ip_bans.yaml
+known_devices.yaml
+
+# Certificati SSL
+*.pem
+*.key
+*.crt

@@ -1,0 +1,23 @@
+esphome:
+  name: esp_adc
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "NetRomieri"
+  password: "13Luglio2019"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Net_espadc"
+    password: "13Luglio2019"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:

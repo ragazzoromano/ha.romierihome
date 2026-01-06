@@ -1,0 +1,31 @@
+{
+  "name": "node-red-contrib-actionflows",
+  "version": "2.1.2",
+  "description": "Create extendable, loopable, and reusable design patterns for flows.",
+  "author": "Stephen J. Carnam <steveorevo@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "node-red",
+    "extendable",
+    "libraries",
+    "actions",
+    "filters",
+    "iterate",
+    "plugins",
+    "subflow",
+    "extend",
+    "repeat",
+    "flows",
+    "loop",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Steveorevo/node-red-contrib-actionflows.git"
+  },
+  "node-red": {
+    "nodes": {
+      "actionfilters": "actionflows/actionflows.js"
+    }
+  }
+}

@@ -1,0 +1,513 @@
+#  _____                                                         _____            _         _       
+# |  __ \                                                       / ____|          (_)       | |      
+# | |__) |_ __  ___    __ _  _ __  __ _  _ __ ___   _ __ ___   | (___    ___  _ __  _  _ __| |_ ___ 
+# |  ___/| '__|/ _ \  / _` || '__|/ _` || '_ ` _ \ | '_ ` _ \   \___ \  / __|| '__||| '_ \| __|/ __|
+# | |    | |  | (_) || (_| || |  | (_| || | | | | || | | | | |  ____) || (__ | |   | | |_) || |_\__ \
+# |_|    |_|   \___/  \__, ||_|   \__,_||_| |_| |_||_| |_| |_| |_____/  \___||_|   |_| .__/  \__|___/
+#                      __/ |                                                          | |             
+#                     |___/                                                           |_|             
+
+script:
+  # Script per gli script di irrigazione delle zone
+  grdn_start_zona1:
+    alias: GRDN_Start_Zona1
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_1', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_1
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_1_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_1
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_1
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_1
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_1
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_1_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_1
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_start_zona2:
+    alias: GRDN_Start_Zona2
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_2', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_2
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_2_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_2
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_2
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_2
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_2
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_2_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_2
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_start_zona3:
+    alias: GRDN_Start_Zona3
+    sequence:
+    # Solo modalità normale: usa flag_zone_3
+    - condition: state
+      entity_id: input_boolean.flag_zone_3
+      state: 'on'
+    - service: homeassistant.turn_on
+      entity_id: switch.zona_3
+    - delay:
+        seconds: "{{ states('sensor.irrigation_zona_3_final_time') | int(0) }}"
+    - service: homeassistant.turn_off
+      entity_id: switch.zona_3
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    mode: restart
+
+  grdn_start_zona4:
+    alias: GRDN_Start_Zona4
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_4', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_4
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_4_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_4
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_4
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_4
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_4
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_4_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_4
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_start_zona5:
+    alias: GRDN_Start_Zona5
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_5', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_5
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_5_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_5
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_5
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_5
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_5
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_5_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_5
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_start_zona6:
+    alias: GRDN_Start_Zona6
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_6', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_6
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_6_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_6
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_6
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_6
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_6
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_6_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_6
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_start_zona7:
+    alias: GRDN_Start_Zona7
+    sequence:
+    # Solo modalità normale: usa flag_zone_7
+    - condition: state
+      entity_id: input_boolean.flag_zone_7
+      state: 'on'
+    - service: homeassistant.turn_on
+      entity_id: switch.zona_7
+    - delay:
+        seconds: "{{ states('sensor.irrigation_zona_7_final_time') | int(0) }}"
+    - service: homeassistant.turn_off
+      entity_id: switch.zona_7
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    mode: restart
+
+  grdn_start_zona8:
+    alias: GRDN_Start_Zona8
+    sequence:
+    - choose:
+      # Modalità avanzata: controlla il giorno corrente
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.irrigation_mode_advanced
+          state: 'on'
+        - condition: template
+          value_template: >
+            {% set day = now().strftime('%A').lower() %}
+            {{ is_state('input_boolean.' ~ day ~ '_zone_8', 'on') }}
+        sequence:
+        - service: homeassistant.turn_on
+          entity_id: switch.zona_8
+        - delay:
+            seconds: >
+              {% set day = now().strftime('%A').lower() %}
+              {{ states('sensor.' ~ day ~ '_zone_8_final_time') | int(0) }}
+        - service: homeassistant.turn_off
+          entity_id: switch.zona_8
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+      # Modalità normale: usa flag_zone_8
+      default:
+      - condition: state
+        entity_id: input_boolean.flag_zone_8
+        state: 'on'
+      - service: homeassistant.turn_on
+        entity_id: switch.zona_8
+      - delay:
+          seconds: "{{ states('sensor.irrigation_zona_8_final_time') | int(0) }}"
+      - service: homeassistant.turn_off
+        entity_id: switch.zona_8
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+    mode: restart
+
+  grdn_ferma_irrigazione:
+    alias: GRDN_Ferma_Irrigazione
+    sequence:
+    # Prima ferma tutti gli script delle zone
+    - service: script.turn_off
+      target:
+        entity_id:
+          - script.grdn_start_zona1
+          - script.grdn_start_zona2
+          - script.grdn_start_zona3
+          - script.grdn_start_zona4
+          - script.grdn_start_zona5
+          - script.grdn_start_zona6
+          - script.grdn_start_zona7
+          - script.grdn_start_zona8
+    # Poi chiudi tutte le valvole
+    - service: homeassistant.turn_off
+      entity_id:
+        - switch.zona_1
+        - switch.zona_2
+        - switch.zona_3
+        - switch.zona_4
+        - switch.zona_5
+        - switch.zona_6
+        - switch.zona_7
+        - switch.zona_8
+    # Infine ferma i cicli principali
+    - service: script.turn_off
+      target:
+        entity_id:
+          - script.grdn_inizia_ciclo_irrigazione
+          - script.grdn_inizia_ciclo_gocciagoccia
+    mode: restart
+
+  grdn_inizia_ciclo_irrigazione:
+    alias: GRDN_Inizia_Ciclo_Irrigazione
+    sequence:
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona2
+    - wait_template: '{{ is_state(''script.grdn_start_zona2'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona5
+    - wait_template: '{{ is_state(''script.grdn_start_zona5'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona1
+    - wait_template: '{{ is_state(''script.grdn_start_zona1'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona4
+    - wait_template: '{{ is_state(''script.grdn_start_zona4'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona6
+    - wait_template: '{{ is_state(''script.grdn_start_zona6'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona8
+    - wait_template: '{{ is_state(''script.grdn_start_zona8'', ''off'') }}'
+      timeout: '01:00:00'
+      continue_on_timeout: true
+    mode: restart
+
+  grdn_inizia_ciclo_gocciagoccia:
+    alias: GRDN_Inizia_Ciclo_GocciaGoccia
+    sequence:
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona3
+    - wait_template: '{{ is_state(''script.grdn_start_zona3'', ''off'') }}'
+      timeout: '02:00:00'
+      continue_on_timeout: true
+    - service: script.turn_on
+      target:
+        entity_id: script.grdn_start_zona7
+    - wait_template: '{{ is_state(''script.grdn_start_zona7'', ''off'') }}'
+      timeout: '02:00:00'
+      continue_on_timeout: true
+    mode: restart
+
+  # Script per copiare la configurazione da un giorno a un altro
+  irrigation_copy_day_schedule:
+    alias: "Irrigazione - Copia Programmazione Giorno"
+    description: "Copia la configurazione (zone + durate) da un giorno sorgente a un giorno destinazione"
+    fields:
+      source_day:
+        description: "Giorno sorgente (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
+        example: "monday"
+      dest_day:
+        description: "Giorno destinazione (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
+        example: "tuesday"
+    sequence:
+      # Copia tutte le 8 zone (boolean + durata)
+      - repeat:
+          count: 8
+          sequence:
+            - service: input_boolean.turn_{{ 'on' if is_state('input_boolean.' ~ source_day ~ '_zone_' ~ repeat.index, 'on') else 'off' }}
+              target:
+                entity_id: "input_boolean.{{ dest_day }}_zone_{{ repeat.index }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "input_number.{{ dest_day }}_zone_{{ repeat.index }}_duration"
+              data:
+                value: "{{ states('input_number.' ~ source_day ~ '_zone_' ~ repeat.index ~ '_duration') | float }}"
+    mode: single
+
+  # Script per applicare la configurazione di un giorno a tutti gli altri giorni
+  irrigation_apply_to_all_days:
+    alias: "Irrigazione - Applica a Tutta la Settimana"
+    description: "Applica la configurazione di un giorno a tutti gli altri giorni della settimana"
+    fields:
+      source_day:
+        description: "Giorno sorgente (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
+        example: "monday"
+    sequence:
+      - repeat:
+          for_each:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+          sequence:
+            - condition: template
+              value_template: "{{ repeat.item != source_day }}"
+            - service: script.irrigation_copy_day_schedule
+              data:
+                source_day: "{{ source_day }}"
+                dest_day: "{{ repeat.item }}"
+    mode: single
+
+  # Script per resettare un giorno (disabilita zone e azzera durate)
+  irrigation_reset_day:
+    alias: "Irrigazione - Reset Giorno"
+    description: "Disabilita tutte le zone e azzera le durate per un giorno specifico"
+    fields:
+      day:
+        description: "Giorno da resettare (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
+        example: "monday"
+    sequence:
+      - repeat:
+          count: 8
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: "input_boolean.{{ day }}_zone_{{ repeat.index }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "input_number.{{ day }}_zone_{{ repeat.index }}_duration"
+              data:
+                value: 0
+    mode: single
+
+  # Script per gestire la selezione del giorno nella UI
+  irrigation_select_day:
+    alias: "Irrigazione - Seleziona Giorno UI"
+    description: "Gestisce la selezione del giorno nella UI (disattiva tutti gli altri selettori)"
+    fields:
+      day:
+        description: "Giorno da selezionare (mon, tue, wed, thu, fri, sat, sun)"
+        example: "mon"
+    sequence:
+      # Disattiva tutti i selettori
+      - service: input_boolean.turn_off
+        target:
+          entity_id:
+            - input_boolean.schedule_day_selector_mon
+            - input_boolean.schedule_day_selector_tue
+            - input_boolean.schedule_day_selector_wed
+            - input_boolean.schedule_day_selector_thu
+            - input_boolean.schedule_day_selector_fri
+            - input_boolean.schedule_day_selector_sat
+            - input_boolean.schedule_day_selector_sun
+      # Attiva il selettore scelto
+      - service: input_boolean.turn_on
+        target:
+          entity_id: "input_boolean.schedule_day_selector_{{ day }}"
+    mode: single

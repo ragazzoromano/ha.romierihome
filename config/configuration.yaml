@@ -1,0 +1,192 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+zeroconf:
+
+# INCLUDE
+homeassistant:
+  packages:
+    pack_1: !include irrigation.yaml
+    pack_2: !include irrigation_schedule.yaml
+    pack_3: !include irrigation_scripts.yaml
+    pack_4: !include garage_energy.yaml
+  external_url: "https://ha.romierihome.digital"
+  internal_url: "http://192.168.179.30:8123"
+    
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+    
+# IFTTT CONFIG    
+ifttt:
+  key: lyNIZo2vQ9B1FwDkWyvo3IqwhMNofw1F3cQ5YURxb8V
+  
+# BROKER CONFIG  
+mqtt:
+  # SENSORS
+  sensor:
+    # Sensore Temperatura
+    - state_topic: "DHT22/sensor1/SENSOR"  
+      name: "Temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['AM2301'].Temperature }}"
+    - state_topic: "DHT22/sensor1/SENSOR"  
+      name: "Humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value_json['AM2301'].Humidity }}"
+    
+    # Sensori Energia elettrica Home
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Voltage"
+      unit_of_measurement: "V"
+      value_template: "{{ value_json['ENERGY'].Voltage }}"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Current"
+      unit_of_measurement: "A"
+      value_template: "{{ value_json['ENERGY'].Current }}"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Power"
+      unit_of_measurement: "W"
+      value_template: "{{ value_json['ENERGY'].Power }}"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Power Factor"
+      unit_of_measurement: " "
+      value_template: "{{ value_json['ENERGY'].Factor }}"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Today Energy"
+      unit_of_measurement: "kWh"
+      value_template: "{{ value_json['ENERGY'].Today }}"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Yesterday Energy"
+      value_template: "{{ value_json['ENERGY'].Yesterday }}"
+      unit_of_measurement: "kWh"
+    - state_topic: "PZEM004_H/elSensorH/SENSOR"  
+      name: "Home Total Energy"
+      value_template: "{{ value_json['ENERGY'].Total }}"
+      unit_of_measurement: "kWh"
+
+    # Sensori Energia elettrica ABB
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Voltage"
+      unit_of_measurement: "V"
+      value_template: "{{ value_json['ENERGY'].Voltage }}"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Current"
+      unit_of_measurement: "A"
+      value_template: "{{ value_json['ENERGY'].Current }}"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Power"
+      unit_of_measurement: "W"
+      value_template: "{{ value_json['ENERGY'].Power }}"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Power Factor"
+      unit_of_measurement: " "
+      value_template: "{{ value_json['ENERGY'].Factor }}"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Today Energy"
+      unit_of_measurement: "kWh"
+      value_template: "{{ value_json['ENERGY'].Today }}"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Yesterday Energy"
+      value_template: "{{ value_json['ENERGY'].Yesterday }}"
+      unit_of_measurement: "kWh"
+    - state_topic: "PZEM004_A/elSensorA/SENSOR"  
+      name: "ABB Total Energy"
+      value_template: "{{ value_json['ENERGY'].Total }}"
+      unit_of_measurement: "kWh"
+    
+    # Sensori NodeRed
+    - state_topic: "noderedHA/SENSOR"  
+      name: "Power Overview"
+      unit_of_measurement: "W"
+      value_template: "{{ value_json['DELTA_ENERGY'].value }}"
+    - state_topic: "noderedHA/GRIDSENSOR"  
+      name: "Grid Total Energy"
+      value_template: "{{ value_json['ENERGY'].Total }}"
+      unit_of_measurement: "Wh"
+      device_class: energy
+      state_class: total_increasing
+
+    # Sensori Rain Temperatura Roof
+    - state_topic: "tele/elSensorR01/SENSOR"  
+      name: "Rain01ADC"
+      value_template: "{{ value_json['ANALOG'].A0 }}"
+      unit_of_measurement: "#"
+    - state_topic: "tele/elSensorR01/SENSOR" 
+      name: "Rain01Temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json['AM2301'].Temperature }}"
+    - state_topic: "tele/elSensorR01/SENSOR"  
+      name: "Rain01Humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value_json['AM2301'].Humidity }}"
+      
+  # SWITCH
+  switch:
+  #Switch Rain Temperatura
+  - command_topic: "cmnd/elSensorR01/POWER"
+    name: "Rain01s01"
+    state_topic: "stat/elSensorR01/POWER"
+    availability_topic: "tele/elSensorR01/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 0
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+    retain: false
+    
+# INPUT BOOLEAN
+input_boolean:
+  shutterclosed:
+    name: shutterclosed
+  shutteropened:
+    name: shutteropened
+  israining:
+    name: israining
+
+template:
+  - binary_sensor:
+      - name: shutterclosed Read only
+        state: "{{ states('input_boolean.shutterclosed') | bool }}"
+      - name: shutteropened Read only
+        state: "{{ states('input_boolean.shutteropened') | bool }}"
+      - name: israining Read only
+        state: "{{ states('input_boolean.israining') | bool }}"
+
+  - sensor:
+      - name: Sun Next Events
+        unique_id: sun_next_events
+        icon: mdi:weather-sunset
+        state: >
+          {% set sr = as_timestamp(state_attr('sun.sun','next_rising')) | timestamp_custom(' %I:%M %p') | replace(" 0", "") %}
+          {% set ss = as_timestamp(state_attr('sun.sun','next_setting')) | timestamp_custom(' %I:%M %p') | replace(" 0", "") %}
+          Sunrise:{{ sr }} | Sunset:{{ ss }}
+
+# Recorder settings
+recorder:
+  db_url: !secret mariadb_url
+  # Keep state history for 1 year (365 days)
+  purge_keep_days: 365
+  # Enable auto-purge to clean old state history (keeps last year)
+  auto_purge: true
+  # Commit interval for better performance
+  commit_interval: 1
+  # Exclude domains that don't need detailed state history
+  exclude:
+    domains:
+      - automation
+      - updater
+    entity_globs:
+      - sensor.weather_*
+      - sensor.*_signal_*
+
+# Long-term statistics configuration
+# Note: Long-term statistics are ALWAYS kept indefinitely by default
+# This includes all energy and power sensors which is perfect for indefinite energy tracking
+# Statistics are stored separately with 5-minute resolution and don't count toward purge_keep_days
+  
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.179.38      # Add the IP address of the proxy server

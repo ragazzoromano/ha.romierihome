@@ -1,0 +1,1068 @@
+#                         _                                          _ 
+#                        | |                                        | |
+#   __ _   __ _  _ __  __| |  ___  _ __     _   _   __ _  _ __ ___  | |
+#  / _` | / _` || '__|/ _` | / _ \| '_ \   | | | | / _` || '_ ` _ \ | |
+# | (_| || (_| || |  | (_| ||  __/| | | | _| |_| || (_| || | | | | || |
+#  \__, | \__,_||_|   \__,_| \___||_| |_|(_)\__, | \__,_||_| |_| |_||_|
+#   __/ |                                    __/ |                     
+#  |___/                                    |___/                      
+
+#   _____           _  _         _     
+#  / ____|         (_)| |       | |    
+# | (___ __      __ _ | |_  ___ | |__  
+#  \___ \\ \ /\ / /| || __|/ __|| '_ \ 
+#  ____) |\ V  V / | || |_| (__ | | | |
+# |_____/  \_/\_/  |_| \__|\___||_| |_|
+mqtt:
+  switch:
+########################
+# Switch - Irrigazione #
+########################
+
+    #Ovest interno
+    - unique_id: Zona1
+      name: "Zona 1"
+      state_topic: "stat/elSensorI0104/POWER1"
+      command_topic: "cmnd/elSensorI0104/POWER1"
+      availability_topic: "tele/elSensorI0104/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false  
+
+    #Sud esterno
+    - unique_id: Zona2
+      name: "Zona 2"
+      state_topic: "stat/elSensorI0104/POWER2"
+      command_topic: "cmnd/elSensorI0104/POWER2"
+      availability_topic: "tele/elSensorI0104/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false
+
+    #GG Sud
+    - unique_id: Zona3
+      name: "Zona 3"
+      state_topic: "stat/elSensorI0104/POWER3"
+      command_topic: "cmnd/elSensorI0104/POWER3"
+      availability_topic: "tele/elSensorI0104/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false       
+    
+    #Sud interno
+    - unique_id: Zona4
+      name: "Zona 4"
+      state_topic: "stat/elSensorI0104/POWER4"
+      command_topic: "cmnd/elSensorI0104/POWER4"
+      availability_topic: "tele/elSensorI0104/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false
+    
+    #Ovest esterno
+    - unique_id: Zona5
+      name: "Zona 5"
+      state_topic: "stat/elSensorI0508/POWER1"
+      command_topic: "cmnd/elSensorI0508/POWER1"
+      availability_topic: "tele/elSensorI0508/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false      
+    
+    #Nord esterno
+    - unique_id: Zona6
+      name: "Zona 6"
+      state_topic: "stat/elSensorI0508/POWER2"
+      command_topic: "cmnd/elSensorI0508/POWER2"
+      availability_topic: "tele/elSensorI0508/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false    
+    
+    #GG Est
+    - unique_id: Zona7
+      name: "Zona 7"
+      state_topic: "stat/elSensorI0508/POWER3"
+      command_topic: "cmnd/elSensorI0508/POWER3"
+      availability_topic: "tele/elSensorI0508/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false     
+    
+    #Nord interno
+    - unique_id: Zona8
+      name: "Zona 8"
+      state_topic: "stat/elSensorI0508/POWER4"
+      command_topic: "cmnd/elSensorI0508/POWER4"
+      availability_topic: "tele/elSensorI0508/LWT"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 0
+      payload_on: "ON"
+      payload_off: "OFF"
+      optimistic: false
+      retain: false
+    
+
+#  _                       _        _         _         _    _                  
+# (_)                     | |      | |       | |       | |  (_)                 
+#  _  _ __   _ __   _   _ | |_   __| |  __ _ | |_  ___ | |_  _  _ __ ___    ___ 
+# | || '_ \ | '_ \ | | | || __| / _` | / _` || __|/ _ \| __|| || '_ ` _ \  / _ \
+# | || | | || |_) || |_| || |_ | (_| || (_| || |_|  __/| |_ | || | | | | ||  __/
+# |_||_| |_|| .__/  \__,_| \__| \__,_| \__,_| \__|\___| \__||_||_| |_| |_| \___|
+#           | |             ______                                              
+#           |_|            |______|                                             
+input_datetime:
+#############################################################
+# Input date time - Per orari di partenza automazioni varie #
+#############################################################
+  # Orario partenza irrigazione classica
+  time_start_irrigazione:
+    name: Orario Irrigazione Classica
+    has_date: false
+    has_time: true
+  
+  # Orario partenza goccia-goccia (separato)
+  time_start_gocciagoccia:
+    name: Orario Goccia-Goccia
+    has_date: false
+    has_time: true
+    
+#  _                       _                              _                 
+# (_)                     | |                            | |                
+#  _  _ __   _ __   _   _ | |_   _ __   _   _  _ __ ___  | |__    ___  _ __ 
+# | || '_ \ | '_ \ | | | || __| | '_ \ | | | || '_ ` _ \ | '_ \  / _ \| '__|
+# | || | | || |_) || |_| || |_  | | | || |_| || | | | | || |_) ||  __/| |   
+# |_||_| |_|| .__/  \__,_| \__| |_| |_| \__,_||_| |_| |_||_.__/  \___||_|   
+#           | |             ______                                          
+#           |_|            |______|                                          
+input_number:
+################################################
+# Input Number - Slider per durata irrigazione #
+################################################
+  # Tempo zona 1
+  slider_zona_1:
+    name: "Ovest interno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Tempo zona 2
+  slider_zona_2:
+    name: "Sud esterno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Tempo zona 3
+  slider_zona_3:
+    name: "GG Sud"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Tempo zona 4
+  slider_zona_4:
+    name: "Sud interno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Tempo zona 5
+  slider_zona_5:
+    name: "Ovest esterno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+  
+  # Tempo zona 6
+  slider_zona_6:
+    name: "Nord esterno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Tempo zona 7
+  slider_zona_7:
+    name: "GG Est"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+
+  # Tempo zona 8
+  slider_zona_8:
+    name: "Nord interno"
+    icon: mdi:clock-end
+    unit_of_measurement: min
+    min: 1
+    max: 40
+    step: 1
+    
+  # Offset Tempo    
+  slider_time_offset:
+    name: "Time Offset"
+    icon: mdi:clock-out
+    unit_of_measurement: '%'
+    min: 0
+    max: 100
+    step: 10
+    
+  # Finale Tempo zona 1
+  slider_final_zona_1:
+    name: "Ovest interno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1   
+    
+  # Finale Tempo zona 2
+  slider_final_zona_2:
+    name: "Sud esterno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1      
+
+  # Finale Tempo zona 3
+  slider_final_zona_3:
+    name: "GG Sud Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1      
+    
+  # Finale Tempo zona 4
+  slider_final_zona_4:
+    name: "Sud interno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1
+    
+  slider_final_zona_5:
+    name: "Ovest esterno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1   
+    
+  # Finale Tempo zona 6
+  slider_final_zona_6:
+    name: "Nord esterno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1      
+
+  # Finale Tempo zona 7
+  slider_final_zona_7:
+    name: "GG Est Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1      
+    
+  # Finale Tempo zona 8
+  slider_final_zona_8:
+    name: "Nord interno Finale"
+    icon: mdi:clock-end
+    unit_of_measurement: sec
+    min: 1
+    max: 7200
+    step: 1
+    
+  irrigation_global_factor:
+    name: Irrigazione - Fattore globale
+    min: 0
+    max: 200
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
+    icon: mdi:percent
+
+#  _                       _     _                    _                     
+# (_)                     | |   | |                  | |                    
+#  _  _ __   _ __   _   _ | |_  | |__    ___    ___  | |  ___   __ _  _ __  
+# | || '_ \ | '_ \ | | | || __| | '_ \  / _ \  / _ \ | | / _ \ / _` || '_ \ 
+# | || | | || |_) || |_| || |_  | |_) || (_) || (_) || ||  __/| (_| || | | |
+# |_||_| |_|| .__/  \__,_| \__| |_.__/  \___/  \___/ |_| \___| \__,_||_| |_|
+#           | |             ______                                          
+#           |_|            |______|                                         
+input_boolean:
+################################################
+# Input Boolean - Giorni della settimana       #
+################################################
+  # Giorni per irrigatori classici
+  monday:
+    name: Lunedì
+
+  tuesday:
+    name: Martedì
+
+  wednesday:
+    name: Mercoledì
+
+  thursday:
+    name: Giovedì
+
+  friday:
+    name: Venerdì
+
+  saturday:
+    name: Sabato
+
+  sunday:
+    name: Domenica
+
+  # Giorni per sistema goccia-goccia
+  gocciagoccia_monday:
+    name: GG Lunedì
+
+  gocciagoccia_tuesday:
+    name: GG Martedì
+
+  gocciagoccia_wednesday:
+    name: GG Mercoledì
+
+  gocciagoccia_thursday:
+    name: GG Giovedì
+
+  gocciagoccia_friday:
+    name: GG Venerdì
+
+  gocciagoccia_saturday:
+    name: GG Sabato
+
+  gocciagoccia_sunday:
+    name: GG Domenica
+
+  flag_zone_1:
+    name: flag_zone_1
+
+  flag_zone_2:
+    name: flag_zone_2
+
+  flag_zone_3:
+    name: flag_zone_3
+
+  flag_zone_4:
+    name: flag_zone_4
+
+  flag_zone_5:
+    name: flag_zone_5
+
+  flag_zone_6:
+    name: flag_zone_6
+
+  flag_zone_7:
+    name: flag_zone_7
+
+  flag_zone_8:
+    name: flag_zone_8
+
+  irrigation_mode_advanced:
+    name: Modalità Avanzata (Programmazione Settimanale)
+    icon: mdi:calendar-week
+
+  smart_irrigation_enabled:
+    name: Abilita Smart Irrigation (Fattore Meteo)
+    icon: mdi:weather-partly-cloudy
+
+# Template sensors per calcolo automatico tempi finali con moltiplicatore globale
+template:
+  - sensor:
+      # ========== SMART IRRIGATION - SENSORI METEO INTELLIGENTI ==========
+      
+      # Sensore per calcolare la pioggia degli ultimi 3 giorni
+      - name: "Rain Last 3 Days"
+        unique_id: rain_last_3_days
+        unit_of_measurement: "mm"
+        icon: mdi:weather-pouring
+        state: >
+          {# Questo sensore sarà popolato da Smart Irrigation dopo la configurazione #}
+          {# Per ora restituisce 0, verrà aggiornato automaticamente #}
+          {{ states('sensor.smart_irrigation_rain_last_3_days') | float(0) }}
+      
+      # Fattore meteo intelligente basato su condizioni attuali e previsioni
+      - name: "Smart Irrigation Weather Factor"
+        unique_id: smart_irrigation_weather_factor
+        unit_of_measurement: "%"
+        icon: mdi:water-percent
+        state: >
+          {% set base_factor = 100 %}
+          
+          {# BLOCCO TOTALE se sta piovendo ora #}
+          {% if is_state('input_boolean.israining', 'on') %}
+            {% set base_factor = 0 %}
+          
+          {# Riduzione forte per condizioni meteo sfavorevoli #}
+          {% elif is_state('weather.romieriweather', 'rainy') %}
+            {% set base_factor = 10 %}
+          {% elif is_state('weather.romieriweather', 'pouring') %}
+            {% set base_factor = 0 %}
+          {% elif is_state('weather.romieriweather', 'lightning-rainy') %}
+            {% set base_factor = 0 %}
+          {% elif is_state('weather.romieriweather', 'snowy-rainy') %}
+            {% set base_factor = 5 %}
+          
+          {# Riduzione media per nuvolosità #}
+          {% elif is_state('weather.romieriweather', 'cloudy') %}
+            {% set base_factor = 75 %}
+          {% elif is_state('weather.romieriweather', 'partlycloudy') %}
+            {% set base_factor = 85 %}
+          {% elif is_state('weather.romieriweather', 'fog') %}
+            {% set base_factor = 60 %}
+          {% endif %}
+          
+          {# Regolazione per temperatura (aumenta con caldo) #}
+          {% set temp = state_attr('weather.romieriweather', 'temperature') | float(20) %}
+          {% if temp > 35 %}
+            {% set base_factor = base_factor * 1.4 %}
+          {% elif temp > 30 %}
+            {% set base_factor = base_factor * 1.25 %}
+          {% elif temp > 25 %}
+            {% set base_factor = base_factor * 1.1 %}
+          {% elif temp < 15 %}
+            {% set base_factor = base_factor * 0.7 %}
+          {% elif temp < 10 %}
+            {% set base_factor = base_factor * 0.5 %}
+          {% endif %}
+          
+          {# Riduzione per umidità alta #}
+          {% set humidity = state_attr('weather.romieriweather', 'humidity') | float(50) %}
+          {% if humidity > 85 %}
+            {% set base_factor = base_factor * 0.7 %}
+          {% elif humidity > 75 %}
+            {% set base_factor = base_factor * 0.85 %}
+          {% endif %}
+          
+          {# Limita tra 0 e 150% #}
+          {% set base_factor = [0, base_factor] | max %}
+          {% set base_factor = [150, base_factor] | min %}
+          
+          {{ base_factor | round(0) | int }}
+      
+      # Fattore combinato: moltiplicatore manuale × fattore meteo intelligente
+      - name: "Irrigation Combined Factor"
+        unique_id: irrigation_combined_factor
+        unit_of_measurement: "%"
+        icon: mdi:water-sync
+        state: >
+          {% set manual = states('input_number.irrigation_global_factor') | float(100) %}
+          {% set weather = states('sensor.smart_irrigation_weather_factor') | float(100) %}
+          {{ ((manual * weather / 10000) | round(0)) | int }}
+      
+      # Sensore di stato irrigazione intelligente (per dashboard)
+      - name: "Smart Irrigation Status"
+        unique_id: smart_irrigation_status
+        icon: mdi:information-outline
+        state: >
+          {% set combined = states('sensor.irrigation_combined_factor') | int(100) %}
+          {% if combined == 0 %}
+            Irrigazione BLOCCATA (pioggia)
+          {% elif combined < 30 %}
+            Ridotta fortemente ({{ combined }}%)
+          {% elif combined < 70 %}
+            Ridotta ({{ combined }}%)
+          {% elif combined > 120 %}
+            Aumentata ({{ combined }}%)
+          {% else %}
+            Normale ({{ combined }}%)
+          {% endif %}
+      
+      # Zona 1 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 1 Final Time"
+        unique_id: irrigation_zona_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_1') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+        
+      # Zona 2 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 2 Final Time"
+        unique_id: irrigation_zona_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_2') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+        
+      # Zona 3 - TEMPO PURO senza fattore globale (goccia-goccia)
+      - name: "Irrigation Zona 3 Final Time"
+        unique_id: irrigation_zona_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_3') | float(0) %}
+          {{ (base_time * 60) | int }}
+        
+      # Zona 4 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 4 Final Time"
+        unique_id: irrigation_zona_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_4') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+        
+      # Zona 5 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 5 Final Time"
+        unique_id: irrigation_zona_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_5') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+        
+      # Zona 6 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 6 Final Time"
+        unique_id: irrigation_zona_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_6') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+        
+      # Zona 7 - TEMPO PURO senza fattore globale (goccia-goccia)
+      - name: "Irrigation Zona 7 Final Time"
+        unique_id: irrigation_zona_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_7') | float(0) %}
+          {{ (base_time * 60) | int }}
+        
+      # Zona 8 - Calcolo tempo finale con FATTORE INTELLIGENTE
+      - name: "Irrigation Zona 8 Final Time"
+        unique_id: irrigation_zona_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.slider_zona_8') | float(0) %}
+          {% if is_state('input_boolean.smart_irrigation_enabled', 'on') %}
+            {% set factor = states('sensor.irrigation_combined_factor') | float(100) %}
+          {% else %}
+            {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {% endif %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+      
+      # Sensori helper per visualizzazione in minuti
+      - name: "Irrigation Zona 1 Final Time Minutes"
+        unique_id: irrigation_zona_1_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_1_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 2 Final Time Minutes"
+        unique_id: irrigation_zona_2_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_2_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 3 Final Time Minutes"
+        unique_id: irrigation_zona_3_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_3_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 4 Final Time Minutes"
+        unique_id: irrigation_zona_4_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_4_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 5 Final Time Minutes"
+        unique_id: irrigation_zona_5_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_5_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 6 Final Time Minutes"
+        unique_id: irrigation_zona_6_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_6_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 7 Final Time Minutes"
+        unique_id: irrigation_zona_7_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_7_final_time') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 8 Final Time Minutes"
+        unique_id: irrigation_zona_8_final_time_min
+        unit_of_measurement: "min"
+        icon: mdi:clock-end
+        state: >
+          {{ (states('sensor.irrigation_zona_8_final_time') | float(0) / 60) | round(1) }}
+
+      # ========== SENSORI RUNTIME - TEMPO TRASCORSO ==========
+      # Zona 1 - Runtime sensors
+      - name: "Irrigation Zona 1 Time Remaining"
+        unique_id: irrigation_zona_1_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_1', 'on') %}
+            {% set total = states('sensor.irrigation_zona_1_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_1.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 1 Time Elapsed"
+        unique_id: irrigation_zona_1_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_1', 'on') %}
+            {{ (now() - states.switch.zona_1.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 1 Time Remaining Minutes"
+        unique_id: irrigation_zona_1_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_1_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 1 Time Elapsed Minutes"
+        unique_id: irrigation_zona_1_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_1_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 2 - Runtime sensors
+      - name: "Irrigation Zona 2 Time Remaining"
+        unique_id: irrigation_zona_2_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_2', 'on') %}
+            {% set total = states('sensor.irrigation_zona_2_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_2.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 2 Time Elapsed"
+        unique_id: irrigation_zona_2_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_2', 'on') %}
+            {{ (now() - states.switch.zona_2.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 2 Time Remaining Minutes"
+        unique_id: irrigation_zona_2_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_2_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 2 Time Elapsed Minutes"
+        unique_id: irrigation_zona_2_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_2_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 3 - Runtime sensors
+      - name: "Irrigation Zona 3 Time Remaining"
+        unique_id: irrigation_zona_3_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_3', 'on') %}
+            {% set total = states('sensor.irrigation_zona_3_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_3.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 3 Time Elapsed"
+        unique_id: irrigation_zona_3_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_3', 'on') %}
+            {{ (now() - states.switch.zona_3.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 3 Time Remaining Minutes"
+        unique_id: irrigation_zona_3_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_3_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 3 Time Elapsed Minutes"
+        unique_id: irrigation_zona_3_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_3_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 4 - Runtime sensors
+      - name: "Irrigation Zona 4 Time Remaining"
+        unique_id: irrigation_zona_4_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_4', 'on') %}
+            {% set total = states('sensor.irrigation_zona_4_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_4.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 4 Time Elapsed"
+        unique_id: irrigation_zona_4_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_4', 'on') %}
+            {{ (now() - states.switch.zona_4.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 4 Time Remaining Minutes"
+        unique_id: irrigation_zona_4_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_4_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 4 Time Elapsed Minutes"
+        unique_id: irrigation_zona_4_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_4_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 5 - Runtime sensors
+      - name: "Irrigation Zona 5 Time Remaining"
+        unique_id: irrigation_zona_5_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_5', 'on') %}
+            {% set total = states('sensor.irrigation_zona_5_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_5.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 5 Time Elapsed"
+        unique_id: irrigation_zona_5_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_5', 'on') %}
+            {{ (now() - states.switch.zona_5.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 5 Time Remaining Minutes"
+        unique_id: irrigation_zona_5_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_5_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 5 Time Elapsed Minutes"
+        unique_id: irrigation_zona_5_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_5_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 6 - Runtime sensors
+      - name: "Irrigation Zona 6 Time Remaining"
+        unique_id: irrigation_zona_6_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_6', 'on') %}
+            {% set total = states('sensor.irrigation_zona_6_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_6.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 6 Time Elapsed"
+        unique_id: irrigation_zona_6_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_6', 'on') %}
+            {{ (now() - states.switch.zona_6.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 6 Time Remaining Minutes"
+        unique_id: irrigation_zona_6_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_6_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 6 Time Elapsed Minutes"
+        unique_id: irrigation_zona_6_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_6_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 7 - Runtime sensors
+      - name: "Irrigation Zona 7 Time Remaining"
+        unique_id: irrigation_zona_7_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_7', 'on') %}
+            {% set total = states('sensor.irrigation_zona_7_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_7.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 7 Time Elapsed"
+        unique_id: irrigation_zona_7_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_7', 'on') %}
+            {{ (now() - states.switch.zona_7.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 7 Time Remaining Minutes"
+        unique_id: irrigation_zona_7_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_7_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 7 Time Elapsed Minutes"
+        unique_id: irrigation_zona_7_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_7_time_elapsed') | float(0) / 60) | round(1) }}
+
+      # Zona 8 - Runtime sensors
+      - name: "Irrigation Zona 8 Time Remaining"
+        unique_id: irrigation_zona_8_time_remaining
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% if is_state('switch.zona_8', 'on') %}
+            {% set total = states('sensor.irrigation_zona_8_final_time') | int(0) %}
+            {% set elapsed = (now() - states.switch.zona_8.last_changed).total_seconds() | int(0) %}
+            {% set remaining = total - elapsed %}
+            {{ remaining if remaining > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 8 Time Elapsed"
+        unique_id: irrigation_zona_8_time_elapsed
+        unit_of_measurement: "sec"
+        icon: mdi:timer
+        state: >
+          {% if is_state('switch.zona_8', 'on') %}
+            {{ (now() - states.switch.zona_8.last_changed).total_seconds() | int(0) }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Irrigation Zona 8 Time Remaining Minutes"
+        unique_id: irrigation_zona_8_time_remaining_min
+        unit_of_measurement: "min"
+        icon: mdi:timer-sand
+        state: >
+          {{ (states('sensor.irrigation_zona_8_time_remaining') | float(0) / 60) | round(1) }}
+          
+      - name: "Irrigation Zona 8 Time Elapsed Minutes"
+        unique_id: irrigation_zona_8_time_elapsed_min
+        unit_of_measurement: "min"
+        icon: mdi:timer
+        state: >
+          {{ (states('sensor.irrigation_zona_8_time_elapsed') | float(0) / 60) | round(1) }}
+      
+      # Sensore potenza pompa irrigazione
+      - name: "Irrigation Pump Power"
+        unique_id: irrigation_pump_power
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        icon: mdi:pump
+        state: >
+          {% set zones = [
+            states('switch.zona_1'),
+            states('switch.zona_2'),
+            states('switch.zona_3'),
+            states('switch.zona_4'),
+            states('switch.zona_5'),
+            states('switch.zona_6'),
+            states('switch.zona_7'),
+            states('switch.zona_8')
+          ] %}
+          {% if 'on' in zones %}
+            800
+          {% else %}
+            0
+          {% endif %}
+
+#   _____ _____  _____ _____   _____       _______ _____ ____  _   _ 
+#  |_   _|  __ \|  __ \_   _| / ____|   /\|__   __|_   _/ __ \| \ | |
+#    | | | |__) | |__) || |  | |  __   /  \  | |    | || |  | |  \| |
+#    | | |  _  /|  _  / | |  | | |_ | / /\ \ | |    | || |  | | . ` |
+#   _| |_| | \ \| | \ \_| |_ | |__| |/ ____ \| |   _| || |__| | |\  |
+#  |_____|_|  \_\_|  \_\_____|\_____|_/    \_\_|  |_____\____/|_| \_|
+# Sensore energia pompa irrigazione (integrazione Riemann)
+sensor:
+  - platform: integration
+    source: sensor.irrigation_pump_power
+    name: "Irrigation Pump Energy"
+    unique_id: irrigation_pump_energy
+    unit_prefix: k
+    round: 2
+    method: left
+
+#  _    _ _______ _____ _      _____ _________     __  __  __ ______ _______ ______ _____  
+# | |  | |__   __|_   _| |    |_   _|__   __\ \   / / |  \/  |  ____|__   __|  ____|  __ \ 
+# | |  | |  | |    | | | |      | |    | |   \ \_/ /  | \  / | |__     | |  | |__  | |__) |
+# | |  | |  | |    | | | |      | |    | |    \   /   | |\/| |  __|    | |  |  __| |  _  / 
+# | |__| |  | |   _| |_| |____ _| |_   | |     | |    | |  | | |____   | |  | |____| | \ \ 
+#  \____/   |_|  |_____|______|_____|  |_|     |_|    |_|  |_|______|  |_|  |______|_|  \_\
+# Utility meters per consumi periodici
+utility_meter:
+  irrigation_energy_daily:
+    source: sensor.irrigation_pump_energy
+    name: "Irrigation Energy Daily"
+    cycle: daily
+    
+  irrigation_energy_weekly:
+    source: sensor.irrigation_pump_energy
+    name: "Irrigation Energy Weekly"
+    cycle: weekly
+    
+  irrigation_energy_monthly:
+    source: sensor.irrigation_pump_energy
+    name: "Irrigation Energy Monthly"
+    cycle: monthly
+    
+  irrigation_energy_yearly:
+    source: sensor.irrigation_pump_energy
+    name: "Irrigation Energy Yearly"
+    cycle: yearly

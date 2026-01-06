@@ -1,0 +1,1240 @@
+#  _____                                                         _____        _                  _         _      
+# |  __ \                                                       / ____|      | |                | |       | |     
+# | |__) |_ __  ___    __ _  _ __  __ _  _ __ ___   _ __ ___   | (___    ___ | |_  _   _  _ __ | |  __ _ | | ___ 
+# |  ___/| '__|/ _ \  / _` || '__|/ _` || '_ ` _ \ | '_ ` _ \   \___ \  / _ \| __|| | | || '_ \| | / _` || |/ _ \
+# | |    | |  | (_) || (_| || |  | (_| || | | | | || | | | | |  ____) ||  __/| |_ | |_| || | | || || (_| || |  __/
+# |_|    |_|   \___/  \__, ||_|   \__,_||_| |_| |_||_| |_| |_| |_____/  \___| \__| \__,_||_| |_||_| \__,_||_|\___|
+#                      __/ |                                                                                       
+#                     |___/                                                                                        
+
+# Input Boolean per Selezione Giorno nella UI
+input_boolean:
+  schedule_day_selector_mon:
+    name: "Selettore Lunedì"
+    icon: mdi:numeric-1-circle
+    
+  schedule_day_selector_tue:
+    name: "Selettore Martedì"
+    icon: mdi:numeric-2-circle
+    
+  schedule_day_selector_wed:
+    name: "Selettore Mercoledì"
+    icon: mdi:numeric-3-circle
+    
+  schedule_day_selector_thu:
+    name: "Selettore Giovedì"
+    icon: mdi:numeric-4-circle
+    
+  schedule_day_selector_fri:
+    name: "Selettore Venerdì"
+    icon: mdi:numeric-5-circle
+    
+  schedule_day_selector_sat:
+    name: "Selettore Sabato"
+    icon: mdi:numeric-6-circle
+    
+  schedule_day_selector_sun:
+    name: "Selettore Domenica"
+    icon: mdi:numeric-7-circle
+
+  # Lunedì - Zone Enable/Disable
+  monday_zone_1:
+    name: "Lunedì - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  monday_zone_2:
+    name: "Lunedì - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  monday_zone_3:
+    name: "Lunedì - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  monday_zone_4:
+    name: "Lunedì - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  monday_zone_5:
+    name: "Lunedì - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  monday_zone_6:
+    name: "Lunedì - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  monday_zone_7:
+    name: "Lunedì - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  monday_zone_8:
+    name: "Lunedì - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Martedì - Zone Enable/Disable
+  tuesday_zone_1:
+    name: "Martedì - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  tuesday_zone_2:
+    name: "Martedì - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  tuesday_zone_3:
+    name: "Martedì - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  tuesday_zone_4:
+    name: "Martedì - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  tuesday_zone_5:
+    name: "Martedì - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  tuesday_zone_6:
+    name: "Martedì - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  tuesday_zone_7:
+    name: "Martedì - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  tuesday_zone_8:
+    name: "Martedì - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Mercoledì - Zone Enable/Disable
+  wednesday_zone_1:
+    name: "Mercoledì - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  wednesday_zone_2:
+    name: "Mercoledì - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  wednesday_zone_3:
+    name: "Mercoledì - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  wednesday_zone_4:
+    name: "Mercoledì - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  wednesday_zone_5:
+    name: "Mercoledì - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  wednesday_zone_6:
+    name: "Mercoledì - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  wednesday_zone_7:
+    name: "Mercoledì - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  wednesday_zone_8:
+    name: "Mercoledì - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Giovedì - Zone Enable/Disable
+  thursday_zone_1:
+    name: "Giovedì - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  thursday_zone_2:
+    name: "Giovedì - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  thursday_zone_3:
+    name: "Giovedì - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  thursday_zone_4:
+    name: "Giovedì - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  thursday_zone_5:
+    name: "Giovedì - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  thursday_zone_6:
+    name: "Giovedì - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  thursday_zone_7:
+    name: "Giovedì - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  thursday_zone_8:
+    name: "Giovedì - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Venerdì - Zone Enable/Disable
+  friday_zone_1:
+    name: "Venerdì - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  friday_zone_2:
+    name: "Venerdì - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  friday_zone_3:
+    name: "Venerdì - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  friday_zone_4:
+    name: "Venerdì - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  friday_zone_5:
+    name: "Venerdì - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  friday_zone_6:
+    name: "Venerdì - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  friday_zone_7:
+    name: "Venerdì - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  friday_zone_8:
+    name: "Venerdì - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Sabato - Zone Enable/Disable
+  saturday_zone_1:
+    name: "Sabato - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  saturday_zone_2:
+    name: "Sabato - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  saturday_zone_3:
+    name: "Sabato - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  saturday_zone_4:
+    name: "Sabato - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  saturday_zone_5:
+    name: "Sabato - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  saturday_zone_6:
+    name: "Sabato - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  saturday_zone_7:
+    name: "Sabato - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  saturday_zone_8:
+    name: "Sabato - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+  # Domenica - Zone Enable/Disable
+  sunday_zone_1:
+    name: "Domenica - Zona 1 (Ovest interno)"
+    icon: mdi:sprinkler
+    
+  sunday_zone_2:
+    name: "Domenica - Zona 2 (Sud esterno)"
+    icon: mdi:sprinkler
+    
+  sunday_zone_3:
+    name: "Domenica - Zona 3 (GG Sud)"
+    icon: mdi:water
+    
+  sunday_zone_4:
+    name: "Domenica - Zona 4 (Ovest esterno)"
+    icon: mdi:sprinkler
+    
+  sunday_zone_5:
+    name: "Domenica - Zona 5 (Sud interno)"
+    icon: mdi:sprinkler
+    
+  sunday_zone_6:
+    name: "Domenica - Zona 6 (Est interno)"
+    icon: mdi:sprinkler
+    
+  sunday_zone_7:
+    name: "Domenica - Zona 7 (GG Est)"
+    icon: mdi:water
+    
+  sunday_zone_8:
+    name: "Domenica - Zona 8 (Nord interno)"
+    icon: mdi:sprinkler
+
+# Input Number per Durate Zone
+input_number:
+  # Lunedì - Durate Zone
+  monday_zone_1_duration:
+    name: "Lunedì - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_2_duration:
+    name: "Lunedì - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_3_duration:
+    name: "Lunedì - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_4_duration:
+    name: "Lunedì - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_5_duration:
+    name: "Lunedì - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_6_duration:
+    name: "Lunedì - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_7_duration:
+    name: "Lunedì - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  monday_zone_8_duration:
+    name: "Lunedì - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Martedì - Durate Zone
+  tuesday_zone_1_duration:
+    name: "Martedì - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_2_duration:
+    name: "Martedì - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_3_duration:
+    name: "Martedì - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_4_duration:
+    name: "Martedì - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_5_duration:
+    name: "Martedì - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_6_duration:
+    name: "Martedì - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_7_duration:
+    name: "Martedì - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  tuesday_zone_8_duration:
+    name: "Martedì - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Mercoledì - Durate Zone
+  wednesday_zone_1_duration:
+    name: "Mercoledì - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_2_duration:
+    name: "Mercoledì - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_3_duration:
+    name: "Mercoledì - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_4_duration:
+    name: "Mercoledì - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_5_duration:
+    name: "Mercoledì - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_6_duration:
+    name: "Mercoledì - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_7_duration:
+    name: "Mercoledì - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  wednesday_zone_8_duration:
+    name: "Mercoledì - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Giovedì - Durate Zone
+  thursday_zone_1_duration:
+    name: "Giovedì - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_2_duration:
+    name: "Giovedì - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_3_duration:
+    name: "Giovedì - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_4_duration:
+    name: "Giovedì - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_5_duration:
+    name: "Giovedì - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_6_duration:
+    name: "Giovedì - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_7_duration:
+    name: "Giovedì - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  thursday_zone_8_duration:
+    name: "Giovedì - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Venerdì - Durate Zone
+  friday_zone_1_duration:
+    name: "Venerdì - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_2_duration:
+    name: "Venerdì - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_3_duration:
+    name: "Venerdì - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_4_duration:
+    name: "Venerdì - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_5_duration:
+    name: "Venerdì - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_6_duration:
+    name: "Venerdì - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_7_duration:
+    name: "Venerdì - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  friday_zone_8_duration:
+    name: "Venerdì - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Sabato - Durate Zone
+  saturday_zone_1_duration:
+    name: "Sabato - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_2_duration:
+    name: "Sabato - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_3_duration:
+    name: "Sabato - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_4_duration:
+    name: "Sabato - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_5_duration:
+    name: "Sabato - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_6_duration:
+    name: "Sabato - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_7_duration:
+    name: "Sabato - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  saturday_zone_8_duration:
+    name: "Sabato - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+  # Domenica - Durate Zone
+  sunday_zone_1_duration:
+    name: "Domenica - Zona 1 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_2_duration:
+    name: "Domenica - Zona 2 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_3_duration:
+    name: "Domenica - Zona 3 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_4_duration:
+    name: "Domenica - Zona 4 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_5_duration:
+    name: "Domenica - Zona 5 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_6_duration:
+    name: "Domenica - Zona 6 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_7_duration:
+    name: "Domenica - Zona 7 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+    
+  sunday_zone_8_duration:
+    name: "Domenica - Zona 8 Durata"
+    icon: mdi:timer
+    min: 0
+    max: 60
+    step: 1
+    unit_of_measurement: "min"
+
+# Template sensors per calcolo tempi finali con fattore globale
+template:
+  - sensor:
+      # LUNEDÌ - Tempi finali con fattore globale applicato
+      - name: "Monday Zone 1 Final Time"
+        unique_id: monday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 2 Final Time"
+        unique_id: monday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 3 Final Time"
+        unique_id: monday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 4 Final Time"
+        unique_id: monday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 5 Final Time"
+        unique_id: monday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 6 Final Time"
+        unique_id: monday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 7 Final Time"
+        unique_id: monday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Monday Zone 8 Final Time"
+        unique_id: monday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.monday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # MARTEDÌ - Tempi finali con fattore globale applicato
+      - name: "Tuesday Zone 1 Final Time"
+        unique_id: tuesday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 2 Final Time"
+        unique_id: tuesday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 3 Final Time"
+        unique_id: tuesday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 4 Final Time"
+        unique_id: tuesday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 5 Final Time"
+        unique_id: tuesday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 6 Final Time"
+        unique_id: tuesday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 7 Final Time"
+        unique_id: tuesday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Tuesday Zone 8 Final Time"
+        unique_id: tuesday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.tuesday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # MERCOLEDÌ - Tempi finali con fattore globale applicato
+      - name: "Wednesday Zone 1 Final Time"
+        unique_id: wednesday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 2 Final Time"
+        unique_id: wednesday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 3 Final Time"
+        unique_id: wednesday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 4 Final Time"
+        unique_id: wednesday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 5 Final Time"
+        unique_id: wednesday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 6 Final Time"
+        unique_id: wednesday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 7 Final Time"
+        unique_id: wednesday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Wednesday Zone 8 Final Time"
+        unique_id: wednesday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.wednesday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # GIOVEDÌ - Tempi finali con fattore globale applicato
+      - name: "Thursday Zone 1 Final Time"
+        unique_id: thursday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 2 Final Time"
+        unique_id: thursday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 3 Final Time"
+        unique_id: thursday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 4 Final Time"
+        unique_id: thursday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 5 Final Time"
+        unique_id: thursday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 6 Final Time"
+        unique_id: thursday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 7 Final Time"
+        unique_id: thursday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Thursday Zone 8 Final Time"
+        unique_id: thursday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.thursday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # VENERDÌ - Tempi finali con fattore globale applicato
+      - name: "Friday Zone 1 Final Time"
+        unique_id: friday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 2 Final Time"
+        unique_id: friday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 3 Final Time"
+        unique_id: friday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 4 Final Time"
+        unique_id: friday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 5 Final Time"
+        unique_id: friday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 6 Final Time"
+        unique_id: friday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 7 Final Time"
+        unique_id: friday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Friday Zone 8 Final Time"
+        unique_id: friday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.friday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # SABATO - Tempi finali con fattore globale applicato
+      - name: "Saturday Zone 1 Final Time"
+        unique_id: saturday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 2 Final Time"
+        unique_id: saturday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 3 Final Time"
+        unique_id: saturday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 4 Final Time"
+        unique_id: saturday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 5 Final Time"
+        unique_id: saturday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 6 Final Time"
+        unique_id: saturday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 7 Final Time"
+        unique_id: saturday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Saturday Zone 8 Final Time"
+        unique_id: saturday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.saturday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+
+      # DOMENICA - Tempi finali con fattore globale applicato
+      - name: "Sunday Zone 1 Final Time"
+        unique_id: sunday_zone_1_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_1_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 2 Final Time"
+        unique_id: sunday_zone_2_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_2_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 3 Final Time"
+        unique_id: sunday_zone_3_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_3_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 4 Final Time"
+        unique_id: sunday_zone_4_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_4_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 5 Final Time"
+        unique_id: sunday_zone_5_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_5_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 6 Final Time"
+        unique_id: sunday_zone_6_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_6_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 7 Final Time"
+        unique_id: sunday_zone_7_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_7_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
+          
+      - name: "Sunday Zone 8 Final Time"
+        unique_id: sunday_zone_8_final_time
+        unit_of_measurement: "sec"
+        icon: mdi:timer-sand
+        state: >
+          {% set base_time = states('input_number.sunday_zone_8_duration') | float(0) %}
+          {% set factor = states('input_number.irrigation_global_factor') | float(100) %}
+          {{ ((base_time * 60 * factor / 100) | round(0)) | int }}
