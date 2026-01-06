@@ -1,0 +1,1316 @@
+title: Irrigazione
+path: irrigazione
+icon: mdi:sprinkler-variant
+views:
+  - title: Monitoring
+    path: monitoring
+    icon: mdi:eye-outline
+    badges: []
+    cards:
+      - type: markdown
+        content: >
+          ## 📊 Monitoraggio Sistema Irrigazione
+
+          Visualizzazione in tempo reale dello stato delle elettrovalvole e
+          analisi storica dell'attività del sistema.
+        text_only: true
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.smart_irrigation_status
+                name: 🧠 Stato Sistema Intelligente
+                icon: mdi:head-cog
+              - entity: sensor.irrigation_combined_factor
+                name: 🎯 Fattore Combinato (Finale)
+                icon: mdi:percent-circle
+              - entity: sensor.smart_irrigation_weather_factor
+                name: ☁️ Fattore Meteo
+                icon: mdi:weather-partly-cloudy
+              - type: divider
+              - entity: weather.romieri
+                name: 🌤️ Meteo Attuale
+              - entity: binary_sensor.israining_read_only
+                name: 🌧️ Pioggia in Corso
+              - entity: sensor.rain_last_3_days
+                name: 💧 Pioggia ultimi 3 giorni
+              - type: divider
+              - entity: binary_sensor.shutterclosed_read_only
+                name: Tapparelle chiuse (read-only)
+              - entity: binary_sensor.shutteropened_read_only
+                name: Tapparelle aperte (read-only)
+            title: 🌦️ Smart Irrigation - Controllo Meteo
+            state_color: true
+            show_header_toggle: false
+      - type: entities
+        title: Stato impianto
+        show_header_toggle: false
+        entities:
+          - entity: sensor.sun_next_events
+            name: Alba / Tramonto
+          - type: divider
+          - entity: automation.grdn_irrigazione_settimanale_2
+            name: Auto settimanale
+            icon: mdi:calendar-week
+          - entity: automation.grdn_irrigazione_settimanale_alba
+            name: Auto alba
+            icon: mdi:sun-clock
+        state_color: true
+      - type: gauge
+        entity: input_number.irrigation_global_factor
+        name: Fattore Globale
+        min: 0
+        max: 200
+        needle: true
+        segments:
+          - from: 0
+            color: '#0066cc'
+          - from: 80
+            color: '#00cc66'
+          - from: 120
+            color: '#ffcc00'
+          - from: 150
+            color: '#ff6600'
+      - type: entities
+        title: 🌱 Tempi effettivi Irrigazione
+        show_header_toggle: false
+        entities:
+          - entity: sensor.irrigation_zona_1_final_time_minutes
+            name: ⏱️ Zona 1 (Ovest interno)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_2_final_time_minutes
+            name: ⏱️ Zona 2 (Sud esterno)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_3_final_time_minutes
+            name: ⏱️ Zona 3 (GG Sud)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_4_final_time_minutes
+            name: ⏱️ Zona 4 (Ovest esterno)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_5_final_time_minutes
+            name: ⏱️ Zona 5 (Sud interno)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_6_final_time_minutes
+            name: ⏱️ Zona 6 (Est interno)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_7_final_time_minutes
+            name: ⏱️ Zona 7 (GG Est)
+            secondary_info: none
+          - entity: sensor.irrigation_zona_8_final_time_minutes
+            name: ⏱️ Zona 8 (Nord interno)
+            secondary_info: none
+        state_color: true
+      - type: custom:timer-bar-card
+        entities:
+          - entity: switch.zona_1
+            name: Zona 1 (Ovest interno)
+            duration:
+              entity: sensor.irrigation_zona_1_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+          - entity: switch.zona_2
+            name: Zona 2 (Sud esterno)
+            duration:
+              entity: sensor.irrigation_zona_2_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+          - entity: switch.zona_3
+            name: Zona 3 (GG Sud)
+            duration:
+              entity: sensor.irrigation_zona_3_final_time
+              units: seconds
+            icon: mdi:water
+            active_state: 'on'
+          - entity: switch.zona_4
+            name: Zona 4 (Ovest esterno)
+            duration:
+              entity: sensor.irrigation_zona_4_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+          - entity: switch.zona_5
+            name: Zona 5 (Sud interno)
+            duration:
+              entity: sensor.irrigation_zona_5_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+          - entity: switch.zona_6
+            name: Zona 6 (Est interno)
+            duration:
+              entity: sensor.irrigation_zona_6_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+          - entity: switch.zona_7
+            name: Zona 7 (GG Est)
+            duration:
+              entity: sensor.irrigation_zona_7_final_time
+              units: seconds
+            icon: mdi:water
+            active_state: 'on'
+          - entity: switch.zona_8
+            name: Zona 8 (Nord interno)
+            duration:
+              entity: sensor.irrigation_zona_8_final_time
+              units: seconds
+            icon: mdi:sprinkler-variant
+            active_state: 'on'
+        text_width: 3.5em
+        invert: false
+        sync_issues: fix
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 1
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_1
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 2
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_2
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 3
+            icon: mdi:water
+            tap_action:
+              action: none
+            entity: switch.zona_3
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 4
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_4
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 5
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_5
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 6
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_6
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 7
+            icon: mdi:water
+            tap_action:
+              action: none
+            entity: switch.zona_7
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Zona 8
+            icon: mdi:sprinkler
+            tap_action:
+              action: none
+            entity: switch.zona_8
+            show_state: true
+      - square: false
+        type: grid
+        columns: 2
+        cards:
+          - type: statistic
+            entity: sensor.irrigation_energy_daily
+            name: Oggi
+            icon: mdi:calendar-today
+            period:
+              calendar:
+                period: day
+            stat_type: change
+          - type: statistic
+            entity: sensor.irrigation_energy_weekly
+            name: Questa Settimana
+            icon: mdi:calendar-week
+            period:
+              calendar:
+                period: week
+            stat_type: change
+          - type: statistic
+            entity: sensor.irrigation_energy_monthly
+            name: Questo Mese
+            icon: mdi:calendar-month
+            period:
+              calendar:
+                period: month
+            stat_type: change
+          - type: statistic
+            entity: sensor.irrigation_energy_yearly
+            name: Quest'Anno
+            icon: mdi:calendar
+            period:
+              calendar:
+                period: year
+            stat_type: change
+      - type: history-graph
+        title: 📈 Timeline 24 ore
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - entity: switch.zona_1
+            name: Z1 Ovest int
+          - entity: switch.zona_2
+            name: Z2 Sud est
+          - entity: switch.zona_3
+            name: Z3 GG Sud
+          - entity: switch.zona_4
+            name: Z4 Ovest est
+          - entity: switch.zona_5
+            name: Z5 Sud int
+          - entity: switch.zona_6
+            name: Z6 Est int
+          - entity: switch.zona_7
+            name: Z7 GG Est
+          - entity: switch.zona_8
+            name: Z8 Nord int
+      - type: history-graph
+        title: 📈 Timeline 7 giorni
+        hours_to_show: 168
+        refresh_interval: 300
+        entities:
+          - entity: switch.zona_1
+            name: Z1 Ovest int
+          - entity: switch.zona_2
+            name: Z2 Sud est
+          - entity: switch.zona_3
+            name: Z3 GG Sud
+          - entity: switch.zona_4
+            name: Z4 Ovest est
+          - entity: switch.zona_5
+            name: Z5 Sud int
+          - entity: switch.zona_6
+            name: Z6 Est int
+          - entity: switch.zona_7
+            name: Z7 GG Est
+          - entity: switch.zona_8
+            name: Z8 Nord int
+      - type: history-graph
+        title: 📈 Timeline 30 giorni
+        hours_to_show: 720
+        refresh_interval: 600
+        entities:
+          - entity: switch.zona_1
+            name: Z1 Ovest int
+          - entity: switch.zona_2
+            name: Z2 Sud est
+          - entity: switch.zona_3
+            name: Z3 GG Sud
+          - entity: switch.zona_4
+            name: Z4 Ovest est
+          - entity: switch.zona_5
+            name: Z5 Sud int
+          - entity: switch.zona_6
+            name: Z6 Est int
+          - entity: switch.zona_7
+            name: Z7 GG Est
+          - entity: switch.zona_8
+            name: Z8 Nord int
+      - type: entities
+        title: ⚡ Consumo Pompa Irrigazione
+        show_header_toggle: false
+        entities:
+          - entity: sensor.irrigation_pump_power
+            name: Potenza Pompa
+            icon: mdi:pump
+          - entity: sensor.irrigation_pump_energy
+            name: Energia Totale
+            icon: mdi:counter
+        state_color: true
+  - title: Setup & Test
+    path: setup
+    icon: mdi:cog-outline
+    badges: []
+    cards:
+      - type: markdown
+        content: >
+          ## ⚙️ Configurazione e Test Manuale
+
+          Gestisci la configurazione del sistema e avvia test manuali delle zone
+          di irrigazione.
+
+          **Sistema Irrigazione Classica** (Z1, Z2, Z4, Z5, Z6, Z8): Irrigatori
+          tradizionali
+
+          **Sistema Goccia-Goccia** (Z3, Z7): Sistema a goccia dedicato con
+          controllo separato
+        text_only: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: switch.zona_1
+            name: Z1 Ovest int
+            icon: mdi:sprinkler
+          - type: tile
+            entity: switch.zona_2
+            name: Z2 Sud est
+            icon: mdi:sprinkler
+          - type: tile
+            entity: switch.zona_3
+            name: Z3 GG Sud
+            icon: mdi:water
+          - type: tile
+            entity: switch.zona_4
+            name: Z4 Ovest est
+            icon: mdi:sprinkler
+          - type: tile
+            entity: switch.zona_5
+            name: Z5 Sud int
+            icon: mdi:sprinkler
+          - type: tile
+            entity: switch.zona_6
+            name: Z6 Est int
+            icon: mdi:sprinkler
+          - type: tile
+            entity: switch.zona_7
+            name: Z7 GG Est
+            icon: mdi:water
+          - type: tile
+            entity: switch.zona_8
+            name: Z8 Nord int
+            icon: mdi:sprinkler
+      - type: entities
+        title: 🎮 Comandi Irrigazione Classica
+        show_header_toggle: false
+        entities:
+          - entity: script.grdn_inizia_ciclo_irrigazione
+            name: 🚀 AVVIA CICLO IRRIGATORI CLASSICI
+            icon: mdi:sprinkler-variant
+          - entity: script.grdn_ferma_irrigazione
+            name: 🛑 STOP TUTTO
+            icon: mdi:stop-circle
+        state_color: true
+      - type: entities
+        title: 💧 Comandi Sistema Goccia-Goccia
+        show_header_toggle: false
+        entities:
+          - entity: script.grdn_inizia_ciclo_gocciagoccia
+            name: 💧 AVVIA CICLO GOCCIA-GOCCIA
+            icon: mdi:water
+          - entity: script.grdn_ferma_irrigazione
+            name: 🛑 STOP TUTTO
+            icon: mdi:stop-circle
+        state_color: true
+      - type: entities
+        title: 🛡️ Automazioni sicurezza
+        show_header_toggle: false
+        entities:
+          - entity: automation.grdn_chiudi_tapparelle
+            name: Chiudi tapparelle Zona 6 (Est interno)
+            icon: mdi:window-shutter-auto
+          - entity: automation.grdn_chiudi_tapparelle_zona_8
+            name: Chiudi tapparelle Zona 8 (Nord interno)
+            icon: mdi:window-shutter-auto
+        state_color: true
+      - type: entities
+        title: ⚙️ Modalità Irrigazione
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.irrigation_mode_advanced
+            name: Modalità Avanzata (Programmazione Settimanale)
+            icon: mdi:calendar-week
+          - type: divider
+          - entity: input_boolean.smart_irrigation_enabled
+            name: Abilita Smart Irrigation (Fattore Meteo)
+            icon: mdi:weather-partly-cloudy
+        state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.irrigation_mode_advanced
+            state: 'off'
+        card:
+          type: markdown
+          content: >
+            **ℹ️ Modalità Normale Attiva**
+
+
+            Stai usando la modalità semplificata con configurazione unificata
+            per tutti i giorni selezionati.
+
+
+            Per configurare zone e durate diverse per ogni giorno, attiva la
+            **Modalità Avanzata** sopra e vai alla tab "Programma Settimanale".
+      - type: conditional
+        conditions:
+          - entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: markdown
+          content: >
+            **✅ Modalità Avanzata Attiva**
+
+
+            Stai usando la programmazione settimanale avanzata.
+
+
+            Vai alla tab **"Programma Settimanale"** per configurare zone e
+            durate specifiche per ogni giorno della settimana.
+      - type: entities
+        title: 💧 Programma Goccia-Goccia
+        show_header_toggle: false
+        entities:
+          - entity: automation.grdn_gocciagoccia_settimanale
+            name: Ciclo Goccia-Goccia
+            secondary_info: last-triggered
+            icon: mdi:water
+          - entity: input_datetime.time_start_gocciagoccia
+            name: ⏰ Orario Partenza Goccia-Goccia
+          - type: section
+            label: Giorni Attivi
+          - entity: input_boolean.gocciagoccia_monday
+            name: Lunedì
+          - entity: input_boolean.gocciagoccia_tuesday
+            name: Martedì
+          - entity: input_boolean.gocciagoccia_wednesday
+            name: Mercoledì
+          - entity: input_boolean.gocciagoccia_thursday
+            name: Giovedì
+          - entity: input_boolean.gocciagoccia_friday
+            name: Venerdì
+          - entity: input_boolean.gocciagoccia_saturday
+            name: Sabato
+          - entity: input_boolean.gocciagoccia_sunday
+            name: Domenica
+          - type: section
+            label: Durate Zone
+          - entity: input_boolean.flag_zone_3
+            name: Zona 3 (GG Sud)
+          - entity: input_number.slider_zona_3
+            name: Durata Zona 3
+          - type: divider
+          - entity: input_boolean.flag_zone_7
+            name: Zona 7 (GG Est)
+          - entity: input_number.slider_zona_7
+            name: Durata Zona 7
+          - type: section
+            label: ⚠️ Nota
+          - type: custom:hui-markdown-card
+            content: >
+              Il sistema goccia-goccia **non è affetto** dal fattore di
+              correzione globale.
+
+              I tempi impostati vengono utilizzati esattamente come configurati.
+        state_color: true
+      - type: entities
+        title: 🌱 Fattore Globale Irrigazione
+        show_header_toggle: false
+        entities:
+          - entity: input_number.irrigation_global_factor
+            name: Fattore Globale
+            icon: mdi:water-percent
+          - type: section
+            label: Tempi effettivi (con fattore applicato)
+          - entity: sensor.irrigation_zona_1_final_time_minutes
+            name: ⏱️ Zona 1 (Ovest interno)
+          - entity: sensor.irrigation_zona_2_final_time_minutes
+            name: ⏱️ Zona 2 (Sud esterno)
+          - entity: sensor.irrigation_zona_3_final_time_minutes
+            name: ⏱️ Zona 3 (GG Sud)
+          - entity: sensor.irrigation_zona_4_final_time_minutes
+            name: ⏱️ Zona 4 (Ovest esterno)
+          - entity: sensor.irrigation_zona_5_final_time_minutes
+            name: ⏱️ Zona 5 (Sud interno)
+          - entity: sensor.irrigation_zona_6_final_time_minutes
+            name: ⏱️ Zona 6 (Est interno)
+          - entity: sensor.irrigation_zona_7_final_time_minutes
+            name: ⏱️ Zona 7 (GG Est)
+          - entity: sensor.irrigation_zona_8_final_time_minutes
+            name: ⏱️ Zona 8 (Nord interno)
+      - type: conditional
+        conditions:
+          - entity: input_boolean.irrigation_mode_advanced
+            state: 'off'
+        card:
+          type: entities
+          title: 📅 Programma Irrigazione
+          show_header_toggle: false
+          entities:
+            - entity: automation.grdn_irrigazione_settimanale_2
+              name: Irrigazione Classica
+              secondary_info: last-triggered
+              icon: mdi:sprinkler-variant
+            - entity: input_datetime.time_start_irrigazione
+              name: Orario partenza irrigazione
+              secondary_info: none
+            - type: divider
+            - entity: automation.grdn_irrigazione_settimanale_alba
+              name: Irrigazione all'alba
+              secondary_info: last-triggered
+              icon: mdi:sun-clock
+            - entity: sensor.sun_next_events
+            - type: section
+              label: Giorni attivi
+            - entity: input_boolean.monday
+              name: Lunedì
+            - entity: input_boolean.tuesday
+              name: Martedì
+            - entity: input_boolean.wednesday
+              name: Mercoledì
+            - entity: input_boolean.thursday
+              name: Giovedì
+            - entity: input_boolean.friday
+              name: Venerdì
+            - entity: input_boolean.saturday
+              name: Sabato
+            - entity: input_boolean.sunday
+              name: Domenica
+            - type: section
+              label: Durate Zone
+            - entity: input_boolean.flag_zone_1
+              name: Zona 1 (Ovest interno)
+            - entity: input_number.slider_zona_1
+              name: Durata Zona 1
+            - type: divider
+            - entity: input_boolean.flag_zone_2
+              name: Zona 2 (Sud esterno)
+            - entity: input_number.slider_zona_2
+              name: Durata Zona 2
+            - type: divider
+            - entity: input_boolean.flag_zone_4
+              name: Zona 4 (Ovest esterno)
+            - entity: input_number.slider_zona_4
+              name: Durata Zona 4
+            - type: divider
+            - entity: input_boolean.flag_zone_5
+              name: Zona 5 (Sud interno)
+            - entity: input_number.slider_zona_5
+              name: Durata Zona 5
+            - type: divider
+            - entity: input_boolean.flag_zone_6
+              name: Zona 6 (Est interno)
+            - entity: input_number.slider_zona_6
+              name: Durata Zona 6
+            - type: divider
+            - entity: input_boolean.flag_zone_8
+              name: Zona 8 (Nord interno)
+            - entity: input_number.slider_zona_8
+              name: Durata Zona 8
+          state_color: true
+      - type: markdown
+        content: >
+          ## 📅 Programmazione Settimanale Avanzata
+
+
+          Configura zone specifiche e durate diverse per ogni giorno della
+          settimana.
+
+          Seleziona un giorno per personalizzare la programmazione.
+        text_only: true
+        visibility:
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+      - type: horizontal-stack
+        cards:
+          - show_name: true
+            show_icon: true
+            type: button
+            name: LUN
+            icon: mdi:numeric-1-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: mon
+            entity: input_boolean.schedule_day_selector_mon
+            show_state: false
+          - type: button
+            name: MAR
+            icon: mdi:numeric-2-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: tue
+            entity: input_boolean.schedule_day_selector_tue
+            show_state: false
+          - type: button
+            name: MER
+            icon: mdi:numeric-3-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: wed
+            entity: input_boolean.schedule_day_selector_wed
+            show_state: false
+          - type: button
+            name: GIO
+            icon: mdi:numeric-4-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: thu
+            entity: input_boolean.schedule_day_selector_thu
+            show_state: false
+          - type: button
+            name: VEN
+            icon: mdi:numeric-5-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: fri
+            entity: input_boolean.schedule_day_selector_fri
+            show_state: false
+          - type: button
+            name: SAB
+            icon: mdi:numeric-6-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: sat
+            entity: input_boolean.schedule_day_selector_sat
+            show_state: false
+          - type: button
+            name: DOM
+            icon: mdi:numeric-7-circle
+            tap_action:
+              action: call-service
+              service: script.irrigation_select_day
+              service_data:
+                day: sun
+            entity: input_boolean.schedule_day_selector_sun
+            show_state: false
+        visibility:
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_mon
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Lunedì
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.monday
+              name: 🔘 Abilita Lunedì
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.monday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.monday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.monday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.monday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.monday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.monday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.monday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Domenica
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: sunday
+                  dest_day: monday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: monday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: monday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_tue
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Martedì
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.tuesday
+              name: 🔘 Abilita Martedì
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.tuesday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.tuesday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.tuesday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.tuesday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.tuesday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.tuesday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.tuesday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Lunedì
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: monday
+                  dest_day: tuesday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: tuesday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: tuesday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_wed
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Mercoledì
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.wednesday
+              name: 🔘 Abilita Mercoledì
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.wednesday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.wednesday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.wednesday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.wednesday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.wednesday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.wednesday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.wednesday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Martedì
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: tuesday
+                  dest_day: wednesday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: wednesday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: wednesday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_thu
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Giovedì
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.thursday
+              name: 🔘 Abilita Giovedì
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.thursday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.thursday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.thursday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.thursday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.thursday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.thursday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.thursday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Mercoledì
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: wednesday
+                  dest_day: thursday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: thursday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: thursday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_fri
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Venerdì
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.friday
+              name: 🔘 Abilita Venerdì
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.friday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.friday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.friday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.friday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.friday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.friday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.friday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Giovedì
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: thursday
+                  dest_day: friday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: friday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: friday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_sat
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Sabato
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.saturday
+              name: 🔘 Abilita Sabato
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.saturday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.saturday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.saturday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.saturday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.saturday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.saturday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.saturday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Venerdì
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: friday
+                  dest_day: saturday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: saturday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: saturday
+          state_color: true
+      - type: conditional
+        conditions:
+          - entity: input_boolean.schedule_day_selector_sun
+            state: 'on'
+          - condition: state
+            entity: input_boolean.irrigation_mode_advanced
+            state: 'on'
+        card:
+          type: entities
+          title: 🗓️ Domenica
+          show_header_toggle: false
+          entities:
+            - entity: input_boolean.sunday
+              name: 🔘 Abilita Domenica
+            - entity: input_datetime.time_start_irrigazione
+              name: ⏰ Orario Partenza
+            - type: divider
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_1
+                name: Z1 - Ovest interno
+              entities:
+                - entity: input_number.sunday_zone_1_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_2
+                name: Z2 - Sud esterno
+              entities:
+                - entity: input_number.sunday_zone_2_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_4
+                name: Z4 - Ovest esterno
+              entities:
+                - entity: input_number.sunday_zone_4_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_5
+                name: Z5 - Sud interno
+              entities:
+                - entity: input_number.sunday_zone_5_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_6
+                name: Z6 - Est interno
+              entities:
+                - entity: input_number.sunday_zone_6_duration
+                  name: Durata
+            - type: custom:fold-entity-row
+              head:
+                entity: input_boolean.sunday_zone_8
+                name: Z8 - Nord interno
+              entities:
+                - entity: input_number.sunday_zone_8_duration
+                  name: Durata
+            - type: divider
+            - type: button
+              name: 📋 Copia da Sabato
+              icon: mdi:content-copy
+              tap_action:
+                action: call-service
+                service: script.irrigation_copy_day_schedule
+                service_data:
+                  source_day: saturday
+                  dest_day: sunday
+            - type: button
+              name: 📢 Applica a tutta la settimana
+              icon: mdi:calendar-multiple
+              tap_action:
+                action: call-service
+                service: script.irrigation_apply_to_all_days
+                service_data:
+                  source_day: sunday
+            - type: button
+              name: 🗑️ Reset giorno
+              icon: mdi:delete-sweep
+              tap_action:
+                action: call-service
+                service: script.irrigation_reset_day
+                service_data:
+                  day: sunday
+          state_color: true
+    visible:
+      - user: 821d219dcb374b60998236c84880ec03

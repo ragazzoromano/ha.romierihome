@@ -1,0 +1,1033 @@
+title: Romieri
+views:
+  - title: Romieri
+    path: romieri
+    icon: hass:home
+    subview: false
+    badges: []
+    cards:
+      - type: markdown
+        content: '## 🌡️ Clima Esterno'
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            title: Giardino
+            state_color: false
+            entities:
+              - entity: sensor.tasmotasi7021_si7021_temperature
+                name: Temperatura
+                icon: mdi:thermometer
+              - entity: sensor.tasmotasi7021_si7021_humidity
+                name: Umidità
+                icon: mdi:water-percent
+          - type: entities
+            title: Portico
+            state_color: false
+            entities:
+              - entity: sensor.tasmotadht22_am2301_temperature
+                name: Temperatura
+                icon: mdi:thermometer
+              - entity: sensor.tasmotadht22_am2301_humidity
+                name: Umidità
+                icon: mdi:water-percent
+        columns: 1
+      - type: markdown
+        content: '## 🏠 Clima Interno'
+      - type: entities
+        title: Sala
+        state_color: true
+        entities:
+          - entity: sensor.smarther_thermostat_current_temperature
+            name: Temperatura
+            icon: mdi:thermometer
+          - entity: sensor.smarther_thermostat_humidity_sensor
+            name: Umidità
+            icon: mdi:water-percent
+      - type: entities
+        title: Camere
+        state_color: true
+        entities:
+          - entity: sensor.smarther_thermostat_current_temperature_2
+            name: Temperatura
+            icon: mdi:thermometer
+          - entity: sensor.smarther_thermostat_humidity_sensor_2
+            name: Umidità
+            icon: mdi:water-percent
+      - type: markdown
+        content: '## 📺 Media'
+      - type: media-control
+        entity: media_player.samsung_tv
+      - type: markdown
+        content: '## 📊 Storico'
+      - type: history-graph
+        title: Termostato Sala
+        hours_to_show: 31
+        entities:
+          - climate.smarther_thermostat_heater_cooler
+      - type: history-graph
+        title: Termostato Camera
+        hours_to_show: 31
+        entities:
+          - entity: climate.smarther_thermostat_heater_cooler_2
+  - title: Sistema Elettrico
+    path: pow
+    visible:
+      - user: 821d219dcb374b60998236c84880ec03
+      - user: 2e595090c88442b3aa98ca5a31384dab
+    icon: hass:power-plug
+    badges:
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_current
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_factor
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_frequency
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_power
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_reactivepower
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_voltage
+      - type: entity
+        entity: sensor.tasmotapzem004_home_energy_apparentpower
+    cards:
+      - type: markdown
+        content: '## ⚡ Monitoraggio Potenza'
+      - square: false
+        type: grid
+        cards:
+          - type: gauge
+            entity: sensor.power_overview
+            max: 6000
+            name: General Status
+            min: -6000
+            severity:
+              green: 1
+              yellow: 0
+              red: -6000
+            needle: true
+            unit: W
+        columns: 1
+      - square: true
+        type: grid
+        cards:
+          - type: gauge
+            entity: sensor.home_power
+            min: 0
+            max: 6000
+            severity:
+              green: 0
+              yellow: 5000
+              red: 5500
+            needle: true
+            unit: W
+          - type: gauge
+            entity: sensor.abb_power
+            min: 0
+            max: 4700
+            needle: true
+            severity:
+              green: 1
+              yellow: 0
+              red: 0
+        columns: 2
+      - type: markdown
+        content: '## 🏠 Energia Casa'
+      - type: entities
+        entities:
+          - entity: sensor.home_today_energy
+            icon: hass:power-plug
+          - entity: sensor.home_yesterday_energy
+            icon: hass:power-plug
+        title: Energy
+        state_color: true
+        footer:
+          type: graph
+          entity: sensor.home_power
+          detail: 2
+          hours_to_show: 15
+      - type: markdown
+        content: '## ☀️ Energia Fotovoltaico'
+      - type: entities
+        entities:
+          - entity: sensor.abb_today_energy
+            icon: hass:power-plug
+          - entity: sensor.abb_yesterday_energy
+            icon: hass:power-plug
+        title: Energy ABB
+        state_color: true
+        footer:
+          type: graph
+          entity: sensor.abb_power
+          hours_to_show: 15
+          detail: 2
+      - type: markdown
+        content: '## 📊 Statistiche Dettagliate'
+      - square: false
+        type: grid
+        columns: 1
+        cards:
+          - chart_type: line
+            period: day
+            type: statistics-graph
+            entities:
+              - sensor.tasmotapzem004_home_energy_power
+            stat_types:
+              - mean
+              - min
+              - max
+            title: Home Power Statistics
+            days_to_show: 7
+          - chart_type: line
+            period: day
+            type: statistics-graph
+            entities:
+              - sensor.tasmotapzem004_abb_energy_power
+            stat_types:
+              - mean
+              - min
+              - max
+            title: ABB Power Statistics
+            days_to_show: 7
+      - chart_type: line
+        period: 5minute
+        type: statistics-graph
+        entities:
+          - sensor.tasmotapzem004_home_energy_voltage
+        stat_types:
+          - mean
+          - min
+          - max
+        title: Home voltage
+        days_to_show: 1
+      - type: markdown
+        content: '## 🔌 Dispositivi'
+      - type: entities
+        entities:
+          - entity: sensor.module_din_connesso_power
+            name: Power
+        title: Module DIN connesso
+        state_color: true
+      - type: entities
+        entities:
+          - switch.garage
+          - sensor.garage_power
+        title: Garage
+        state_color: true
+        show_header_toggle: false
+      - type: markdown
+        content: '## 🚗 Energia Garage'
+      - square: false
+        type: grid
+        columns: 1
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.garage_energy_daily
+                name: Oggi
+                icon: mdi:calendar-today
+              - entity: sensor.garage_energy_weekly
+                name: Questa Settimana
+                icon: mdi:calendar-week
+              - entity: sensor.garage_energy_monthly
+                name: Questo Mese
+                icon: mdi:calendar-month
+              - entity: sensor.garage_energy_yearly
+                name: Quest'Anno
+                icon: mdi:calendar
+              - entity: sensor.garage_energy
+                name: Totale
+                icon: mdi:sigma
+            title: Consumi Garage
+            state_color: true
+            footer:
+              type: graph
+              entity: sensor.garage_power
+              detail: 2
+              hours_to_show: 24
+          - chart_type: bar
+            period: month
+            type: statistics-graph
+            entities:
+              - sensor.garage_energy
+            stat_types:
+              - change
+            title: Storico Mensile
+            days_to_show: 30
+  - type: sections
+    visible:
+      - user: 821d219dcb374b60998236c84880ec03
+      - user: 2e595090c88442b3aa98ca5a31384dab
+    title: Luci
+    path: luci
+    icon: mdi:lightbulb
+    sections:
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_cucina
+                name: Luce Cucina
+                icon: mdi:lightbulb
+              - entity: switch.luce_pensile_cucina
+                name: Luce Pensile
+                icon: mdi:lightbulb
+              - entity: switch.luce_isola_cucina
+                name: Luce Isola
+                icon: mdi:lightbulb
+            show_header_toggle: true
+            title: 🍳 Cucina
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_angolo_sala
+                name: Luce Angolo
+                icon: mdi:lightbulb
+              - entity: switch.luce_sud_sala
+                name: Luce Sud
+                icon: mdi:lightbulb
+              - entity: switch.luce_nord_sala
+                name: Luce Nord
+                icon: mdi:lightbulb
+              - entity: switch.luce_tv_sala
+                name: Luce TV
+                icon: mdi:lightbulb
+              - entity: switch.luce_mobile_tv_sala
+                name: Luce Mobile TV
+                icon: mdi:lightbulb
+              - entity: switch.luce_mobile_sala
+                name: Luce Mobile
+                icon: mdi:lightbulb
+              - entity: switch.luce_entrata_sala
+                name: Luce Entrata
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: climate.smarther_thermostat_heater_cooler
+                name: Termostato
+            show_header_toggle: true
+            title: 🛋️ Sala
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_camera_da_letto
+                name: Luce Principale
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: light.comodino_luca
+                name: Comodino Luca HUE
+                icon: mdi:lamp
+              - entity: light.comodino_mariachiara
+                name: Comodino Mariachiara HUE
+                icon: mdi:lamp
+              - entity: light.luce_1_camera_da_letto_hue
+                name: HUE 1
+                icon: mdi:lightbulb-on
+              - type: divider
+              - entity: cover.tapparella_camera_da_letto
+                name: Tapparella
+                secondary_info: position
+              - type: divider
+              - entity: climate.camera_da_letto
+                name: Termostato
+            show_header_toggle: true
+            title: 🛏️ Camera da Letto
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_studio
+                name: Luce Studio
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: cover.tapparella_studio
+                name: Tapparella
+                secondary_info: position
+            show_header_toggle: false
+            title: 💻 Studio
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_corridoio
+                name: Luce Corridoio
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: 🚪 Corridoio
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_corridoio_camere
+                name: Luce Corridoio Camere
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: 🚪 Corridoio Camere
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_cameretta
+                name: Luce Cameretta
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: cover.tapparella_cameretta
+                name: Tapparella
+                secondary_info: position
+            show_header_toggle: false
+            title: 👶 Cameretta
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_camera
+                name: Luce Principale
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: light.luce_1_camera_hue
+                name: HUE 1
+                icon: mdi:lamp
+              - entity: light.luce_2_camera_hue
+                name: HUE 2
+                icon: mdi:lamp
+              - entity: light.luce_3_camera_hue
+                name: HUE 3
+                icon: mdi:lamp
+              - type: divider
+              - entity: cover.tapparella_camera
+                name: Tapparella
+                secondary_info: position
+            show_header_toggle: false
+            title: 🧒 Camera
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_bagno_giorno
+                name: Luce Principale
+                icon: mdi:lightbulb
+              - entity: switch.luce_specchio_bagno_giorno
+                name: Luce Specchio
+                icon: mdi:lightbulb
+            show_header_toggle: true
+            title: 🚿 Bagno Giorno
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_bagno_notte
+                name: Luce Principale
+                icon: mdi:lightbulb
+              - entity: switch.luce_specchio_bagno_notte
+                name: Luce Specchio
+                icon: mdi:lightbulb
+              - type: divider
+              - entity: cover.tapparella_bagno_notte
+                name: Tapparella
+                secondary_info: position
+            show_header_toggle: true
+            title: 🚿 Bagno Notte
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.luce_portico
+                name: Luce Portico
+                icon: mdi:lightbulb
+              - entity: switch.luce_2_portico
+                name: Luce 2 Portico
+                icon: mdi:lightbulb
+            show_header_toggle: true
+            title: 🪴 Portico
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_lavanderia
+                name: Luce Lavanderia
+                icon: mdi:lightbulb
+              - entity: switch.luce_lavanderia_esterno
+                name: Luce Esterno
+                icon: mdi:lightbulb
+            show_header_toggle: true
+            title: 🧺 Lavanderia
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_entrata
+                name: Luce Entrata
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: 🏡 Entrata
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_sgabuzzino
+                name: Luce Sgabuzzino
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: 📦 Sgabuzzino
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luce_dispensa
+                name: Luce Dispensa
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: 🥫 Dispensa
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.luci_esterne
+                name: Luci Esterne
+                icon: mdi:lightbulb
+            show_header_toggle: false
+            title: ⚡ Quadro Elettrico
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.garage
+              - entity: sensor.garage_power
+            show_header_toggle: false
+            title: 🚗 Garage
+            state_color: true
+        column_span: 1
+      - type: grid
+        cards:
+          - type: history-graph
+            title: 📊 Zona Giorno
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - entity: switch.luce_cucina
+                name: Cucina
+              - entity: switch.luce_pensile_cucina
+                name: Pensile
+              - entity: switch.luce_isola_cucina
+                name: Isola
+              - entity: switch.luce_angolo_sala
+                name: Angolo Sala
+              - entity: switch.luce_sud_sala
+                name: Sud Sala
+              - entity: switch.luce_nord_sala
+                name: Nord Sala
+              - entity: switch.luce_tv_sala
+                name: TV Sala
+              - entity: switch.luce_mobile_tv_sala
+                name: Mobile TV
+              - entity: switch.luce_mobile_sala
+                name: Mobile Sala
+              - entity: switch.luce_entrata_sala
+                name: Entrata Sala
+        column_span: 1
+      - type: grid
+        cards:
+          - type: history-graph
+            title: 📊 Camere
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - entity: switch.luce_camera_da_letto
+                name: Camera da Letto
+              - entity: light.comodino_luca
+                name: Comodino Luca
+              - entity: light.comodino_mariachiara
+                name: Comodino MC
+              - entity: light.luce_1_camera_da_letto_hue
+                name: HUE Camera Letto
+              - entity: switch.luce_cameretta
+                name: Cameretta
+              - entity: switch.luce_camera
+                name: Camera
+              - entity: light.luce_1_camera_hue
+                name: HUE 1 Camera
+              - entity: light.luce_2_camera_hue
+                name: HUE 2 Camera
+              - entity: light.luce_3_camera_hue
+                name: HUE 3 Camera
+        column_span: 1
+      - type: grid
+        cards:
+          - type: history-graph
+            title: 📊 Studio, Corridoi e Bagni
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - entity: switch.luce_studio
+                name: Studio
+              - entity: switch.luce_corridoio
+                name: Corridoio
+              - entity: switch.luce_corridoio_camere
+                name: Corridoio Camere
+              - entity: switch.luce_bagno_giorno
+                name: Bagno Giorno
+              - entity: switch.luce_specchio_bagno_giorno
+                name: Specchio Giorno
+              - entity: switch.luce_bagno_notte
+                name: Bagno Notte
+              - entity: switch.luce_specchio_bagno_notte
+                name: Specchio Notte
+        column_span: 1
+      - type: grid
+        cards:
+          - type: history-graph
+            title: 📊 Esterni e Servizi
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - entity: switch.luce_portico
+                name: Portico
+              - entity: switch.luce_2_portico
+                name: 2 Portico
+              - entity: switch.luce_lavanderia
+                name: Lavanderia
+              - entity: switch.luce_lavanderia_esterno
+                name: Lavanderia Esterno
+              - entity: switch.luce_entrata
+                name: Entrata
+              - entity: switch.luce_sgabuzzino
+                name: Sgabuzzino
+              - entity: switch.luce_dispensa
+                name: Dispensa
+              - entity: switch.luci_esterne
+                name: Luci Esterne
+        column_span: 1
+      - type: grid
+        cards:
+          - type: logbook
+            hours_to_show: 24
+            title: 📋 Storico Completo
+            target:
+              entity_id:
+                - switch.luce_cucina
+                - switch.luce_pensile_cucina
+                - switch.luce_isola_cucina
+                - switch.luce_angolo_sala
+                - switch.luce_sud_sala
+                - switch.luce_nord_sala
+                - switch.luce_tv_sala
+                - switch.luce_mobile_tv_sala
+                - switch.luce_mobile_sala
+                - switch.luce_entrata_sala
+                - switch.luce_camera_da_letto
+                - light.comodino_luca
+                - light.comodino_mariachiara
+                - light.luce_1_camera_da_letto_hue
+                - switch.luce_studio
+                - switch.luce_corridoio
+                - switch.luce_corridoio_camere
+                - switch.luce_cameretta
+                - switch.luce_camera
+                - light.luce_1_camera_hue
+                - light.luce_2_camera_hue
+                - light.luce_3_camera_hue
+                - switch.luce_bagno_giorno
+                - switch.luce_specchio_bagno_giorno
+                - switch.luce_bagno_notte
+                - switch.luce_specchio_bagno_notte
+                - switch.luce_portico
+                - switch.luce_2_portico
+                - switch.luce_lavanderia
+                - switch.luce_lavanderia_esterno
+                - switch.luce_entrata
+                - switch.luce_sgabuzzino
+                - switch.luce_dispensa
+                - switch.luci_esterne
+                - climate.smarther_thermostat_heater_cooler
+                - climate.camera_da_letto
+        column_span: 1
+    header: {}
+  - type: sections
+    title: Allarme
+    path: allarme
+    icon: mdi:shield-home
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Allarme
+            icon: mdi:shield-home
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: automation.enable_alarm_location_ifttt
+            show_state: true
+            name: Allarme con posizione
+            icon: mdi:home-map-marker
+          - type: button
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.enable_alarm_ifttt
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            name: Attiva allarme
+            icon: mdi:home-lock
+          - type: button
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.disable_alarm_ifttt
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            name: Disabilita allarme
+            icon: mdi:home-lock-open
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              data: {}
+              target:
+                entity_id: automation.alarm_enable_partial_ifttt
+            hold_action:
+              action: more-info
+            name: Attiva allarme parziale
+            icon: mdi:home-lock
+          - type: entities
+            entities:
+              - entity: person.mariachiara
+                secondary_info: last-updated
+                icon: mdi:human-female
+              - entity: person.luca
+                secondary_info: last-updated
+                icon: mdi:human-male
+            title: Posizione
+            state_color: true
+          - type: entities
+            entities:
+              - entity: sensor.sm_a546b_geocoded_location
+              - entity: binary_sensor.sm_a546b_is_charging
+              - entity: sensor.sm_s901u1_geocoded_location
+              - entity: binary_sensor.sm_s901u1_is_charging
+            state_color: true
+            title: Cellulari
+          - type: logbook
+            hours_to_show: 72
+            title: Storico allarme
+            target:
+              entity_id:
+                - automation.enable_alarm_location_ifttt
+                - automation.enable_alarm_ifttt
+                - automation.disable_alarm_location_ifttt
+                - automation.disable_alarm_ifttt
+                - automation.alarm_enable_partial_ifttt
+                - device_tracker.sm_a546b
+                - device_tracker.sm_s901u1
+        column_span: 1
+    header: {}
+  - theme: Backend-selected
+    title: Tapparelle
+    icon: mdi:window-shutter-cog
+    badges: []
+    cards: []
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Tapparelle
+            icon: mdi:window-shutter-settings
+            badges:
+              - type: entity
+                show_state: true
+                show_icon: true
+                entity: input_boolean.shutterclosed
+                name: Chiuse
+                state_content: name
+              - type: entity
+                show_state: true
+                show_icon: true
+                entity: input_boolean.shutteropened
+                name: Aperte
+                state_content: name
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: scene.sht_opened
+              perform_action: scene.turn_on
+            name: Tapparelle aperte
+            icon: mdi:window-shutter-open
+            icon_height: 50px
+            show_state: false
+            entity: scene.sht_opened
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: scene.sht_closed
+              perform_action: scene.turn_on
+              data: {}
+            entity: scene.sht_closed
+            name: Tapparelle chiuse
+            icon: mdi:window-shutter
+            icon_height: 50px
+          - type: entities
+            entities:
+              - entity: cover.tapparella_studio
+                secondary_info: position
+              - entity: cover.tapparella_camera_da_letto
+                secondary_info: position
+              - entity: cover.tapparella_cameretta
+                secondary_info: position
+              - entity: cover.tapparella_camera
+                secondary_info: position
+              - entity: cover.tapparella_bagno_notte
+                secondary_info: position
+            state_color: true
+          - type: logbook
+            target:
+              entity_id:
+                - cover.tapparella_bagno_notte
+                - cover.tapparella_camera
+                - cover.tapparella_camera_da_letto
+                - cover.tapparella_cameretta
+                - cover.tapparella_studio
+                - automation.rn_rain_active_close_shutters_weather_romieri_2
+                - automation.rn_rain_active_close_shutters_forecast
+                - input_boolean.shutterclosed
+                - input_boolean.shutteropened
+                - automation.shutters_location_auto_off
+                - automation.sht_uv_index
+                - automation.sht_close_location_ifttt
+                - scene.sht_closed
+                - automation.sht_open_location
+                - scene.sht_opened
+                - scene.sht_semi_chiuso
+                - binary_sensor.shutterclosed_read_only
+                - binary_sensor.shutteropened_read_only
+          - type: history-graph
+            entities:
+              - entity: cover.tapparella_studio
+              - entity: cover.tapparella_camera_da_letto
+              - entity: cover.tapparella_cameretta
+              - entity: cover.tapparella_camera
+              - entity: cover.tapparella_bagno_notte
+        column_span: 1
+      - type: grid
+        cards:
+          - type: heading
+            heading: Tende
+            heading_style: title
+            icon: mdi:awning-outline
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: scene.tende_aperte
+              perform_action: scene.turn_on
+              data: {}
+            name: Tende aperte
+            icon: ''
+            icon_height: 50px
+            entity: scene.tende_aperte
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: scene.tende_chiuse
+              perform_action: scene.turn_on
+              data: {}
+            name: Tende chiuse
+            icon: ''
+            icon_height: 50px
+            entity: scene.tende_chiuse
+          - type: entities
+            entities:
+              - entity: cover.sunilus_io_dx
+                name: Tenda DX
+                secondary_info: position
+              - entity: cover.sunilus_io_sx
+                secondary_info: position
+                name: Tenda SX
+            title: Tende Portico
+            state_color: true
+            show_header_toggle: true
+          - type: logbook
+            target:
+              entity_id:
+                - cover.sunilus_io_dx
+                - cover.sunilus_io_sx
+                - scene.tende_aperte
+                - scene.tende_chiuse
+                - automation.cover_height_dynamic
+                - automation.tramonto_apertura_tende
+                - input_boolean.isrunnningdynamicshadeposition
+                - >-
+                  automation.isrunnningdynamicshadeposition_on_shade_position_change_cover_height_dynamic_disable
+          - type: history-graph
+            entities:
+              - entity: cover.sunilus_io_dx
+              - entity: cover.sunilus_io_sx
+  - type: sections
+    max_columns: 1
+    title: Settings
+    path: settings
+    icon: mdi:store-cog
+    sections:
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: automation.alarm_location_on_working_day
+                icon: mdi:shield-home
+                secondary_info: last-changed
+              - entity: automation.alarm_workday_on
+                secondary_info: last-triggered
+                icon: mdi:shield-home
+              - entity: automation.alarm_location_workdays
+                icon: mdi:shield-home-outline
+                secondary_info: last-changed
+              - entity: automation.lgt_notte
+                icon: mdi:home-lightbulb
+                secondary_info: last-triggered
+                name: Close Lights when phones charging in night
+              - entity: input_boolean.autotoggleshuttersmovmentbylocatio
+                name: Apertura chiusura Tapparella (Location Riccardo)
+                secondary_info: last-updated
+              - entity: automation.sht_close_location_ifttt
+                icon: mdi:window-shutter
+                name: Tapparelle Semi-chiuso (Location)
+                secondary_info: last-triggered
+              - entity: automation.sht_open_location
+                name: Tapparelle Apri (Location)
+                icon: mdi:window-shutter-open
+                secondary_info: last-triggered
+              - entity: automation.sht_uv_index
+                name: UV Index Chiusura tapparella camera
+                icon: mdi:shield-sun
+                secondary_info: last-triggered
+              - entity: automation.rn_rain_active_close_shutters_weather_romieri_2
+                icon: mdi:window-shutter-alert
+                name: Close shutters  when raining
+                secondary_info: last-triggered
+              - entity: automation.rn_tende_apertura
+                secondary_info: last-triggered
+                name: Open Shades when raining
+                icon: mdi:awning-outline
+              - entity: automation.lgt_sala_tv_on
+                icon: mdi:television-ambient-light
+                name: Luce televisione al tramonto
+                secondary_info: last-triggered
+              - entity: automation.cover_height_dynamic
+                name: 'Tende posizione dinamica '
+                icon: mdi:awning-outline
+                secondary_info: last-changed
+              - entity: automation.tende_uv_index
+                name: UV Index Chiusura portico
+                icon: mdi:shield-sun
+                secondary_info: last-triggered
+              - entity: binary_sensor.shutteropened_read_only
+                name: Tapparelle aperte
+                secondary_info: last-changed
+              - entity: binary_sensor.israining_read_only
+                name: Pioggia
+                secondary_info: last-changed
+            state_color: true
+            title: Romieri Home Settings
+            show_header_toggle: false
+    cards: []
+    header:
+      layout: center
+      badges_position: bottom
+  - icon: mdi:cloud
+    title: Weather
+    visible:
+      - user: 821d219dcb374b60998236c84880ec03
+      - user: 2e595090c88442b3aa98ca5a31384dab
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.tasmotadht22_am2301_temperature
+            name: Portico AM2301
+            secondary_info: last-updated
+          - entity: sensor.tasmotadht22_am2301_humidity
+            name: Portico AM2301
+            secondary_info: last-updated
+          - entity: sensor.tasmotasi7021_si7021_temperature
+          - entity: sensor.tasmotasi7021_si7021_humidity
+        state_color: true
+        title: Home Sensors
+      - type: weather-forecast
+        entity: weather.romieri
+        show_forecast: false
+      - type: entities
+        entities:
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_dew_point
+            name: Dew point
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_feels_like
+            name: Feels like
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_hourly_rain
+            name: Hourly rain
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_humidity
+            name: Humidity
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_relative_pressure
+            name: Relative pressure
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_temperature
+            name: Temperature
+          - entity: sensor.trieste_friuli_venezia_giulia_airport_wind_speed
+            name: Wind speed
+        title: Trieste–Friuli Venezia Giulia Airport
+      - type: weather-forecast
+        entity: weather.meteorologisk_home
+        show_forecast: false
+      - type: weather-forecast
+        entity: weather.romieri
+        show_forecast: false
+  - type: sections
+    max_columns: 4
+    title: Network
+    path: network
+    icon: mdi:access-point-network
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: SpeedTest
+            heading_style: title
+          - graph: line
+            type: sensor
+            detail: 2
+            entity: sensor.speedtest_download
+            hours_to_show: 48
+          - graph: line
+            type: sensor
+            detail: 2
+            entity: sensor.speedtest_ping
+            hours_to_show: 48
+          - graph: line
+            type: sensor
+            detail: 2
+            entity: sensor.speedtest_upload
+            hours_to_show: 48
+        column_span: 3

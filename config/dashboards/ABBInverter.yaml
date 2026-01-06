@@ -1,0 +1,13 @@
+title: ABB Inverter Dashboard
+views:
+  - title: ABB Inverter
+    path: abb
+    panel: true
+    badges: []
+    cards:
+      - type: iframe
+        url: https://abb.romierihome.digital
+        aspect_ratio: 100%
+    visible:
+      - user: 821d219dcb374b60998236c84880ec03
+    type: panel
