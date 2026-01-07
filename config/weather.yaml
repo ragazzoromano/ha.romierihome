@@ -1,0 +1,58 @@
+# ============================================
+#  WEATHER INTEGRATION - Met.no
+# ============================================
+# Provides weather.romieriweather entity and forecast sensors
+# Met.no is a built-in Home Assistant integration (no HACS required)
+# Requires latitude/longitude to be set in secrets.yaml
+
+# Weather entity usando Met.no (built-in HA)
+weather:
+  - platform: met
+    name: RomieriWeather
+
+# Sensori forecast precipitazioni
+template:
+  - sensor:
+      # Pioggia prevista oggi (somma forecast giornaliero)
+      - name: "Rain Forecast Today"
+        unique_id: rain_forecast_today
+        unit_of_measurement: "mm"
+        device_class: precipitation
+        icon: mdi:weather-pouring
+        state: >
+          {% set forecast = state_attr('weather.romieriweather', 'forecast') %}
+          {% if forecast and forecast | length > 0 %}
+            {{ forecast[0].precipitation | float(0) | round(1) }}
+          {% else %}
+            0
+          {% endif %}
+      
+      # Pioggia prevista domani
+      - name: "Rain Forecast Tomorrow"
+        unique_id: rain_forecast_tomorrow
+        unit_of_measurement: "mm"
+        device_class: precipitation
+        icon: mdi:weather-pouring
+        state: >
+          {% set forecast = state_attr('weather.romieriweather', 'forecast') %}
+          {% if forecast and forecast | length > 1 %}
+            {{ forecast[1].precipitation | float(0) | round(1) }}
+          {% else %}
+            0
+          {% endif %}
+      
+      # Totale pioggia prossimi 3 giorni
+      - name: "Rain Forecast Next 3 Days"
+        unique_id: rain_forecast_next_3_days
+        unit_of_measurement: "mm"
+        device_class: precipitation
+        icon: mdi:weather-rainy
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% set forecast = state_attr('weather.romieriweather', 'forecast') %}
+          {% if forecast %}
+            {% for day in forecast[:3] %}
+              {% set ns.total = ns.total + (day.precipitation | float(0)) %}
+            {% endfor %}
+          {% endif %}
+          {{ ns.total | round(1) }}
