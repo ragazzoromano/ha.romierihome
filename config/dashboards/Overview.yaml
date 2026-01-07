@@ -657,6 +657,8 @@ views:
             heading_style: title
             heading: Allarme
             icon: mdi:shield-home
+          - type: markdown
+            content: '## 🔒 Controlli Allarme'
           - show_name: true
             show_icon: true
             type: button
@@ -703,6 +705,8 @@ views:
               action: more-info
             name: Attiva allarme parziale
             icon: mdi:home-lock
+          - type: markdown
+            content: '## 📍 Posizione e Dispositivi'
           - type: entities
             entities:
               - entity: person.mariachiara
@@ -721,6 +725,8 @@ views:
               - entity: binary_sensor.sm_s901u1_is_charging
             state_color: true
             title: Cellulari
+          - type: markdown
+            content: '## 📋 Storico'
           - type: logbook
             hours_to_show: 72
             title: Storico allarme
@@ -761,6 +767,8 @@ views:
                 entity: input_boolean.shutteropened
                 name: Aperte
                 state_content: name
+          - type: markdown
+            content: '## 🪟 Controlli Tapparelle'
           - show_name: true
             show_icon: true
             type: button
@@ -787,6 +795,8 @@ views:
             name: Tapparelle chiuse
             icon: mdi:window-shutter
             icon_height: 50px
+          - type: markdown
+            content: '## 📋 Stato Tapparelle'
           - type: entities
             entities:
               - entity: cover.tapparella_studio
@@ -800,6 +810,8 @@ views:
               - entity: cover.tapparella_bagno_notte
                 secondary_info: position
             state_color: true
+          - type: markdown
+            content: '## 📊 Storico'
           - type: logbook
             target:
               entity_id:
@@ -835,6 +847,8 @@ views:
             heading: Tende
             heading_style: title
             icon: mdi:awning-outline
+          - type: markdown
+            content: '## 🌤️ Controlli Tende Portico'
           - show_name: true
             show_icon: true
             type: button
@@ -861,6 +875,8 @@ views:
             icon: ''
             icon_height: 50px
             entity: scene.tende_chiuse
+          - type: markdown
+            content: '## 📋 Stato Tende'
           - type: entities
             entities:
               - entity: cover.sunilus_io_dx
@@ -872,6 +888,8 @@ views:
             title: Tende Portico
             state_color: true
             show_header_toggle: true
+          - type: markdown
+            content: '## 📊 Storico'
           - type: logbook
             target:
               entity_id:
@@ -896,24 +914,71 @@ views:
     sections:
       - type: grid
         cards:
+          - type: markdown
+            content: '## ⚙️ Impostazioni Automazioni'
+          - type: markdown
+            content: |
+              ### 🔒 Automazioni Allarme
+              
+              **Alarm location ON - weekdays after 19**: Riattiva l'automazione dell'allarme basata sulla posizione dopo le 19:00 nei giorni feriali, permettendo l'attivazione automatica quando tutti escono di casa.
+              
+              **Alarm location ON - weekdays**: Attiva l'automazione dell'allarme basata sulla posizione nei giorni non feriali (weekend e festivi), permettendo l'attivazione automatica quando tutti escono di casa.
+              
+              **Alarm location OFF - weekdays**: Disattiva l'automazione dell'allarme basata sulla posizione all'1:00 nei giorni feriali, evitando attivazioni automatiche quando si va al lavoro la mattina.
           - type: entities
             entities:
               - entity: automation.alarm_location_on_working_day
                 icon: mdi:shield-home
                 secondary_info: last-changed
+                name: Alarm location ON - weekdays after 19
               - entity: automation.alarm_workday_on
                 secondary_info: last-triggered
                 icon: mdi:shield-home
+                name: Alarm location ON - weekdays
               - entity: automation.alarm_location_workdays
                 icon: mdi:shield-home-outline
                 secondary_info: last-changed
+                name: Alarm location OFF - weekdays
+            state_color: true
+            show_header_toggle: false
+          - type: markdown
+            content: |
+              ### 💡 Automazioni Luci
+              
+              **Close Lights when phones charging in night**: Spegne automaticamente tutte le luci della casa quando entrambi i telefoni sono in carica tra le 22:00 e le 06:00, e entrambe le persone sono a casa. Questa automazione aiuta a risparmiare energia quando si va a dormire.
+              
+              **Luce televisione al tramonto**: Accende automaticamente la luce della TV nella sala quando la TV viene accesa dopo il tramonto e prima dell'alba, garantendo illuminazione adeguata durante la visione notturna.
+          - type: entities
+            entities:
               - entity: automation.lgt_notte
                 icon: mdi:home-lightbulb
                 secondary_info: last-triggered
                 name: Close Lights when phones charging in night
+              - entity: automation.lgt_sala_tv_on
+                icon: mdi:television-ambient-light
+                name: Luce televisione al tramonto
+                secondary_info: last-triggered
+            state_color: true
+            show_header_toggle: false
+          - type: markdown
+            content: |
+              ### 🪟 Automazioni Tapparelle
+              
+              **Apertura chiusura Tapparella (Location)**: Input boolean che abilita/disabilita l'apertura e chiusura automatica delle tapparelle basata sulla posizione delle persone.
+              
+              **Tapparelle Semi-chiuso (Location)**: Chiude le tapparelle in posizione semi-chiusa quando entrambe le persone lasciano casa, se è giorno e non sta piovendo. Aiuta a proteggere la casa dal sole e a mantenere la privacy.
+              
+              **Tapparelle Apri (Location)**: Apre automaticamente le tapparelle quando almeno una persona rientra a casa durante il giorno (dopo l'alba e prima del tramonto), se non sta piovendo.
+              
+              **UV Index Chiusura tapparella camera**: Chiude automaticamente la tapparella della camera alle 13:00 se l'indice UV è superiore a 6 e la temperatura percepita è superiore a 25°C, proteggendo la stanza dal calore eccessivo.
+              
+              **Close shutters when raining**: Chiude automaticamente tutte le tapparelle quando inizia a piovere, proteggendo l'interno della casa dall'acqua.
+          - type: entities
+            entities:
               - entity: input_boolean.autotoggleshuttersmovmentbylocatio
-                name: Apertura chiusura Tapparella (Location Riccardo)
+                name: Apertura chiusura Tapparella (Location)
                 secondary_info: last-updated
+                icon: mdi:map-marker-radius
               - entity: automation.sht_close_location_ifttt
                 icon: mdi:window-shutter
                 name: Tapparelle Semi-chiuso (Location)
@@ -928,16 +993,25 @@ views:
                 secondary_info: last-triggered
               - entity: automation.rn_rain_active_close_shutters_weather_romieri_2
                 icon: mdi:window-shutter-alert
-                name: Close shutters  when raining
+                name: Close shutters when raining
                 secondary_info: last-triggered
+            state_color: true
+            show_header_toggle: false
+          - type: markdown
+            content: |
+              ### 🌤️ Automazioni Tende
+              
+              **Open Shades when raining**: Apre automaticamente le tende del portico quando inizia a piovere, proteggendole da possibili danni causati dal vento e dalla pioggia forte.
+              
+              **Tende posizione dinamica**: Regola automaticamente l'altezza delle tende del portico in base alla posizione del sole, garantendo ombra ottimale durante il giorno. Utilizza calcoli di azimut ed elevazione solare.
+              
+              **UV Index Chiusura portico**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 5 e la temperatura percepita è superiore a 25°C, e se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
+          - type: entities
+            entities:
               - entity: automation.rn_tende_apertura
                 secondary_info: last-triggered
                 name: Open Shades when raining
                 icon: mdi:awning-outline
-              - entity: automation.lgt_sala_tv_on
-                icon: mdi:television-ambient-light
-                name: Luce televisione al tramonto
-                secondary_info: last-triggered
               - entity: automation.cover_height_dynamic
                 name: 'Tende posizione dinamica '
                 icon: mdi:awning-outline
@@ -946,6 +1020,17 @@ views:
                 name: UV Index Chiusura portico
                 icon: mdi:shield-sun
                 secondary_info: last-triggered
+            state_color: true
+            show_header_toggle: false
+          - type: markdown
+            content: |
+              ### 📊 Sensori Stato
+              
+              **Tapparelle aperte**: Sensore di sola lettura che indica se almeno una tapparella è aperta. Aggiornato automaticamente ogni 10 minuti.
+              
+              **Pioggia**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stati meteo come pioggia, temporali, grandine o neve.
+          - type: entities
+            entities:
               - entity: binary_sensor.shutteropened_read_only
                 name: Tapparelle aperte
                 secondary_info: last-changed
@@ -953,7 +1038,6 @@ views:
                 name: Pioggia
                 secondary_info: last-changed
             state_color: true
-            title: Romieri Home Settings
             show_header_toggle: false
     cards: []
     header:
