@@ -49,6 +49,13 @@ The weather integration enables automatic irrigation optimization:
 | `sensor.irrigation_combined_factor` | Final irrigation factor (manual × weather) | % |
 | `sensor.smart_irrigation_status` | Human-readable irrigation status | - |
 
+### Weather Automations
+
+Two automations are included in `config/automations.yaml`:
+
+1. **Morning Briefing (06:00)**: Daily notification with weather forecast and irrigation plan
+2. **Pre-Skip Irrigation (05:00)**: Automatically blocks irrigation when >5mm rain is forecasted
+
 ### How Automatic Skip Works
 
 Every morning at **05:00**, the system checks rain forecast:
@@ -57,4 +64,5 @@ Every morning at **05:00**, the system checks rain forecast:
 - System automatically re-enables when forecast improves
 
 You can still manually override by adjusting `input_number.irrigation_global_factor`.
+
 

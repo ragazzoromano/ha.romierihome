@@ -1748,3 +1748,104 @@
     data:
       message: Inizio ciclo goccia-goccia
   mode: single
+# ============================================
+#  WEATHER FORECAST AUTOMATIONS
+# ============================================
+# Two critical automations for smart irrigation:
+# 1. Morning briefing notification with weather and irrigation plan
+# 2. Pre-skip irrigation when significant rain is forecasted
+
+# ============================================
+#  AUTOMAZIONE 1: Notifica Mattutina
+# ============================================
+- id: weather_morning_irrigation_briefing
+  alias: "Weather - Briefing Irrigazione Mattina"
+  description: "Notifica giornaliera ore 06:00 con previsioni e piano irrigazione"
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  action:
+    - action: notify.mobile_app_sm_s901u1
+      data:
+        title: "🌦️ Previsioni Irrigazione Oggi"
+        message: >
+          Meteo: {{ states('weather.romieriweather') }} - {{ state_attr('weather.romieriweather', 'temperature') }}°C
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          Pioggia prevista domani: {{ states('sensor.rain_forecast_tomorrow') }}mm
+          
+          Smart Irrigation Factor: {{ states('sensor.smart_irrigation_weather_factor') }}%
+          Stato: {{ states('sensor.smart_irrigation_status') }}
+    - action: notify.mobile_app_sm_a546b
+      data:
+        title: "🌦️ Previsioni Irrigazione Oggi"
+        message: >
+          Meteo: {{ states('weather.romieriweather') }} - {{ state_attr('weather.romieriweather', 'temperature') }}°C
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          Pioggia prevista domani: {{ states('sensor.rain_forecast_tomorrow') }}mm
+          
+          Smart Irrigation Factor: {{ states('sensor.smart_irrigation_weather_factor') }}%
+          Stato: {{ states('sensor.smart_irrigation_status') }}
+    - action: notify.mobile_app_sm_g980f
+      data:
+        title: "🌦️ Previsioni Irrigazione Oggi"
+        message: >
+          Meteo: {{ states('weather.romieriweather') }} - {{ state_attr('weather.romieriweather', 'temperature') }}°C
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          Pioggia prevista domani: {{ states('sensor.rain_forecast_tomorrow') }}mm
+          
+          Smart Irrigation Factor: {{ states('sensor.smart_irrigation_weather_factor') }}%
+          Stato: {{ states('sensor.smart_irrigation_status') }}
+  mode: single
+
+# ============================================
+#  AUTOMAZIONE 2: Pre-Blocco Irrigazione
+# ============================================
+- id: weather_irrigation_forecast_skip
+  alias: "Weather - Blocco Irrigazione per Pioggia Prevista"
+  description: "Blocca irrigazione alle 05:00 se pioggia significativa prevista oggi"
+  trigger:
+    - platform: time
+      at: "05:00:00"
+  condition:
+    # Solo se pioggia prevista > 5mm
+    - condition: numeric_state
+      entity_id: sensor.rain_forecast_today
+      above: 5
+    # E smart irrigation è abilitata
+    - condition: state
+      entity_id: input_boolean.smart_irrigation_enabled
+      state: 'on'
+  action:
+    # Imposta factor globale a 0 (blocca irrigazione)
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.irrigation_global_factor
+      data:
+        value: 0
+    
+    # Notifica mobile a tutti i device
+    - action: notify.mobile_app_sm_s901u1
+      data:
+        title: "🚫 Irrigazione Bloccata"
+        message: >
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          
+          L'irrigazione è stata bloccata automaticamente per risparmiare acqua.
+          Il sistema si riabiliterà automaticamente quando le previsioni miglioreranno.
+    - action: notify.mobile_app_sm_a546b
+      data:
+        title: "🚫 Irrigazione Bloccata"
+        message: >
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          
+          L'irrigazione è stata bloccata automaticamente per risparmiare acqua.
+          Il sistema si riabiliterà automaticamente quando le previsioni miglioreranno.
+    - action: notify.mobile_app_sm_g980f
+      data:
+        title: "🚫 Irrigazione Bloccata"
+        message: >
+          Pioggia prevista oggi: {{ states('sensor.rain_forecast_today') }}mm
+          
+          L'irrigazione è stata bloccata automaticamente per risparmiare acqua.
+          Il sistema si riabiliterà automaticamente quando le previsioni miglioreranno.
+  mode: single

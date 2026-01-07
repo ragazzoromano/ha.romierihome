@@ -195,8 +195,3 @@ http:
 #  WEATHER INTEGRATION - Met.no
 # ============================================
 weather: !include weather.yaml
-
-# ============================================
-#  WEATHER FORECAST AUTOMATIONS
-# ============================================
-automation weather_forecast: !include automations_weather_forecast.yaml
