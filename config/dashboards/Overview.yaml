@@ -1045,47 +1045,72 @@ views:
                     content: |
                       **Descrizione**: Chiude automaticamente tutte le tapparelle quando inizia a piovere, proteggendo l'interno della casa dall'acqua.
           - type: markdown
-            content: |
-              ### 🌤️ Automazioni Tende
-              
-              **Open Shades when raining**: Apre automaticamente le tende del portico quando inizia a piovere, proteggendole da possibili danni causati dal vento e dalla pioggia forte.
-              
-              **Tende posizione dinamica**: Regola automaticamente l'altezza delle tende del portico in base alla posizione del sole, garantendo ombra ottimale durante il giorno. Utilizza calcoli di azimut ed elevazione solare.
-              
-              **UV Index Chiusura portico**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 5 e la temperatura percepita è superiore a 25°C, e se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
+            content: '### 🌤️ Automazioni Tende'
           - type: entities
-            entities:
-              - entity: automation.rn_tende_apertura
-                secondary_info: last-triggered
-                name: Open Shades when raining
-                icon: mdi:awning-outline
-              - entity: automation.cover_height_dynamic
-                name: 'Tende posizione dinamica '
-                icon: mdi:awning-outline
-                secondary_info: last-changed
-              - entity: automation.tende_uv_index
-                name: UV Index Chiusura portico
-                icon: mdi:shield-sun
-                secondary_info: last-triggered
             state_color: true
             show_header_toggle: false
+            entities:
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: automation.rn_tende_apertura
+                  icon: mdi:awning-outline
+                  secondary_info: last-triggered
+                  name: Open Shades when raining
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: |
+                      **Descrizione**: Apre automaticamente le tende del portico quando inizia a piovere, proteggendole da possibili danni causati dal vento e dalla pioggia forte.
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: automation.cover_height_dynamic
+                  icon: mdi:sun-angle
+                  secondary_info: last-triggered
+                  name: Tende posizione dinamica
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: |
+                      **Descrizione**: Regola automaticamente l'altezza delle tende del portico in base alla posizione del sole, garantendo ombra ottimale durante il giorno. Utilizza calcoli di azimut ed elevazione solare.
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: automation.tende_uv_index
+                  icon: mdi:shield-sun
+                  secondary_info: last-triggered
+                  name: UV Index Chiusura portico
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: |
+                      **Descrizione**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 5 e la temperatura percepita è superiore a 25°C, se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
           - type: markdown
-            content: |
-              ### 📊 Sensori Stato
-              
-              **Tapparelle aperte**: Sensore di sola lettura che indica se almeno una tapparella è aperta. Aggiornato automaticamente ogni 10 minuti.
-              
-              **Pioggia**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stati meteo come pioggia, temporali, grandine o neve.
+            content: '### 📊 Sensori Stato'
           - type: entities
-            entities:
-              - entity: binary_sensor.shutteropened_read_only
-                name: Tapparelle aperte
-                secondary_info: last-changed
-              - entity: binary_sensor.israining_read_only
-                name: Pioggia
-                secondary_info: last-changed
             state_color: true
             show_header_toggle: false
+            entities:
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: binary_sensor.shutteropened_read_only
+                  icon: mdi:window-shutter-open
+                  secondary_info: last-updated
+                  name: Tapparelle aperte
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: |
+                      **Descrizione**: Sensore di sola lettura che indica se almeno una tapparella è aperta. Aggiornato automaticamente ogni 10 minuti.
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: binary_sensor.israining_read_only
+                  icon: mdi:weather-pouring
+                  secondary_info: last-updated
+                  name: Pioggia
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: |
+                      **Descrizione**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stati meteo come pioggia, temporali, grandine o neve.
     cards: []
     header:
       layout: center
