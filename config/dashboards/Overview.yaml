@@ -1082,7 +1082,7 @@ views:
                 entities:
                   - type: custom:hui-markdown-card
                     content: |
-                      **Descrizione**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 6 e la temperatura percepita è superiore a 25°C, se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
+                      **Descrizione**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 5 e la temperatura percepita è superiore a 25°C, se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
           - type: markdown
             content: '### 📊 Sensori Stato'
           - type: entities
