@@ -1110,7 +1110,7 @@ views:
                 entities:
                   - type: custom:hui-markdown-card
                     content: |
-                      **Descrizione**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stato meteo come pioggia, temporali, grandine o neve.
+                      **Descrizione**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stati meteo come pioggia, temporali, grandine o neve.
     cards: []
     header:
       layout: center
