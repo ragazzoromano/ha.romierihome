@@ -49,10 +49,10 @@ views:
           - entity: sensor.sun_next_events
             name: Alba / Tramonto
           - type: divider
-          - entity: automation.grdn_irrigazione_settimanale_2
+          - entity: automation.irrigazione_avvio_settimanale_programmato
             name: Auto settimanale
             icon: mdi:calendar-week
-          - entity: automation.grdn_irrigazione_settimanale_alba
+          - entity: automation.irrigazione_avvio_alba_settimanale
             name: Auto alba
             icon: mdi:sun-clock
         state_color: true
@@ -427,10 +427,10 @@ views:
         title: 🛡️ Automazioni sicurezza
         show_header_toggle: false
         entities:
-          - entity: automation.grdn_chiudi_tapparelle
+          - entity: automation.irrigazione_chiusura_tapparelle_zona_6
             name: Chiudi tapparelle Zona 6 (Est interno)
             icon: mdi:window-shutter-auto
-          - entity: automation.grdn_chiudi_tapparelle_zona_8
+          - entity: automation.irrigazione_chiusura_tapparelle_zona_8
             name: Chiudi tapparelle Zona 8 (Nord interno)
             icon: mdi:window-shutter-auto
         state_color: true
@@ -557,7 +557,7 @@ views:
           title: 📅 Programma Irrigazione
           show_header_toggle: false
           entities:
-            - entity: automation.grdn_irrigazione_settimanale_2
+            - entity: automation.irrigazione_avvio_settimanale_programmato
               name: Irrigazione Classica
               secondary_info: last-triggered
               icon: mdi:sprinkler-variant
@@ -565,7 +565,7 @@ views:
               name: Orario partenza irrigazione
               secondary_info: none
             - type: divider
-            - entity: automation.grdn_irrigazione_settimanale_alba
+            - entity: automation.irrigazione_avvio_alba_settimanale
               name: Irrigazione all'alba
               secondary_info: last-triggered
               icon: mdi:sun-clock

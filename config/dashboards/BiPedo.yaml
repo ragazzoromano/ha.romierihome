@@ -92,7 +92,7 @@ views:
         content: '## 🤖 Automazioni'
       - type: entities
         entities:
-          - entity: automation.bipedo_park
+          - entity: automation.robot_ritorno_base_pioggia_irrigazione_attiva
             name: 🏠 Auto parking with rain or sprinklers
             secondary_info: last-triggered
             icon: mdi:home-circle
@@ -108,6 +108,6 @@ views:
             - sensor.bipedo_error
             - binary_sensor.bipedo_leaving_dock
             - binary_sensor.bipedo_charging
-            - automation.bipedo_park
+            - automation.robot_ritorno_base_pioggia_irrigazione_attiva
           device_id: ad41450039d7e7554bde03f58aabc964
 title: BiPedo
