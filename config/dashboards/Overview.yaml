@@ -664,7 +664,7 @@ views:
             type: button
             tap_action:
               action: toggle
-            entity: automation.enable_alarm_location_ifttt
+            entity: automation.allarme_attivazione_uscita_da_casa
             show_state: true
             name: Allarme con posizione
             icon: mdi:home-map-marker
@@ -673,7 +673,7 @@ views:
               action: call-service
               service: automation.trigger
               service_data:
-                entity_id: automation.enable_alarm_ifttt
+                entity_id: automation.allarme_attivazione_manuale
             hold_action:
               action: more-info
             show_icon: true
@@ -685,7 +685,7 @@ views:
               action: call-service
               service: automation.trigger
               service_data:
-                entity_id: automation.disable_alarm_ifttt
+                entity_id: automation.allarme_disattivazione_manuale
             hold_action:
               action: more-info
             show_icon: true
@@ -732,10 +732,10 @@ views:
             title: Storico allarme
             target:
               entity_id:
-                - automation.enable_alarm_location_ifttt
-                - automation.enable_alarm_ifttt
-                - automation.disable_alarm_location_ifttt
-                - automation.disable_alarm_ifttt
+                - automation.allarme_attivazione_uscita_da_casa
+                - automation.allarme_attivazione_manuale
+                - automation.allarme_disattivazione_rientro_a_casa
+                - automation.allarme_disattivazione_manuale
                 - automation.alarm_enable_partial_ifttt
                 - device_tracker.sm_a546b
                 - device_tracker.sm_s901u1
@@ -825,10 +825,10 @@ views:
                 - input_boolean.shutterclosed
                 - input_boolean.shutteropened
                 - automation.shutters_location_auto_off
-                - automation.sht_uv_index
-                - automation.sht_close_location_ifttt
+                - automation.tapparelle_chiusura_uv_temperatura_alta
+                - automation.tapparelle_chiusura_uscita_da_casa
                 - scene.sht_closed
-                - automation.sht_open_location
+                - automation.tapparelle_apertura_rientro_a_casa
                 - scene.sht_opened
                 - scene.sht_semi_chiuso
                 - binary_sensor.shutterclosed_read_only
@@ -975,7 +975,7 @@ views:
               - type: custom:fold-entity-row
                 open: true
                 head:
-                  entity: automation.lgt_sala_tv_on
+                  entity: automation.luci_accensione_automatica_sala_tv
                   icon: mdi:television-ambient-light
                   name: Luce televisione al tramonto
                   secondary_info: last-triggered
@@ -1003,7 +1003,7 @@ views:
               - type: custom:fold-entity-row
                 open: true
                 head:
-                  entity: automation.sht_close_location_ifttt
+                  entity: automation.tapparelle_chiusura_uscita_da_casa
                   icon: mdi:window-shutter
                   name: Tapparelle Semi-chiuso (Location)
                   secondary_info: last-triggered
@@ -1014,7 +1014,7 @@ views:
               - type: custom:fold-entity-row
                 open: true
                 head:
-                  entity: automation.sht_open_location
+                  entity: automation.tapparelle_apertura_rientro_a_casa
                   name: Tapparelle Apri (Location)
                   icon: mdi:window-shutter-open
                   secondary_info: last-triggered
@@ -1025,7 +1025,7 @@ views:
               - type: custom:fold-entity-row
                 open: true
                 head:
-                  entity: automation.sht_uv_index
+                  entity: automation.tapparelle_chiusura_uv_temperatura_alta
                   name: UV Index Chiusura tapparella camera
                   icon: mdi:shield-sun
                   secondary_info: last-triggered

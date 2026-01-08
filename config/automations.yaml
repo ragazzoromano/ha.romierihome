@@ -1,5 +1,5 @@
 - id: '1609686557369'
-  alias: Alarm Enable (Location) IFTTT
+  alias: Allarme - Attivazione - Uscita da casa
   description: Attiva l'allarme automaticamente quando entrambi i dispositivi escono dalla zona casa
   category: security
   triggers:
@@ -45,7 +45,7 @@
     title: Allarme attivato
   mode: single
 - id: '1609686952547'
-  alias: Alarm Disable (Location) IFTTT
+  alias: Allarme - Disattivazione - Rientro a casa
   description: Disattiva l'allarme automaticamente quando almeno un dispositivo rientra nella zona casa
   category: security
   triggers:
@@ -91,7 +91,7 @@
     title: Allarme disabilitato
   mode: single
 - id: '1614083771225'
-  alias: 'Alarm Disable IFTTT '
+  alias: Allarme - Disattivazione - Manuale
   description: Disattiva manualmente l'allarme tramite IFTTT e invia notifica ai dispositivi mobili
   category: security
   triggers: []
@@ -113,7 +113,7 @@
     title: Allarme disabilitato
   mode: single
 - id: '1614111057350'
-  alias: Alarm Enable IFTTT
+  alias: Allarme - Attivazione - Manuale
   description: Attiva manualmente l'allarme tramite IFTTT e invia notifica ai dispositivi mobili
   category: security
   triggers: []
@@ -135,7 +135,7 @@
     title: Allarme attivato
   mode: single
 - id: '1632223938466'
-  alias: GRDN_Irrigazione_Settimanale
+  alias: Irrigazione - Avvio - Settimanale programmato
   description: Avvia il ciclo di irrigazione settimanale all'orario programmato, con controlli meteo e supporto per modalità normale e avanzata (zone personalizzate per giorno)
   category: irrigation
   triggers:
@@ -400,7 +400,7 @@
       message: Inizio Irrigazione
   mode: single
 - id: '1632224023054'
-  alias: GRDN_Irrigazione_Settimanale_Alba
+  alias: Irrigazione - Avvio - Alba settimanale
   description: Avvia il ciclo di irrigazione settimanale all'alba, con controlli meteo e supporto per modalità normale e avanzata
   category: irrigation
   triggers:
@@ -664,7 +664,7 @@
       message: Inizio Irrigazione
   mode: single
 - id: '1633346222844'
-  alias: GRDN Chiudi Tapparelle Zona 6
+  alias: Irrigazione - Chiusura tapparelle - Zona 6
   description: Chiude automaticamente le tapparelle quando inizia l'irrigazione della zona 6 (se aperte)
   category: irrigation
   triggers:
@@ -688,7 +688,7 @@
       entity_id: scene.sht_closed
   mode: single
 - id: '1633375247675'
-  alias: LGT Sala TV > ON
+  alias: Luci - Accensione automatica - Sala TV
   description: Accende automaticamente la luce della sala TV quando la TV viene accesa durante le ore notturne
   category: lighting
   triggers:
@@ -713,7 +713,7 @@
     domain: switch
   mode: single
 - id: '1633375354850'
-  alias: LGT Sala TV > OFF
+  alias: Luci - Spegnimento automatico - Sala TV
   description: Spegne automaticamente la luce della sala TV quando la TV viene spenta
   category: lighting
   triggers:
@@ -735,7 +735,7 @@
     domain: switch
   mode: single
 - id: '1638692618674'
-  alias: ENG Potenza attiva 5kW
+  alias: Energia - Notifica - Superamento 5kW
   description: Invia una notifica quando la potenza attiva supera i 5kW per più di un minuto
   category: energy
   triggers:
@@ -759,7 +759,7 @@
       title: 'Soglia potenza '
   mode: single
 - id: '1648500187701'
-  alias: GRDN Chiudi Tapparelle Zona 8
+  alias: Irrigazione - Chiusura tapparelle - Zona 8
   description: Chiude automaticamente le tapparelle quando inizia l'irrigazione della zona 8 (se aperte)
   category: irrigation
   triggers:
@@ -783,7 +783,7 @@
       entity_id: scene.sht_closed
   mode: single
 - id: '1649156718690'
-  alias: 'SHT Open (Location) '
+  alias: Tapparelle - Apertura - Rientro a casa
   description: Apre le tapparelle quando qualcuno rientra a casa durante il giorno, se non piove
   category: shutters
   triggers:
@@ -829,7 +829,7 @@
       entity_id: scene.sht_opened
   mode: single
 - id: '1649224379592'
-  alias: SHT Close (Location)
+  alias: Tapparelle - Chiusura - Uscita da casa
   description: Chiude le tapparelle quando tutti escono da casa durante il giorno, se non piove
   category: shutters
   triggers:
@@ -875,7 +875,7 @@
       entity_id: scene.sht_closed
   mode: single
 - id: '1650475662481'
-  alias: ENG Potenza attiva 6kW
+  alias: Energia - Notifica - Superamento 6kW
   description: Invia una notifica quando la potenza attiva supera i 6kW per più di un minuto
   category: energy
   triggers:
@@ -899,7 +899,7 @@
       title: 'Soglia potenza '
   mode: single
 - id: '1658404474268'
-  alias: SHT UV Index Tapparella camera (AccuW)
+  alias: Tapparelle - Chiusura - UV/Temperatura alta
   description: Chiude la tapparella della camera alle 13:00 se l'indice UV è superiore a 6 e la temperatura percepita supera i 25°C
   category: shutters
   triggers:
@@ -922,7 +922,7 @@
       entity_id: cover.tapparella_camera
   mode: single
 - id: '1658506463789'
-  alias: BiPedo Send to Park
+  alias: Robot - Ritorno base - Pioggia/Irrigazione attiva
   description: Invia il robot tagliaerba (BiPedo) alla docking station quando inizia a piovere o quando si attiva l'irrigazione e il robot non è a casa
   category: appliances
   triggers:
@@ -1183,7 +1183,7 @@
     data:
       stop_actions: false
     target:
-      entity_id: automation.enable_alarm_location_ifttt
+      entity_id: automation.allarme_attivazione_uscita_da_casa
     action: automation.turn_off
   mode: single
 - id: '1714384821537'
@@ -1202,7 +1202,7 @@
   actions:
   - target:
       entity_id:
-      - automation.enable_alarm_location_ifttt
+      - automation.allarme_attivazione_uscita_da_casa
     data: {}
     action: automation.turn_on
   mode: single
@@ -1222,7 +1222,7 @@
   actions:
   - target:
       entity_id:
-      - automation.enable_alarm_location_ifttt
+      - automation.allarme_attivazione_uscita_da_casa
     data: {}
     action: automation.turn_on
   mode: single
@@ -1263,8 +1263,8 @@
       stop_actions: true
     target:
       entity_id:
-      - automation.sht_open_location
-      - automation.sht_close_location_ifttt
+      - automation.tapparelle_apertura_rientro_a_casa
+      - automation.tapparelle_chiusura_uscita_da_casa
   mode: single
 - id: '1745051815983'
   alias: LGT Bagno giorno Timer OFF
@@ -1689,8 +1689,8 @@
     data: {}
     target:
       entity_id:
-      - automation.sht_close_location_ifttt
-      - automation.sht_open_location
+      - automation.tapparelle_chiusura_uscita_da_casa
+      - automation.tapparelle_apertura_rientro_a_casa
   mode: single
 - id: '1754741810908'
   alias: Tende UV Index (AccuW)
