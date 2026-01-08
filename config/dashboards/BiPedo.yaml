@@ -12,64 +12,94 @@ views:
         tap_action:
           action: url
           url_path: https://www.husqvarna.com/it/
+      - type: markdown
+        content: >
+          ## 🤖 Stato BiPedo
+
+          Visualizzazione in tempo reale dello stato del robot tagliaerba e
+          statistiche di funzionamento.
+        text_only: true
       - type: entities
         entities:
           - lawn_mower.bipedo
-          - entity: sensor.bipedo_number_of_charging_cycles
-            name: Number of charging cycles
-          - entity: sensor.bipedo_number_of_collisions
-            name: Number of collisions
-          - entity: sensor.bipedo_total_charging_time
-            name: Total charging time
-          - entity: sensor.bipedo_total_cutting_time
-            name: Total cutting time
-          - entity: sensor.bipedo_total_drive_distance
-            name: Total drive distance
-          - entity: sensor.bipedo_total_running_time
-            name: Total running time
-          - entity: sensor.bipedo_total_searching_time
-            name: Total searching time
-          - entity: sensor.bipedo_next_start
-            secondary_info: last-changed
-          - entity: sensor.bipedo_number_of_charging_cycles
-          - entity: sensor.bipedo_total_charging_time
-          - entity: sensor.bipedo_total_running_time
-          - number.bipedo_cutting_height
-          - entity: switch.bipedo_enable_schedule
-            name: Enable schedule
           - entity: sensor.bipedo_battery
-            name: Battery
+            name: 🔋 Battery
           - entity: binary_sensor.bipedo_charging
-            name: Charging
-          - entity: sensor.bipedo_error
-            name: Error
-          - entity: binary_sensor.bipedo_leaving_dock
-            name: Leaving dock
+            name: ⚡ Charging
           - entity: sensor.bipedo_mode
-            name: Mode
+            name: 🎯 Mode
           - entity: sensor.bipedo_next_start
-            name: Next start
-          - entity: sensor.bipedo_restricted_reason
-            name: Restricted reason
+            name: ⏰ Next start
+            secondary_info: last-changed
+          - type: divider
+          - entity: switch.bipedo_enable_schedule
+            name: 📅 Enable schedule
+          - entity: number.bipedo_cutting_height
+            name: ✂️ Cutting height
+          - type: divider
+          - entity: binary_sensor.bipedo_leaving_dock
+            name: 🚀 Leaving dock
           - entity: binary_sensor.bipedo_returning_to_dock
-            name: Returning to dock
-          - entity: automation.bipedo_park
-            name: Auto parking with rain or sprinklers
-            secondary_info: last-triggered
-            icon: mdi:home-circle
+            name: 🏠 Returning to dock
+          - entity: sensor.bipedo_error
+            name: ⚠️ Error
+          - entity: sensor.bipedo_restricted_reason
+            name: 🚫 Restricted reason
         state_color: true
-        title: BiPedo
+        title: 🤖 Controllo BiPedo
+      - type: markdown
+        content: '## 📊 Statistiche'
+      - type: entities
+        entities:
+          - entity: sensor.bipedo_total_cutting_time
+            name: ⏱️ Total cutting time
+            icon: mdi:timer-sand
+          - entity: sensor.bipedo_total_running_time
+            name: 🏃 Total running time
+            icon: mdi:run
+          - entity: sensor.bipedo_total_drive_distance
+            name: 🛣️ Total drive distance
+            icon: mdi:map-marker-distance
+          - entity: sensor.bipedo_total_charging_time
+            name: ⚡ Total charging time
+            icon: mdi:battery-charging
+          - entity: sensor.bipedo_total_searching_time
+            name: 🔍 Total searching time
+            icon: mdi:radar
+          - type: divider
+          - entity: sensor.bipedo_number_of_charging_cycles
+            name: 🔌 Number of charging cycles
+            icon: mdi:counter
+          - entity: sensor.bipedo_number_of_collisions
+            name: 💥 Number of collisions
+            icon: mdi:alert-circle
+        state_color: true
+        title: 📈 Statistiche di Utilizzo
+      - type: markdown
+        content: '## 🗺️ Posizione'
       - type: map
         entities:
           - entity: device_tracker.bipedo
         theme_mode: dark
         hours_to_show: 12
         default_zoom: 19
+      - type: markdown
+        content: '## 📉 Storico'
       - type: history-graph
         entities:
           - entity: lawn_mower.bipedo
+      - type: markdown
+        content: '## 🤖 Automazioni'
+      - type: entities
+        entities:
+          - entity: automation.bipedo_park
+            name: 🏠 Auto parking with rain or sprinklers
+            secondary_info: last-triggered
+            icon: mdi:home-circle
+        state_color: true
+        title: ⚙️ Controllo Automatico
       - type: logbook
-        title: BiPedo Log
+        title: 📝 BiPedo Log
         target:
           entity_id:
             - lawn_mower.bipedo
