@@ -1,6 +1,8 @@
 - id: '1609686557369'
   alias: Alarm Enable (Location) IFTTT
-  description: Enable home alarm
+  description: 'Attiva automaticamente l''allarme di casa tramite IFTTT quando entrambi
+    i dispositivi tracciati lasciano la zona home. Invia notifiche push ai dispositivi
+    mobili registrati.'
   triggers:
   - device_id: 112e0adb7fac1d9a23a0db703a21eacb
     domain: device_tracker
@@ -45,7 +47,9 @@
   mode: single
 - id: '1609686952547'
   alias: Alarm Disable (Location) IFTTT
-  description: Disable home alarm
+  description: 'Disattiva automaticamente l''allarme di casa tramite IFTTT quando almeno
+    uno dei dispositivi tracciati entra nella zona home. Invia notifiche push ai dispositivi
+    mobili registrati.'
   triggers:
   - device_id: 112e0adb7fac1d9a23a0db703a21eacb
     domain: device_tracker
@@ -90,7 +94,9 @@
   mode: single
 - id: '1614083771225'
   alias: 'Alarm Disable IFTTT '
-  description: Disable home alarm
+  description: 'Automazione manuale per disattivare l''allarme di casa tramite IFTTT.
+    Può essere eseguita manualmente dalla UI o tramite script/servizi. Non ha trigger
+    automatici.'
   triggers: []
   conditions: []
   actions:
@@ -111,7 +117,9 @@
   mode: single
 - id: '1614111057350'
   alias: Alarm Enable IFTTT
-  description: Enable home alarm
+  description: 'Automazione manuale per attivare l''allarme di casa tramite IFTTT.
+    Può essere eseguita manualmente dalla UI o tramite script/servizi. Non ha trigger
+    automatici.'
   triggers: []
   conditions: []
   actions:
@@ -132,6 +140,11 @@
   mode: single
 - id: '1632223938466'
   alias: GRDN_Irrigazione_Settimanale
+  description: 'Automazione principale per l''irrigazione settimanale programmata.
+    Parte all''ora configurata in input_datetime.time_start_irrigazione. Supporta due
+    modalità: normale (con giorni della settimana fissi) e avanzata (con programmazione
+    per zona/giorno). Include controlli meteo Smart Irrigation: blocca se piove o se
+    il fattore di irrigazione combinato è troppo basso (<5).'
   triggers:
   - value_template: '{{ states(''sensor.time'') == (states.input_datetime.time_start_irrigazione.attributes.timestamp
       | int | timestamp_custom(''%H:%M'', False)) }}'
@@ -395,7 +408,10 @@
   mode: single
 - id: '1632224023054'
   alias: GRDN_Irrigazione_Settimanale_Alba
-  description: ''
+  description: 'Automazione alternativa per l''irrigazione che parte all''alba (sunrise).
+    Utilizza la stessa logica di modalità (normale/avanzata) e gli stessi controlli
+    meteo Smart Irrigation dell''automazione principale. Utile per irrigazione mattutina
+    prima che il sole sia alto.'
   triggers:
   - event: sunrise
     trigger: sun
@@ -658,7 +674,9 @@
   mode: single
 - id: '1633346222844'
   alias: GRDN Chiudi Tapparelle Zona 6
-  description: ''
+  description: 'Chiude automaticamente le tapparelle quando l''irrigazione della zona
+    6 si attiva. Previene danni da acqua e migliora la sicurezza. Attende 3 secondi
+    dall''accensione della zona e verifica che le tapparelle siano effettivamente aperte.'
   triggers:
   - entity_id: switch.tasmotairr_06
     from: 'off'
@@ -681,7 +699,9 @@
   mode: single
 - id: '1633375247675'
   alias: LGT Sala TV > ON
-  description: ''
+  description: 'Accende automaticamente la luce della sala TV quando la TV Samsung viene
+    accesa, ma solo se la luce è spenta e se è buio (tra tramonto e alba). Migliora
+    comfort visivo durante la visione notturna.'
   triggers:
   - device_id: 96172cae7d0505d20ac4b369c6891c17
     domain: media_player
@@ -705,7 +725,9 @@
   mode: single
 - id: '1633375354850'
   alias: LGT Sala TV > OFF
-  description: ''
+  description: 'Spegne automaticamente la luce della sala TV quando la TV Samsung viene
+    spenta, ma solo se la luce è accesa. Coppia con LGT Sala TV > ON per gestione
+    automatica illuminazione.'
   triggers:
   - device_id: 96172cae7d0505d20ac4b369c6891c17
     domain: media_player
@@ -726,7 +748,9 @@
   mode: single
 - id: '1638692618674'
   alias: ENG Potenza attiva 5kW
-  description: ''
+  description: 'Monitora il consumo energetico domestico e invia notifiche push a entrambi
+    i dispositivi mobili quando la potenza attiva supera 5kW per almeno 1 minuto.
+    Aiuta a prevenire sovraccarichi.'
   triggers:
   - entity_id: sensor.home_power
     above: '5000'
@@ -749,7 +773,9 @@
   mode: single
 - id: '1648500187701'
   alias: GRDN Chiudi Tapparelle Zona 8
-  description: ''
+  description: 'Chiude automaticamente le tapparelle quando l''irrigazione della zona
+    8 si attiva. Funziona come l''automazione per zona 6, proteggendo finestre e ambiente
+    interno durante l''irrigazione.'
   triggers:
   - entity_id: switch.tasmotairr_08
     from: 'off'
@@ -772,7 +798,9 @@
   mode: single
 - id: '1649156718690'
   alias: 'SHT Open (Location) '
-  description: Open shutters by location
+  description: 'Apre automaticamente le tapparelle quando uno dei dispositivi tracciati
+    entra nella zona home, se l''altro è ancora fuori. Funziona solo di giorno (2h
+    dopo alba fino a tramonto) e solo se non piove. Migliora accoglienza al rientro.'
   triggers:
   - device_id: 112e0adb7fac1d9a23a0db703a21eacb
     domain: device_tracker
@@ -817,7 +845,9 @@
   mode: single
 - id: '1649224379592'
   alias: SHT Close (Location)
-  description: ''
+  description: 'Chiude automaticamente le tapparelle quando entrambi i dispositivi
+    lasciano la zona home. Funziona solo dopo alba e prima delle 22:30, solo se le
+    tapparelle sono aperte e non piove. Migliora sicurezza della casa vuota.'
   triggers:
   - device_id: 112e0adb7fac1d9a23a0db703a21eacb
     domain: device_tracker
@@ -862,7 +892,9 @@
   mode: single
 - id: '1650475662481'
   alias: ENG Potenza attiva 6kW
-  description: ''
+  description: 'Monitora il consumo energetico domestico e invia notifiche push quando
+    la potenza attiva supera 6kW per almeno 1 minuto. Soglia di allarme superiore
+    rispetto alla 5kW per situazioni più critiche.'
   triggers:
   - entity_id:
     - sensor.home_power
@@ -885,7 +917,9 @@
   mode: single
 - id: '1658404474268'
   alias: SHT UV Index Tapparella camera (AccuW)
-  description: ''
+  description: 'Chiude automaticamente la tapparella della camera alle 13:00 quando
+    l''indice UV AccuWeather supera 6 e la temperatura percepita supera 25°C. Protegge
+    ambiente da calore eccessivo e raggi UV dannosi.'
   triggers:
   - at: '13:00:00'
     trigger: time
@@ -907,7 +941,10 @@
   mode: single
 - id: '1658506463789'
   alias: BiPedo Send to Park
-  description: ''
+  description: 'Invia automaticamente il robot tagliaerba BiPedo alla docking station
+    quando inizia a piovere o quando una qualsiasi zona di irrigazione si attiva (dopo
+    30 secondi). Funziona solo se BiPedo non è già a casa. Protegge il robot e evita
+    conflitti con irrigazione.'
   triggers:
   - entity_id:
     - input_boolean.israining
@@ -985,7 +1022,9 @@
   mode: single
 - id: '1660820695570'
   alias: RN Rain active - close shutters
-  description: ''
+  description: 'Chiude automaticamente tutte le tapparelle quando inizia a piovere
+    (transizione da off a on di input_boolean.israining), ma solo se non sono già
+    chiuse. Protegge interni da acqua e vento.'
   triggers:
   - trigger: state
     entity_id:
@@ -1009,7 +1048,9 @@
   mode: single
 - id: '1673872553259'
   alias: LGT NGT Lights
-  description: ''
+  description: 'Spegne automaticamente tutte le luci della casa quando entrambi i dispositivi
+    sono in carica per almeno 5 minuti durante la notte (22:00-06:00) e entrambi sono
+    a casa. Aiuta a ridurre consumo energetico notturno e favorisce il riposo.'
   triggers:
   - type: plugged_in
     device_id: 112e0adb7fac1d9a23a0db703a21eacb
@@ -1095,7 +1136,9 @@
   mode: single
 - id: '1674131878590'
   alias: Alarm Enable Partial IFTTT
-  description: Enable partial home alarm
+  description: 'Automazione manuale per attivare l''allarme parziale di casa tramite
+    IFTTT. Può essere eseguita manualmente dalla UI o tramite script/servizi. Utile
+    per modalità notte o presenza in casa. Non ha trigger automatici.'
   triggers: []
   conditions: []
   actions:
@@ -1116,7 +1159,10 @@
   mode: single
 - id: '1699477288155'
   alias: LGT Portico
-  description: ''
+  description: 'Accende automaticamente la luce del portico quando Luca o MariaChiara
+    entrano nella zona home durante le ore notturne (tra tramonto e alba). La luce
+    rimane accesa per 10 minuti poi si spegne automaticamente. Migliora sicurezza
+    e accoglienza.'
   triggers:
   - entity_id: person.luca
     zone: zone.home
@@ -1146,7 +1192,9 @@
   mode: single
 - id: '1714384746787'
   alias: Alarm location OFF - weekdays
-  description: Turn off alarm if working day
+  description: 'Disattiva l''automazione di allarme basata su posizione (Alarm Enable
+    Location IFTTT) all''1:00 AM durante i giorni lavorativi. Previene attivazioni
+    indesiderate durante la settimana lavorativa quando gli orari sono meno prevedibili.'
   triggers:
   - at: 01:00:00
     trigger: time
@@ -1166,7 +1214,9 @@
   mode: single
 - id: '1714384821537'
   alias: Alarm location ON - weekdays
-  description: Turn on alarm if not working day
+  description: 'Riattiva l''automazione di allarme basata su posizione (Alarm Enable
+    Location IFTTT) all''1:00 AM durante i giorni non lavorativi (weekend/festivi).
+    Ripristina il comportamento automatico durante weekend.'
   triggers:
   - at: 01:00:00
     trigger: time
@@ -1185,7 +1235,9 @@
   mode: single
 - id: '1736546342913'
   alias: Alarm location ON - weekdays after 19
-  description: Turn on alarm if working day after 19.00
+  description: 'Riattiva l''automazione di allarme basata su posizione alle 19:00 anche
+    durante i giorni lavorativi. Completa il sistema di gestione allarme weekday permettendo
+    protezione serale anche in settimana.'
   triggers:
   - at: '19:00:00'
     trigger: time
@@ -1204,7 +1256,9 @@
   mode: single
 - id: '1743078601197'
   alias: SpeedTest Update entity
-  description: ''
+  description: 'Aggiorna automaticamente i sensori SpeedTest (download, upload, ping)
+    ogni 10 minuti. Mantiene statistiche di rete aggiornate per monitoraggio qualità
+    connessione internet.'
   triggers:
   - trigger: time_pattern
     minutes: '10'
@@ -1220,7 +1274,9 @@
   mode: single
 - id: '1743878305637'
   alias: Shutters Location Auto Off
-  description: ''
+  description: 'Disattiva le automazioni di apertura/chiusura tapparelle basate su
+    posizione alle 13:30 e alle 21:30, se l''interruttore di gestione automatica è
+    attivo. Previene movimenti indesiderati durante ore critiche della giornata.'
   triggers:
   - trigger: time
     at: '13:30:00'
@@ -1242,7 +1298,9 @@
   mode: single
 - id: '1745051815983'
   alias: LGT Bagno giorno Timer OFF
-  description: ''
+  description: 'Spegne automaticamente le luci del bagno giorno dopo 1 ora di accensione
+    continua. Risparmio energetico per dimenticanze. Gestisce sia luce principale
+    che specchio.'
   triggers:
   - type: turned_on
     device_id: 3c32b9df56d7678898cbf15e10d229c4
@@ -1274,7 +1332,9 @@
   mode: single
 - id: '1745051994994'
   alias: LGT Bagno notte Timer OFF
-  description: ''
+  description: 'Spegne automaticamente le luci del bagno notte dopo 1 ora di accensione
+    continua. Risparmio energetico per dimenticanze. Gestisce sia luce principale
+    che specchio.'
   triggers:
   - type: turned_on
     device_id: 3688c034d5e643b5e446f1fdc73da197
@@ -1306,7 +1366,9 @@
   mode: single
 - id: '1745053359108'
   alias: LGT Switch OFF (Location)
-  description: Switch off ligths if empty home
+  description: 'Spegne automaticamente tutte le luci quando entrambi i dispositivi
+    lasciano la zona home. Gestisce tutte le aree della casa e un dispositivo esterno
+    specifico. Risparmio energetico e sicurezza per casa vuota.'
   triggers:
   - device_id: 112e0adb7fac1d9a23a0db703a21eacb
     domain: device_tracker
@@ -1355,7 +1417,9 @@
   mode: single
 - id: '1745090254705'
   alias: 'SHD Cover Height Dynamic '
-  description: ''
+  description: 'Regola automaticamente l''altezza delle tende da sole Sunilus in base
+    alla posizione del sole usando blueprint auto_sun_blind. Ottimizza ombreggiamento
+    dinamico per comfort termico ed efficienza energetica.'
   use_blueprint:
     path: langestefan/auto_sun_blind.yaml
     input:
@@ -1379,7 +1443,9 @@
       min_height: 0.1
 - id: '1745384737968'
   alias: SHD Tende apertura
-  description: ''
+  description: 'Apre automaticamente le tende da sole (Sunilus) quando inizia a piovere.
+    Protegge le tende e il meccanismo da danni causati da acqua e vento. Usa scena
+    predefinita tende_aperte.'
   triggers:
   - trigger: state
     entity_id:
@@ -1396,7 +1462,9 @@
   mode: single
 - id: '1746040554030'
   alias: SHD Tramonto apertura tende
-  description: ''
+  description: 'Apre automaticamente le tende da sole 5 minuti prima del tramonto (offset
+    -300 secondi). Prepara l''area esterna per la sera e protegge le tende durante
+    la notte.'
   triggers:
   - trigger: sun
     event: sunset
@@ -1411,7 +1479,10 @@
   mode: single
 - id: '1746040877671'
   alias: STS Shutters closed
-  description: ''
+  description: 'Monitora lo stato di tutte le 5 tapparelle principali e aggiorna gli
+    input_boolean di stato (shutterclosed ON, shutteropened OFF) quando tutte sono
+    chiuse. Include verifica periodica ogni 10 minuti. Mantiene stato sincronizzato
+    per altre automazioni.'
   triggers:
   - device_id: 6a54755bacfb60f1af43d24bfd430310
     domain: cover
@@ -1480,7 +1551,10 @@
   mode: single
 - id: '1746044191006'
   alias: STS Shutters open
-  description: ''
+  description: 'Monitora lo stato di tutte le 5 tapparelle principali e aggiorna gli
+    input_boolean di stato (shutteropened ON, shutterclosed OFF) quando almeno una
+    è aperta. Include verifica periodica ogni 10 minuti. Mantiene stato sincronizzato
+    per altre automazioni.'
   triggers:
   - device_id: 6a54755bacfb60f1af43d24bfd430310
     domain: cover
@@ -1551,7 +1625,9 @@
   mode: single
 - id: '1746045970810'
   alias: STS IsRaining ON (Accuw)
-  description: ''
+  description: 'Attiva l''input_boolean.israining quando il meteo AccuWeather indica
+    condizioni piovose/avverse: rainy, lightning-rainy, exceptional, hail, snowy-rainy,
+    snowy, pouring. Centralizza stato pioggia per altre automazioni.'
   triggers:
   - trigger: state
     entity_id:
@@ -1594,7 +1670,9 @@
   mode: single
 - id: '1746046054153'
   alias: STS IsRaining OFF (Accuw)
-  description: ''
+  description: 'Disattiva l''input_boolean.israining quando il meteo AccuWeather indica
+    condizioni non piovose: clear-night, cloudy, fog, partlycloudy, sunny, windy-variant,
+    windy. Centralizza stato pioggia per altre automazioni.'
   triggers:
   - entity_id:
     - weather.romieriweather
@@ -1636,7 +1714,9 @@
   mode: single
 - id: '1746378165959'
   alias: Shutters Location Auto On
-  description: ''
+  description: 'Riattiva le automazioni di apertura/chiusura tapparelle basate su posizione
+    alle 09:15 e alle 17:15, se l''interruttore di gestione automatica è attivo. Complementa
+    Shutters Location Auto Off per gestione oraria controllata.'
   triggers:
   - trigger: time
     at: 09:15:00
@@ -1657,7 +1737,9 @@
   mode: single
 - id: '1754741810908'
   alias: Tende UV Index (AccuW)
-  description: ''
+  description: 'Chiude automaticamente le tende da sole alle 13:00 quando l''indice
+    UV AccuWeather supera 5, la temperatura percepita supera 25°C e l''automazione
+    di altezza dinamica è disattivata. Protegge da calore e UV eccessivi.'
   triggers:
   - at: '13:00:00'
     trigger: time
@@ -1682,7 +1764,10 @@
   mode: single
 - id: '1767541092476'
   alias: GRDN_GocciaGoccia_Settimanale
-  description: Automazione separata per sistema goccia-goccia
+  description: 'Automazione dedicata per il sistema di irrigazione goccia-goccia (zone
+    3 e 7). Parte all''ora configurata in input_datetime.time_start_gocciagoccia con
+    programmazione settimanale separata. Non usa fattore di irrigazione globale essendo
+    sistema a tempo puro.'
   trigger:
   - platform: template
     value_template: '{{ states(''sensor.time'') == (states.input_datetime.time_start_gocciagoccia.attributes.timestamp
