@@ -27,6 +27,29 @@ This repo is a Home Assistant configuration (YAML-first). Focus on modular irrig
 - Weekly irrigation: `GRDN_Irrigazione_Settimanale` triggers at `input_datetime.time_start_irrigazione`; chooses advanced (per-day zone flags) vs normal (day-of-week booleans). See [automations.yaml](../automations.yaml).
 - Additional variants at sunrise (`sunrise` trigger). Notifications via `notify.mobile_app_*`.
 
+## Automation Entity ID Reference
+This table documents the mapping between automation entity IDs used in dashboards and their corresponding automation aliases and IDs in `automations.yaml`. Use this reference when working with automation references in dashboard files.
+
+| Entity ID | Alias | Automation ID | Dashboard Usage |
+|-----------|-------|---------------|-----------------|
+| `automation.irrigazione_avvio_settimanale_programmato` | Irrigazione - Avvio - Settimanale programmato | 1632223938466 | Irrigation.yaml (lines 52, 560) |
+| `automation.irrigazione_avvio_alba_settimanale` | Irrigazione - Avvio - Alba settimanale | 1632224023054 | Irrigation.yaml (lines 55, 568) |
+| `automation.irrigazione_chiusura_tapparelle_zona_6` | Irrigazione - Chiusura tapparelle - Zona 6 | 1633346222844 | Irrigation.yaml (line 430) |
+| `automation.irrigazione_chiusura_tapparelle_zona_8` | Irrigazione - Chiusura tapparelle - Zona 8 | 1648500187701 | Irrigation.yaml (line 433) |
+| `automation.grdn_gocciagoccia_settimanale` | GRDN_GocciaGoccia_Settimanale | 1767541092476 | Irrigation.yaml (line 484) |
+| `automation.robot_ritorno_base_pioggia_irrigazione_attiva` | Robot - Ritorno base - Pioggia/Irrigazione attiva | 1658506463789 | BiPedo.yaml (lines 95, 111) |
+| `automation.allarme_attivazione_uscita_da_casa` | Allarme - Attivazione - Uscita da casa | 1609686557369 | Overview.yaml (lines 667, 735) |
+| `automation.allarme_attivazione_manuale` | Allarme - Attivazione - Manuale | 1614111057350 | Overview.yaml (lines 676, 736) |
+| `automation.allarme_disattivazione_rientro_a_casa` | Allarme - Disattivazione - Rientro a casa | 1609686952547 | Overview.yaml (line 737) |
+| `automation.allarme_disattivazione_manuale` | Allarme - Disattivazione - Manuale | 1614083771225 | Overview.yaml (lines 688, 738) |
+| `automation.alarm_enable_partial_ifttt` | Alarm Enable Partial IFTTT | 1674131878590 | Overview.yaml (lines 703, 739) |
+
+**Important Notes:**
+- Dashboard entity references must exactly match the entity_id derived from the automation's `alias` field in `automations.yaml`
+- Home Assistant automatically generates entity IDs from aliases by converting to lowercase, replacing spaces with underscores, and removing special characters
+- When renaming automation aliases, remember to update all corresponding dashboard references
+- The numeric `id` field is only for Home Assistant's internal use and should not be referenced in dashboards
+
 ## Conventions
 - Entities and sensors are bilingual but consistent: `switch.zona_N`, `sensor.Irrigation Zona N Final Time`, minute variants `... Minutes`.
 - Template naming follows `irrigation_zona_N_final_time` and `<day>_zone_N_final_time` with `unique_id` for registry stability.
