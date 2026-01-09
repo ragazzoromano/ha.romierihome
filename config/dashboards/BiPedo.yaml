@@ -92,8 +92,7 @@ views:
         content: '## 🤖 Automazioni'
       - type: entities
         entities:
-          # Automation: "Robot - Ritorno base - Pioggia/Irrigazione attiva" (ID: 1658506463789)
-          - entity: automation.robot_ritorno_base_pioggia_irrigazione_attiva
+          - entity: automation.bipedo_park
             name: 🏠 Auto parking with rain or sprinklers
             secondary_info: last-triggered
             icon: mdi:home-circle

@@ -659,17 +659,15 @@ views:
             icon: mdi:shield-home
           - type: markdown
             content: '## 🔒 Controlli Allarme'
-          # Automation: "Allarme - Attivazione - Uscita da casa" (ID: 1609686557369)
           - show_name: true
             show_icon: true
             type: button
             tap_action:
               action: toggle
-            entity: automation.allarme_attivazione_uscita_da_casa
+            entity: automation.enable_alarm_location_ifttt
             show_state: true
             name: Allarme con posizione
             icon: mdi:home-map-marker
-          # Automation: "Allarme - Attivazione - Manuale" (ID: 1614111057350)
           - type: button
             tap_action:
               action: call-service
@@ -682,8 +680,9 @@ views:
             show_name: true
             name: Attiva allarme
             icon: mdi:home-lock
-          # Automation: "Allarme - Disattivazione - Manuale" (ID: 1614083771225)
-          - type: button
+          - show_name: true
+            show_icon: true
+            type: button
             tap_action:
               action: call-service
               service: automation.trigger
@@ -691,11 +690,9 @@ views:
                 entity_id: automation.allarme_disattivazione_manuale
             hold_action:
               action: more-info
-            show_icon: true
-            show_name: true
             name: Disabilita allarme
             icon: mdi:home-lock-open
-          # Automation: "Alarm Enable Partial IFTTT" (ID: 1674131878590)
+            entity: automation.disable_alarm_location_ifttt
           - show_name: true
             show_icon: true
             type: button
@@ -736,15 +733,10 @@ views:
             title: Storico allarme
             target:
               entity_id:
-                # Automation: "Allarme - Attivazione - Uscita da casa" (ID: 1609686557369)
                 - automation.allarme_attivazione_uscita_da_casa
-                # Automation: "Allarme - Attivazione - Manuale" (ID: 1614111057350)
                 - automation.allarme_attivazione_manuale
-                # Automation: "Allarme - Disattivazione - Rientro a casa" (ID: 1609686952547)
                 - automation.allarme_disattivazione_rientro_a_casa
-                # Automation: "Allarme - Disattivazione - Manuale" (ID: 1614083771225)
                 - automation.allarme_disattivazione_manuale
-                # Automation: "Alarm Enable Partial IFTTT" (ID: 1674131878590)
                 - automation.alarm_enable_partial_ifttt
                 - device_tracker.sm_a546b
                 - device_tracker.sm_s901u1
@@ -940,8 +932,11 @@ views:
                   name: Alarm location ON - weekdays after 19
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Riattiva l'automazione dell'allarme basata sulla posizione dopo le 19:00 nei giorni feriali, permettendo l'attivazione automatica quando tutti escono di casa.
+                    content: >
+                      **Descrizione**: Riattiva l'automazione dell'allarme
+                      basata sulla posizione dopo le 19:00 nei giorni feriali,
+                      permettendo l'attivazione automatica quando tutti escono
+                      di casa.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -951,8 +946,11 @@ views:
                   name: Alarm location ON - weekdays
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Attiva l'automazione dell'allarme basata sulla posizione nei giorni non feriali (weekend e festivi), permettendo l'attivazione automatica quando tutti escono.
+                    content: >
+                      **Descrizione**: Attiva l'automazione dell'allarme basata
+                      sulla posizione nei giorni non feriali (weekend e
+                      festivi), permettendo l'attivazione automatica quando
+                      tutti escono.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -962,8 +960,11 @@ views:
                   name: Alarm location OFF - weekdays
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Disattiva l'automazione dell'allarme basata sulla posizione all'1:00 nei giorni feriali, evitando attivazioni automatiche quando si va al lavoro la mattina.
+                    content: >
+                      **Descrizione**: Disattiva l'automazione dell'allarme
+                      basata sulla posizione all'1:00 nei giorni feriali,
+                      evitando attivazioni automatiche quando si va al lavoro la
+                      mattina.
           - type: markdown
             content: '### 💡 Automazioni Luci'
           - type: entities
@@ -979,19 +980,24 @@ views:
                   name: Close Lights when phones charging in night
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Spegne automaticamente tutte le luci della casa quando entrambi i telefoni sono in carica tra le 22:00 e le 06:00, e entrambe le persone sono a casa.
+                    content: >
+                      **Descrizione**: Spegne automaticamente tutte le luci
+                      della casa quando entrambi i telefoni sono in carica tra
+                      le 22:00 e le 06:00, e entrambe le persone sono a casa.
               - type: custom:fold-entity-row
                 open: true
                 head:
-                  entity: automation.luci_accensione_automatica_sala_tv
+                  entity: automation.lgt_sala_tv_on
                   icon: mdi:television-ambient-light
                   name: Luce televisione al tramonto
                   secondary_info: last-triggered
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Accende automaticamente la luce della TV nella sala quando la TV viene accesa dopo il tramonto e prima dell'alba, garantendo illuminazione adeguata durante la visione.
+                    content: >
+                      **Descrizione**: Accende automaticamente la luce della TV
+                      nella sala quando la TV viene accesa dopo il tramonto e
+                      prima dell'alba, garantendo illuminazione adeguata durante
+                      la visione.
           - type: markdown
             content: '### 🪟 Automazioni Tapparelle'
           - type: entities
@@ -1002,35 +1008,15 @@ views:
                 open: true
                 head:
                   entity: input_boolean.autotoggleshuttersmovmentbylocatio
-                  name: Apertura chiusura Tapparella (Location)
+                  name: Apertura/Chiusura Tapparelle (Location)
                   secondary_info: last-updated
                   icon: mdi:map-marker-radius
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Input boolean che abilita/disabilita l'apertura e chiusura automatica delle tapparelle basata sulla posizione delle persone.
-              - type: custom:fold-entity-row
-                open: true
-                head:
-                  entity: automation.tapparelle_chiusura_uscita_da_casa
-                  icon: mdi:window-shutter
-                  name: Tapparelle Semi-chiuso (Location)
-                  secondary_info: last-triggered
-                entities:
-                  - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Chiude le tapparelle in posizione semi-chiusa quando entrambe le persone lasciano casa, se è giorno e non sta piovendo. Aiuta a proteggere la casa e mantenere una temperatura confortevole.
-              - type: custom:fold-entity-row
-                open: true
-                head:
-                  entity: automation.tapparelle_apertura_rientro_a_casa
-                  name: Tapparelle Apri (Location)
-                  icon: mdi:window-shutter-open
-                  secondary_info: last-triggered
-                entities:
-                  - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Apre automaticamente le tapparelle quando almeno una persona rientra a casa durante il giorno (dopo l'alba e prima del tramonto), se non sta piovendo.
+                    content: >
+                      **Descrizione**: Input boolean che abilita/disabilita
+                      l'apertura e chiusura automatica delle tapparelle basata
+                      sulla posizione delle persone.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -1040,8 +1026,11 @@ views:
                   secondary_info: last-triggered
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Chiude automaticamente la tapparella della camera alle 13:00 se l'indice UV è superiore a 6 e la temperatura percepita è superiore a 25°C, proteggendo la stanza dal calore eccessivo.
+                    content: >
+                      **Descrizione**: Chiude automaticamente la tapparella
+                      della camera alle 13:00 se l'indice UV è superiore a 6 e
+                      la temperatura percepita è superiore a 25°C, proteggendo
+                      la stanza dal calore eccessivo.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -1051,8 +1040,36 @@ views:
                   secondary_info: last-triggered
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Chiude automaticamente tutte le tapparelle quando inizia a piovere, proteggendo l'interno della casa dall'acqua.
+                    content: >
+                      **Descrizione**: Chiude automaticamente tutte le
+                      tapparelle quando inizia a piovere, proteggendo l'interno
+                      della casa dall'acqua.
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: automation.shutters_location_auto_on
+                  icon: mdi:window-shutter-open
+                  name: Auto ON Apertura tapparelle (Location)
+                  secondary_info: last-triggered
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: >
+                      **Descrizione**: Attiva l'automazione delle tapparelle
+                      basata sulla posizione alle 09:15 e alle 17:15 se
+                      l'opzione automatica è abilitata.
+              - type: custom:fold-entity-row
+                open: true
+                head:
+                  entity: automation.shutters_location_auto_off
+                  icon: mdi:window-shutter
+                  name: Auto OFF Chiusura tapparelle (Location)
+                  secondary_info: last-triggered
+                entities:
+                  - type: custom:hui-markdown-card
+                    content: >
+                      **Descrizione**: Disattiva l'automazione delle tapparelle
+                      basata sulla posizione alle 13:30 e alle 21:30 se
+                      l'opzione automatica è abilitata.
           - type: markdown
             content: '### 🌤️ Automazioni Tende'
           - type: entities
@@ -1068,8 +1085,10 @@ views:
                   name: Open Shades when raining
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Apre automaticamente le tende del portico quando inizia a piovere, proteggendole da possibili danni causati dal vento e dalla pioggia forte.
+                    content: >
+                      **Descrizione**: Apre automaticamente le tende del portico
+                      quando inizia a piovere, proteggendole da possibili danni
+                      causati dal vento e dalla pioggia forte.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -1079,8 +1098,11 @@ views:
                   name: Tende posizione dinamica
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Regola automaticamente l'altezza delle tende del portico in base alla posizione del sole, garantendo ombra ottimale durante il giorno. Utilizza calcoli di azimut ed elevazione solare.
+                    content: >
+                      **Descrizione**: Regola automaticamente l'altezza delle
+                      tende del portico in base alla posizione del sole,
+                      garantendo ombra ottimale durante il giorno. Utilizza
+                      calcoli di azimut ed elevazione solare.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -1090,8 +1112,11 @@ views:
                   name: UV Index Chiusura portico
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Chiude le tende del portico alle 13:00 se l'indice UV è superiore a 5 e la temperatura percepita è superiore a 25°C, se l'automazione di posizione dinamica è disattivata. Fornisce protezione dal sole intenso.
+                    content: >
+                      **Descrizione**: Chiude le tende del portico alle 13:00 se
+                      l'indice UV è superiore a 5 e la temperatura percepita è
+                      superiore a 25°C, se l'automazione di posizione dinamica è
+                      disattivata. Fornisce protezione dal sole intenso.
           - type: markdown
             content: '### 📊 Sensori Stato'
           - type: entities
@@ -1107,8 +1132,10 @@ views:
                   name: Tapparelle aperte
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Sensore di sola lettura che indica se almeno una tapparella è aperta. Aggiornato automaticamente ogni 10 minuti.
+                    content: >
+                      **Descrizione**: Sensore di sola lettura che indica se
+                      almeno una tapparella è aperta. Aggiornato automaticamente
+                      ogni 10 minuti.
               - type: custom:fold-entity-row
                 open: true
                 head:
@@ -1118,8 +1145,10 @@ views:
                   name: Pioggia
                 entities:
                   - type: custom:hui-markdown-card
-                    content: |
-                      **Descrizione**: Sensore di sola lettura che indica se sta piovendo, basato sui dati meteo di AccuWeather. Si attiva con stati meteo come pioggia, temporali, grandine o neve.
+                    content: >
+                      **Descrizione**: Sensore di sola lettura che indica se sta
+                      piovendo, basato sui dati meteo di AccuWeather. Si attiva
+                      con stati meteo come pioggia, temporali, grandine o neve.
     cards: []
     header:
       layout: center
