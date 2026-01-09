@@ -659,6 +659,7 @@ views:
             icon: mdi:shield-home
           - type: markdown
             content: '## 🔒 Controlli Allarme'
+          # Automation: "Allarme - Attivazione - Uscita da casa" (ID: 1609686557369)
           - show_name: true
             show_icon: true
             type: button
@@ -668,6 +669,7 @@ views:
             show_state: true
             name: Allarme con posizione
             icon: mdi:home-map-marker
+          # Automation: "Allarme - Attivazione - Manuale" (ID: 1614111057350)
           - type: button
             tap_action:
               action: call-service
@@ -680,6 +682,7 @@ views:
             show_name: true
             name: Attiva allarme
             icon: mdi:home-lock
+          # Automation: "Allarme - Disattivazione - Manuale" (ID: 1614083771225)
           - type: button
             tap_action:
               action: call-service
@@ -692,6 +695,7 @@ views:
             show_name: true
             name: Disabilita allarme
             icon: mdi:home-lock-open
+          # Automation: "Alarm Enable Partial IFTTT" (ID: 1674131878590)
           - show_name: true
             show_icon: true
             type: button
@@ -732,10 +736,15 @@ views:
             title: Storico allarme
             target:
               entity_id:
+                # Automation: "Allarme - Attivazione - Uscita da casa" (ID: 1609686557369)
                 - automation.allarme_attivazione_uscita_da_casa
+                # Automation: "Allarme - Attivazione - Manuale" (ID: 1614111057350)
                 - automation.allarme_attivazione_manuale
+                # Automation: "Allarme - Disattivazione - Rientro a casa" (ID: 1609686952547)
                 - automation.allarme_disattivazione_rientro_a_casa
+                # Automation: "Allarme - Disattivazione - Manuale" (ID: 1614083771225)
                 - automation.allarme_disattivazione_manuale
+                # Automation: "Alarm Enable Partial IFTTT" (ID: 1674131878590)
                 - automation.alarm_enable_partial_ifttt
                 - device_tracker.sm_a546b
                 - device_tracker.sm_s901u1

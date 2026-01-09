@@ -49,9 +49,11 @@ views:
           - entity: sensor.sun_next_events
             name: Alba / Tramonto
           - type: divider
+          # Automation: "Irrigazione - Avvio - Settimanale programmato" (ID: 1632223938466)
           - entity: automation.irrigazione_avvio_settimanale_programmato
             name: Auto settimanale
             icon: mdi:calendar-week
+          # Automation: "Irrigazione - Avvio - Alba settimanale" (ID: 1632224023054)
           - entity: automation.irrigazione_avvio_alba_settimanale
             name: Auto alba
             icon: mdi:sun-clock
@@ -427,9 +429,11 @@ views:
         title: 🛡️ Automazioni sicurezza
         show_header_toggle: false
         entities:
+          # Automation: "Irrigazione - Chiusura tapparelle - Zona 6" (ID: 1633346222844)
           - entity: automation.irrigazione_chiusura_tapparelle_zona_6
             name: Chiudi tapparelle Zona 6 (Est interno)
             icon: mdi:window-shutter-auto
+          # Automation: "Irrigazione - Chiusura tapparelle - Zona 8" (ID: 1648500187701)
           - entity: automation.irrigazione_chiusura_tapparelle_zona_8
             name: Chiudi tapparelle Zona 8 (Nord interno)
             icon: mdi:window-shutter-auto
@@ -481,6 +485,7 @@ views:
         title: 💧 Programma Goccia-Goccia
         show_header_toggle: false
         entities:
+          # Automation: "GRDN_GocciaGoccia_Settimanale" (ID: 1767541092476)
           - entity: automation.grdn_gocciagoccia_settimanale
             name: Ciclo Goccia-Goccia
             secondary_info: last-triggered
@@ -557,6 +562,7 @@ views:
           title: 📅 Programma Irrigazione
           show_header_toggle: false
           entities:
+            # Automation: "Irrigazione - Avvio - Settimanale programmato" (ID: 1632223938466)
             - entity: automation.irrigazione_avvio_settimanale_programmato
               name: Irrigazione Classica
               secondary_info: last-triggered
@@ -565,6 +571,7 @@ views:
               name: Orario partenza irrigazione
               secondary_info: none
             - type: divider
+            # Automation: "Irrigazione - Avvio - Alba settimanale" (ID: 1632224023054)
             - entity: automation.irrigazione_avvio_alba_settimanale
               name: Irrigazione all'alba
               secondary_info: last-triggered
