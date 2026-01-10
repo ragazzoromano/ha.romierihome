@@ -1181,7 +1181,8 @@
     data:
       stop_actions: false
     target:
-      entity_id: automation.allarme_attivazione_uscita_da_casa
+      entity_id:
+      - automation.enable_alarm_location_ifttt
     action: automation.turn_off
   mode: single
 - id: '1714384821537'
@@ -1200,7 +1201,7 @@
   actions:
   - target:
       entity_id:
-      - automation.allarme_attivazione_uscita_da_casa
+      - automation.enable_alarm_location_ifttt
     data: {}
     action: automation.turn_on
   mode: single
@@ -1220,7 +1221,7 @@
   actions:
   - target:
       entity_id:
-      - automation.allarme_attivazione_uscita_da_casa
+      - automation.enable_alarm_location_ifttt
     data: {}
     action: automation.turn_on
   mode: single
@@ -1229,7 +1230,7 @@
   description: Aggiorna le entità SpeedTest (download, upload, ping) ogni 10 minuti
   triggers:
   - trigger: time_pattern
-    minutes: '10'
+    minutes: /10
   conditions: []
   actions:
   - action: homeassistant.update_entity
@@ -1467,7 +1468,7 @@
     type: closed
     trigger: device
   - trigger: time_pattern
-    minutes: /10
+    minutes: /1
   conditions:
   - condition: device
     device_id: 6a54755bacfb60f1af43d24bfd430310
@@ -1537,7 +1538,7 @@
     type: opened
     trigger: device
   - trigger: time_pattern
-    minutes: /10
+    minutes: /1
   conditions:
   - condition: or
     conditions:

@@ -320,10 +320,10 @@ views:
                 name: Luce Principale
                 icon: mdi:lightbulb
               - type: divider
-              - entity: light.comodino_luca
+              - entity: light.comodino_luca_2
                 name: Comodino Luca HUE
                 icon: mdi:lamp
-              - entity: light.comodino_mariachiara
+              - entity: light.comodino_mariachiara_2
                 name: Comodino Mariachiara HUE
                 icon: mdi:lamp
               - entity: light.luce_1_camera_da_letto_hue
