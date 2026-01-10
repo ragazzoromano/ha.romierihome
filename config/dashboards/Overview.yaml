@@ -1172,9 +1172,6 @@ views:
           - entity: sensor.tasmotasi7021_si7021_humidity
         state_color: true
         title: Home Sensors
-      - type: weather-forecast
-        entity: weather.romieri
-        show_forecast: false
       - type: entities
         entities:
           - entity: sensor.trieste_friuli_venezia_giulia_airport_dew_point
